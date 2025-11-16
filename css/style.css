@@ -1,0 +1,373 @@
+:root {
+  --color-bg: #020817;
+  --color-grid: rgba(0, 255, 255, 0.04);
+
+  --color-primary: #07dbd0;
+  --color-primary-soft: rgba(7, 219, 208, 0.2);
+  --color-accent: #00ff7a;
+  --color-text: #e6ffff;
+  --color-muted: #4ea3ff;
+  --color-card-bg: rgba(2, 12, 30, 0.95);
+
+  --font-xs: 0.7rem;
+  --font-sm: 0.8rem;
+  --font-md: 1.0rem;
+  --font-lg: 1.3rem;
+  --font-xl: 2.2rem;
+
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  --space-xs: 0.35rem;
+  --space-sm: 0.6rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+
+  --shadow-card: 0 0 20px rgba(0, 0, 0, 0.9);
+}
+
+/* perusasetukset */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Orbitron", system-ui, sans-serif;
+  background-image: url(../pictures/ruudukko.png);
+  color: var(--color-text);
+}
+
+/* keskitys*/
+.app {
+  max-width: 1000px;
+  margin: 3rem auto;
+  padding: 2rem 1.5rem 3rem;
+  position: relative;
+}
+
+
+
+/* header */
+
+.site-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.75rem;
+}
+
+.brand__icon {
+  font-size: 2rem;
+  color: var(--color-primary);
+}
+
+.brand__text {
+  color: var(--color-primary);
+  font-size: var(--font-xl);
+  letter-spacing: 0.22em;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(7, 219, 208, 0.8);
+}
+
+.site-header__title {
+  margin: 0;
+  font-size: var(--font-sm);
+  font-weight: 400;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+}
+
+.site-header__title-icon {
+  margin-left: 0.4rem;
+  color: var(--color-primary);
+}
+
+/* yläosan napit */
+
+.top-nav {
+  margin-top: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.top-nav__row {
+  display: flex;
+  gap: 0.8rem;
+}
+
+/* yleinen nav-nappi */
+.nav-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: var(--space-xs) var(--space-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-primary);
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: var(--font-sm);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow:
+    0 0 10px rgba(7, 219, 208, 0.4),
+    0 7px 0 rgba(0, 0, 0, 0.7);
+  transition:
+    transform 120ms ease-out,
+    box-shadow 120ms ease-out,
+    background-color 120ms ease-out,
+    border-color 120ms ease-out;
+}
+
+.nav-btn__icon {
+  font-size: var(--font-md);
+}
+
+.nav-btn__text {
+  white-space: nowrap;
+}
+
+/* eri värit navissa*/
+.nav-btn--primary {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.nav-btn--secondary {
+  border-color: var(--color-muted);
+  color: var(--color-muted);
+}
+
+.nav-btn--accent {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  box-shadow:
+    0 0 10px rgba(0, 255, 122, 0.5),
+    0 7px 0 rgba(0, 0, 0, 0.7);
+}
+
+.nav-btn--accent::after {
+  background: linear-gradient(
+    to right,
+    rgba(0, 255, 122, 0.6),
+    transparent
+  );
+}
+
+/* hover */
+.nav-btn:hover {
+  background-color: var(--color-primary-soft);
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 14px rgba(7, 219, 208, 0.9),
+    0 9px 0 rgba(0, 0, 0, 0.9);
+}
+
+.nav-btn--accent:hover {
+  box-shadow:
+    0 0 14px rgba(0, 255, 122, 0.9),
+    0 9px 0 rgba(0, 0, 0, 0.9);
+}
+
+/* dashboard-main */
+
+.dashboard {
+  margin-top: 2rem;
+}
+
+/* statsit */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background: var(--color-card-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(7, 219, 208, 0.5);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.stat-card__label {
+  margin: 0 0 0.7rem;
+  font-size: var(--font-sm);
+  letter-spacing: 0.22em;
+  font-weight: 400;
+  color: var(--color-muted);
+}
+
+.stat-card__value {
+  margin: 0;
+  font-size: var(--font-xl);
+  font-weight: 700;
+}
+
+/* erotin viiva */
+.divider {
+  margin: 1.7rem 0 1.2rem;
+  border-bottom: 2px solid rgba(7, 219, 208, 0.35);
+}
+
+/* pelit */
+
+.game-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.game-card {
+  background: rgba(4, 16, 36, 0.96);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(7, 219, 208, 0.5);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-md) var(--space-md);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  row-gap: var(--space-md);
+}
+
+.game-card__header {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+}
+
+.game-card__icon {
+  font-size: 1.6rem;
+}
+
+.game-card__title {
+  margin: 0 0 0.4rem;
+  font-size: var(--font-md);
+  letter-spacing: 0.16em;
+}
+
+.game-card__subtitle {
+  margin: 0;
+  font-size: var(--font-sm);
+  opacity: 0.9;
+}
+
+.game-card__footer {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* pisteet pelejen esikatselussa */
+.game-card__reward {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--font-sm);
+}
+
+.reward-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(7, 219, 208, 0.15);
+  border: 1px solid rgba(7, 219, 208, 0.7);
+}
+
+.reward-text {
+  color: var(--color-primary);
+}
+
+/* toimintakehotenappi */
+.game-card__cta {
+  padding: var(--space-xs) 1.8rem;
+  background: var(--color-primary);
+  color: #001217;
+  border-radius: var(--radius-md);
+  font-size: var(--font-sm);
+  text-decoration: none;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow:
+    0 0 10px rgba(7, 219, 208, 0.7),
+    0 7px 0 rgba(0, 0, 0, 0.8);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-card__cta:hover {
+  filter: brightness(1.05);
+}
+
+/* lukittujen korttien tyylit */
+.game-card--locked {
+  opacity: 0.28;
+  position: relative;
+}
+
+.game-card--locked .game-card__lock {
+  font-size: var(--font-md);
+}
+
+.game-card--locked::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+}
+
+/* responsiivisuusasetukset */
+
+@media (max-width: 800px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .top-nav__row {
+    flex-direction: column;
+  }
+
+  .app {
+    margin: 1.5rem auto;
+    padding-inline: 1rem;
+  }
+
+  .game-card {
+    grid-template-columns: 1fr;
+  }
+
+  .game-card__footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .game-card__cta {
+    align-self: flex-end;
+  }
+}

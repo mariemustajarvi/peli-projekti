@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kyberagentti</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand__icon">🛡</div>
+        <div class="brand__text">Kyberagentti-tietoturvapeli</div>
+      </div>
+        <div class="divider"></div>
+      <h2 class="site-header__title">
+        Agenttien harjoituskeskus
+        <span class="site-header__title-icon">🛡</span>
+      </h2>
+
+      <nav class="top-nav">
+        <a href="#" class="nav-btn nav-btn--primary">
+          <span class="nav-btn__icon">🏆</span>
+          <span class="nav-btn__text">Saavutukset (0/30)</span>
+        </a>
+
+        <div class="top-nav__row">
+          <a href="#" class="nav-btn nav-btn--secondary">
+            <span class="nav-btn__icon">👤</span>
+            <span class="nav-btn__text">Tulostaulukko</span>
+          </a>
+
+          <a href="#" class="nav-btn nav-btn--accent">
+            <span class="nav-btn__icon">➜</span>
+            <span class="nav-btn__text">Kirjaudu sisään / rekisteröidy</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="dashboard">
+      <!-- Statsit -->
+      <section class="stats" aria-label="Player statistics">
+        <article class="stat-card">
+          <h2 class="stat-card__label">Pisteet yhteensä</h2>
+          <p class="stat-card__value">0</p>
+        </article>
+
+        <article class="stat-card">
+          <h2 class="stat-card__label">Läpäistyt pelit</h2>
+          <p class="stat-card__value">0 / 10</p>
+        </article>
+
+        <article class="stat-card">
+          <h2 class="stat-card__label">Edistyminen</h2>
+          <p class="stat-card__value">0%</p>
+        </article>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- Pelit -->
+      <section class="game-list" aria-label="Available games">
+        <!-- Ensimmäinen, heti auki -->
+        <article class="game-card game-card--active">
+          <div class="game-card__header">
+            <div class="game-card__icon">🔐</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Testaa salasanojen vahvuuksia</h2>
+              <p class="game-card__subtitle">
+                Luo salasanoja ja katso, kuinka kauan niiden murtaminen kestää
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__reward">
+              <span class="reward-badge">★</span>
+              <span class="reward-text">100 pistettä</span>
+            </div>
+
+            <a href="#" class="game-card__cta">Aloita peli</a>
+          </div>
+        </article>
+
+        <!-- Loput, alkuun lukittuja / himmennettyjä -->
+        <article class="game-card game-card--locked">
+          <div class="game-card__header">
+            <div class="game-card__icon">📧</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Tunnista tietojenkalasteluviestit</h2>
+              <p class="game-card__subtitle">
+                Opi tunnistamaan väärennetyt sähköpostit, joilla yritetään kalastella tietojasi
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__reward">
+              <span class="reward-badge">★</span>
+              <span class="reward-text">150 pistettä</span>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+
+        <article class="game-card game-card--locked">
+          <div class="game-card__header">
+            <div class="game-card__icon">🕵</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Käyttäjän manipulointi</h2>
+              <p class="game-card__subtitle">
+                Opi, miten hyökkääjät huijaavat ihmisiä luovuttamaan tietoja
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__reward">
+              <span class="reward-badge">★</span>
+              <span class="reward-text">150 pistettä</span>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+
+        <article class="game-card game-card--locked">
+          <div class="game-card__header">
+            <div class="game-card__icon">🌐</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Turvallinen nettiselaaminen</h2>
+              <p class="game-card__subtitle">
+                Pysy turvassa verkossa
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__reward">
+              <span class="reward-badge">★</span>
+              <span class="reward-text">200 pistettä</span>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+
+        <article class="game-card game-card--locked">
+          <div class="game-card__header">
+            <div class="game-card__icon">🔒</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Tietosuoja-asetukset</h2>
+              <p class="game-card__subtitle">
+                Opi suojaamaan henkilötietojasi verkossa
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__reward">
+              <span class="reward-badge">★</span>
+              <span class="reward-text">200 pistettä</span>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+
+        <article class="game-card game-card--locked">
+          <div class="game-card__header">
+            <div class="game-card__icon">🎯</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Lajittele tietoturvakäytännöt</h2>
+              <p class="game-card__subtitle">
+                Vedä ja pudota lajitellaksesi turvalliset ja vaaralliset verkkokäytännöt
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__reward">
+              <span class="reward-badge">★</span>
+              <span class="reward-text">150 pistettä</span>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+
+        <article class="game-card game-card--locked">
+          <div class="game-card__header">
+            <div class="game-card__icon">🧩</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Yhdistä suojaustermit</h2>
+              <p class="game-card__subtitle">
+                Yhdistä kyberturvallisuuden termit niiden määritelmiin
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__reward">
+              <span class="reward-badge">★</span>
+              <span class="reward-text">200 pistettä</span>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+
+        <article class="game-card game-card--locked">
+          <div class="game-card__header">
+            <div class="game-card__icon">🧩</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Uhkatunnistin</h2>
+              <p class="game-card__subtitle">
+                Ole nopea! Tunnista uhat ennen kuin aika loppuu
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__reward">
+              <span class="reward-badge">★</span>
+              <span class="reward-text">250 pistettä</span>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+
+        <article class="game-card game-card--locked">
+          <div class="game-card__header">
+            <div class="game-card__icon">⏱️</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Pikapeli</h2>
+              <p class="game-card__subtitle">
+                Oikein vai väärin? 15 sekuntia per kysymys!
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__reward">
+              <span class="reward-badge">★</span>
+              <span class="reward-text">250 pistettä</span>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+
+        <article class="game-card game-card--locked">
+          <div class="game-card__header">
+            <div class="game-card__icon">🏆</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Tietoturvakysely</h2>
+              <p class="game-card__subtitle">
+                Testaa, mitä olet oppinut!
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__reward">
+              <span class="reward-badge">★</span>
+              <span class="reward-text">300 pistettä</span>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
