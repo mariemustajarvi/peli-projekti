@@ -1,0 +1,24 @@
+{
+  "name": "peli-projekti",
+  "version": "1.0.0",
+  "description": "Hankelähtöinen tuotekehitysprojekti, jonka tavoitteena on suunnitella ja toteuttaa toimiva pelikonsepti ideasta valmiiksi prototyypiksi.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariemustajarvi/peli-projekti.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mariemustajarvi/peli-projekti/issues"
+  },
+  "homepage": "https://github.com/mariemustajarvi/peli-projekti#readme",
+  "dependencies": {
+    "firebase": "^12.6.0"
+  }
+}
