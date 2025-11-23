@@ -8,11 +8,11 @@
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <div class="app">
+  <div class="app content-frame">
     <header class="site-header">
       <div class="brand">
         <div class="brand__icon">🛡</div>
-        <div class="brand__text">Kyberagentti-tietoturvapeli</div>
+        <div class="brand__text">Kyberturvallisuusakatemia</div>
       </div>
         <div class="divider"></div>
       <h2 class="site-header__title">
@@ -64,34 +64,36 @@
       <!-- Pelit -->
       <section class="game-list" aria-label="Available games">
         <!-- Ensimmäinen, heti auki -->
-        <article class="game-card game-card--active">
-          <div class="game-card__header">
-            <div class="game-card__icon">🔐</div>
-            <div class="game-card__titles">
-              <h2 class="game-card__title">Testaa salasanojen vahvuuksia</h2>
-              <p class="game-card__subtitle">
-                Luo salasanoja ja katso, kuinka kauan niiden murtaminen kestää
-              </p>
+        <article class="game-card game-card--active loading-box">
+          <div class="loading-box__content">
+            <div class="game-card__header">
+              <div class="game-card__icon">🔐</div>
+              <div class="game-card__titles">
+                <h2 class="game-card__title">Missio: Salasanasuojaus</h2>
+                <p class="game-card__subtitle">
+                  Analysoi salasanojen vahvuus ja murtoaika. Agenttitason suojaus edellytetään.
+                </p>
+              </div>
             </div>
-          </div>
-          <div class="game-card__footer">
-            <div class="game-card__reward">
-              <span class="reward-badge">★</span>
-              <span class="reward-text">100 pistettä</span>
-            </div>
+            <div class="game-card__footer">
+              <div class="game-card__reward">
+                <span class="reward-badge">★</span>
+                <span class="reward-text">100 pistettä</span>
+              </div>
 
-            <a href="#" class="game-card__cta">Aloita peli</a>
+              <a href="#" class="game-card__cta">Aloita missio</a>
+            </div>
           </div>
         </article>
 
         <!-- Loput, alkuun lukittuja / himmennettyjä -->
-        <article class="game-card game-card--locked">
+        <article class="game-card game-card--locked loading-box">
           <div class="game-card__header">
             <div class="game-card__icon">📧</div>
             <div class="game-card__titles">
-              <h2 class="game-card__title">Tunnista tietojenkalasteluviestit</h2>
+              <h2 class="game-card__title">Missio: Tietojenkalastelun tunnistus</h2>
               <p class="game-card__subtitle">
-                Opi tunnistamaan väärennetyt sähköpostit, joilla yritetään kalastella tietojasi
+                Paljasta väärennetyt viestit. Viholliset yrittävät soluttautua järjestelmiimme.
               </p>
             </div>
           </div>
@@ -104,13 +106,13 @@
           </div>
         </article>
 
-        <article class="game-card game-card--locked">
+        <article class="game-card game-card--locked loading-box">
           <div class="game-card__header">
             <div class="game-card__icon">🕵</div>
             <div class="game-card__titles">
-              <h2 class="game-card__title">Käyttäjän manipulointi</h2>
+              <h2 class="game-card__title">Missio: Manipulaation torjunta</h2>
               <p class="game-card__subtitle">
-                Opi, miten hyökkääjät huijaavat ihmisiä luovuttamaan tietoja
+                Opi vastustamaan sosiaalisen manipuloinnin taktiikoita. Agentti ei lankea huijauksiin.
               </p>
             </div>
           </div>
@@ -123,13 +125,13 @@
           </div>
         </article>
 
-        <article class="game-card game-card--locked">
+        <article class="game-card game-card--locked loading-box">
           <div class="game-card__header">
             <div class="game-card__icon">🌐</div>
             <div class="game-card__titles">
-              <h2 class="game-card__title">Turvallinen nettiselaaminen</h2>
+              <h2 class="game-card__title">Missio: Turvallinen tiedustelu</h2>
               <p class="game-card__subtitle">
-                Pysy turvassa verkossa
+                Erottele turvalliset kohteet vihollisverkkoista. Väärä siirto voi olla kohtalokas.
               </p>
             </div>
           </div>
@@ -142,13 +144,13 @@
           </div>
         </article>
 
-        <article class="game-card game-card--locked">
+        <article class="game-card game-card--locked loading-box">
           <div class="game-card__header">
             <div class="game-card__icon">🔒</div>
             <div class="game-card__titles">
-              <h2 class="game-card__title">Tietosuoja-asetukset</h2>
+              <h2 class="game-card__title">Missio: Tietosuojaoperaatio</h2>
               <p class="game-card__subtitle">
-                Opi suojaamaan henkilötietojasi verkossa
+                Suojaa arkaluontoiset tiedot. Agenttien henkilöllisyys on luokiteltu.
               </p>
             </div>
           </div>
@@ -161,13 +163,13 @@
           </div>
         </article>
 
-        <article class="game-card game-card--locked">
+        <article class="game-card game-card--locked loading-box">
           <div class="game-card__header">
             <div class="game-card__icon">🎯</div>
             <div class="game-card__titles">
-              <h2 class="game-card__title">Lajittele tietoturvakäytännöt</h2>
+              <h2 class="game-card__title">Missio: Tietoturvakäytäntöjen luokittelu</h2>
               <p class="game-card__subtitle">
-                Vedä ja pudota lajitellaksesi turvalliset ja vaaralliset verkkokäytännöt
+                Lajittele turvalliset ja vaaralliset operaatiot. Kenttäagentin on tunnettava ero.
               </p>
             </div>
           </div>
@@ -180,13 +182,13 @@
           </div>
         </article>
 
-        <article class="game-card game-card--locked">
+        <article class="game-card game-card--locked loading-box">
           <div class="game-card__header">
             <div class="game-card__icon">🧩</div>
             <div class="game-card__titles">
-              <h2 class="game-card__title">Yhdistä suojaustermit</h2>
+              <h2 class="game-card__title">Missio: Tiedustelutermit</h2>
               <p class="game-card__subtitle">
-                Yhdistä kyberturvallisuuden termit niiden määritelmiin
+                Yhdistä kyberturva-analyysit määritelmiin. Agentin kieli on oltava hallussa.
               </p>
             </div>
           </div>
@@ -199,13 +201,13 @@
           </div>
         </article>
 
-        <article class="game-card game-card--locked">
+        <article class="game-card game-card--locked loading-box">
           <div class="game-card__header">
             <div class="game-card__icon">🧩</div>
             <div class="game-card__titles">
-              <h2 class="game-card__title">Uhkatunnistin</h2>
+              <h2 class="game-card__title">Missio: Uhka-analyysi</h2>
               <p class="game-card__subtitle">
-                Ole nopea! Tunnista uhat ennen kuin aika loppuu
+                Kriittinen tehtävä! Tunnista uhat ennen kuin ne tunkeutuvat järjestelmään.
               </p>
             </div>
           </div>
@@ -218,13 +220,13 @@
           </div>
         </article>
 
-        <article class="game-card game-card--locked">
+        <article class="game-card game-card--locked loading-box">
           <div class="game-card__header">
             <div class="game-card__icon">⏱️</div>
             <div class="game-card__titles">
-              <h2 class="game-card__title">Pikapeli</h2>
+              <h2 class="game-card__title">Missio: Nopea reagointi</h2>
               <p class="game-card__subtitle">
-                Oikein vai väärin? 15 sekuntia per kysymys!
+                Kenttätilanteessa päätökset on tehtävä sekunneissa. 15 sekuntia per analyysi!
               </p>
             </div>
           </div>
@@ -237,13 +239,13 @@
           </div>
         </article>
 
-        <article class="game-card game-card--locked">
+        <article class="game-card game-card--locked loading-box">
           <div class="game-card__header">
             <div class="game-card__icon">🏆</div>
             <div class="game-card__titles">
-              <h2 class="game-card__title">Tietoturvakysely</h2>
+              <h2 class="game-card__title">Missio: Lopullinen arviointi</h2>
               <p class="game-card__subtitle">
-                Testaa, mitä olet oppinut!
+                Todista kykysi. Vain parhaat agentit läpäisevät tämän testin!
               </p>
             </div>
           </div>

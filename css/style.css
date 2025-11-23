@@ -1,13 +1,14 @@
 :root {
-  --color-bg: #020817;
+  --color-bg: #040e1e;
   --color-grid: rgba(0, 255, 255, 0.04);
 
-  --color-primary: #07dbd0;
+  --color-primary: #00f2ff;
   --color-primary-soft: rgba(7, 219, 208, 0.2);
-  --color-accent: #00ff7a;
-  --color-text: #e6ffff;
-  --color-muted: #4ea3ff;
+  --color-accent: #00f382;
+  --color-text: #00f2ff;
+  --color-muted: #0d4263;
   --color-card-bg: rgba(2, 12, 30, 0.95);
+  --color-muted-transparent: rgba(13, 66, 99, 0.25);
 
   --font-xs: 0.7rem;
   --font-sm: 0.8rem;
@@ -22,6 +23,7 @@
   --space-sm: 0.6rem;
   --space-md: 1rem;
   --space-lg: 1.5rem;
+  --space-xl: 2rem;
 
   --shadow-card: 0 0 20px rgba(0, 0, 0, 0.9);
 }
@@ -38,22 +40,49 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: "Orbitron", system-ui, sans-serif;
-  background-image: url(../pictures/ruudukko.png);
   color: var(--color-text);
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(to right, var(--color-muted-transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-muted-transparent) 1px, transparent 1px);
+  background-size: 35px 35px;
 }
 
-/* keskitys*/
-.app {
-  max-width: 1000px;
+/* sisällön keskitys*/
+.app.content-frame {
+  max-width: 1150px;        /* tai mitä haluat */
   margin: 3rem auto;
-  padding: 2rem 1.5rem 3rem;
+  padding: 3rem 2rem 3rem;  /* säädä makusi mukaan */
   position: relative;
 }
 
+/*kulmaelementit*/
+.app.content-frame::before,
+.app.content-frame::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border: 1px solid var(--color-primary);
+}
 
+/* vasen yläkulma */
+.app.content-frame::before {
+  top: -20px;
+  left: 0px;   
+  border-right: none;
+  border-bottom: none;
+}
+
+/* oikea yläkulma */
+.app.content-frame::after {
+  top: -20px;
+  right: -0px;  
+  border-left: none;
+  border-bottom: none;
+}
 
 /* header */
-
 .site-header {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -73,7 +102,7 @@ body {
 
 .brand__text {
   color: var(--color-primary);
-  font-size: var(--font-xl);
+  font-size: var(--font-lg);
   letter-spacing: 0.22em;
   font-weight: 500;
   text-transform: uppercase;
@@ -81,10 +110,12 @@ body {
 }
 
 .site-header__title {
+  padding-top: 1rem;
   margin: 0;
   font-size: var(--font-sm);
   font-weight: 400;
   letter-spacing: 0.36em;
+  color: var(--color-primary);
   text-transform: uppercase;
 }
 
@@ -93,14 +124,13 @@ body {
   color: var(--color-primary);
 }
 
-/* yläosan napit */
-
+/* yläosan nnavit */
 .top-nav {
   margin-top: 1.6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  gap: 1rem;
 }
 
 .top-nav__row {
@@ -108,20 +138,21 @@ body {
   gap: 0.8rem;
 }
 
-/* yleinen nav-nappi */
+/* navin yleissäädöt */
 .nav-btn {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
-  padding: var(--space-xs) var(--space-lg);
+  gap: 0.55rem;
+  padding: var(--space-md) var(--space-xl);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-primary);
   background: rgba(0, 0, 0, 0.5);
   color: var(--color-primary);
   text-decoration: none;
   font-size: var(--font-sm);
+  font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   cursor: pointer;
@@ -143,15 +174,15 @@ body {
   white-space: nowrap;
 }
 
-/* eri värit navissa*/
+/* navin värit*/
 .nav-btn--primary {
   border-color: var(--color-primary);
   color: var(--color-primary);
 }
 
 .nav-btn--secondary {
-  border-color: var(--color-muted);
-  color: var(--color-muted);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .nav-btn--accent {
@@ -185,8 +216,6 @@ body {
     0 9px 0 rgba(0, 0, 0, 0.9);
 }
 
-/* dashboard-main */
-
 .dashboard {
   margin-top: 2rem;
 }
@@ -214,7 +243,7 @@ body {
   font-size: var(--font-sm);
   letter-spacing: 0.22em;
   font-weight: 400;
-  color: var(--color-muted);
+  color: var(--color-primary);
 }
 
 .stat-card__value {
@@ -223,13 +252,58 @@ body {
   font-weight: 700;
 }
 
-/* erotin viiva */
+/* erotinviiva */
 .divider {
   margin: 1.7rem 0 1.2rem;
   border-bottom: 2px solid rgba(7, 219, 208, 0.35);
 }
 
-/* pelit */
+/* PELIT */
+
+.game-card.loading-box {
+  position: relative;
+  overflow: hidden; 
+}
+
+.loading-box__content {
+  position: relative;
+  z-index: 1;
+  display: contents; 
+}
+
+/* viiva taustalla */
+.game-card.loading-box::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-muted),
+    transparent
+  );
+  animation: drop-line 2.0s linear infinite;
+  z-index: 0;
+}
+
+@keyframes drop-line {
+  0% {
+    top: -5%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
 
 .game-list {
   display: flex;
@@ -238,11 +312,11 @@ body {
 }
 
 .game-card {
-  background: rgba(4, 16, 36, 0.96);
+  background: var(--color-bg);
   border-radius: var(--radius-lg);
   border: 1px solid rgba(7, 219, 208, 0.5);
   box-shadow: var(--shadow-card);
-  padding: var(--space-md) var(--space-md);
+  padding: var(--space-xl) var(--space-md);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   row-gap: var(--space-md);
@@ -261,8 +335,11 @@ body {
 
 .game-card__title {
   margin: 0 0 0.4rem;
+  color: var(--color-primary);
   font-size: var(--font-md);
+  font-weight: 400;
   letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .game-card__subtitle {
@@ -304,11 +381,12 @@ body {
 
 /* toimintakehotenappi */
 .game-card__cta {
-  padding: var(--space-xs) 1.8rem;
+  padding: var(--space-md);
   background: var(--color-primary);
   color: #001217;
   border-radius: var(--radius-md);
   font-size: var(--font-sm);
+  font-weight: 600;
   text-decoration: none;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -326,8 +404,9 @@ body {
 
 /* lukittujen korttien tyylit */
 .game-card--locked {
-  opacity: 0.28;
+  opacity: 0.55;
   position: relative;
+  background-color: var(--color-bg);
 }
 
 .game-card--locked .game-card__lock {
