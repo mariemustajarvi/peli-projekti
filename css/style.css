@@ -50,9 +50,9 @@ body {
 
 /* sisällön keskitys*/
 .app.content-frame {
-  max-width: 1150px;        /* tai mitä haluat */
+  max-width: 1150px;       
   margin: 3rem auto;
-  padding: 3rem 2rem 3rem;  /* säädä makusi mukaan */
+  padding: 3rem 2rem 3rem;  
   position: relative;
 }
 
