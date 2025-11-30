@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Missio — Kysymys 4/6</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/tietojenkalastelu.css">
+</head>
+<body class="level-page">
+  <div class="container-backbtn">
+    <a class="back-btn" href="index.html">← Takaisin missioihin</a>
+  </div>
+
+  <main class="container level-main">
+    <section class="panel">
+      <header class="panel-header">
+        <div class="panel-title">📧 SÄHKÖPOSTIANALYYSI: TIETOJENKALASTELU</div>
+        <div class="panel-sub">
+          VIESTI <span id="qIndex">1</span> / <span id="qTotal">6</span> |
+          TARKISTUKSET OIKEIN: <span id="score">0</span> / <span id="maxScore">6</span>
+        </div>
+      </header>
+
+      <div class="letter">
+        <div class="information">
+          <!-- js:stä teksti -->
+          <p><strong>Lähettäjä:</strong> <span id="sender"></span></p>
+          <p><strong>Aihe:</strong> <span id="subject"></span></p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="body-text" id="bodyText">
+          <!-- sähköpostin teksti tähän -->
+        </div>
+      </div>
+
+      <div class="answers">
+        <button id="btnSafe" class="answer-btn safe">✅ TURVALLINEN VIESTI</button>
+        <button id="btnPhish" class="answer-btn phish">🎧 TIETOJENKALASTELU!</button>
+      </div>
+
+      <div id="feedback" class="feedback hidden">
+        <p id="feedbackTitle"></p>
+        <p id="feedbackText"></p>
+        <button id="nextBtn" class="next-btn">Seuraava viesti →</button>
+      </div>
+    </section>
+  </main>
+
+<script src="./js/tietojenkalastelu.js"></script>
+</body>
+</html>
