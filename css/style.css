@@ -29,7 +29,6 @@
 }
 
 /* perusasetukset */
-
 *,
 *::before,
 *::after {
@@ -122,6 +121,7 @@ body {
 .site-header__title-icon {
   margin-left: 0.4rem;
   color: var(--color-primary);
+  font-size: var(--font-lg);
 }
 
 /* yläosan nnavit */
