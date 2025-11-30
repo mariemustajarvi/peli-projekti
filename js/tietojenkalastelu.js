@@ -8,9 +8,9 @@
           "Hienoa työtä! 🎉\n"+
           "Tämä viesti on tietojenkalasteluyritys!\n" +
           "Varoitusmerkit:\n" +
-          "🎉 Lähettäjän osoite on epäilyttävä (kirjoitusvirhe 'amaz0n').\n" +
-          "🎉 Viesti luo kiireen tunteen ja uhkaa tilin sulkemisella.\n" +
-          "🎉 Sinua painostetaan klikkaamaan linkkiä vahvistaaksesi tietosi."
+          "• Lähettäjän osoite on epäilyttävä (kirjoitusvirhe 'amaz0n').\n" +
+          "• Viesti luo kiireen tunteen ja uhkaa tilin sulkemisella.\n" +
+          "• Sinua painostetaan klikkaamaan linkkiä vahvistaaksesi tietosi."
       },
       {
         sender: "ilmoitukset@pankki.fi",

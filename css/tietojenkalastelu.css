@@ -32,6 +32,13 @@ body {
   z-index: 10;   
 }
 
+.back-btn {
+    border: 1px solid;
+    border-radius: 6px; 
+    padding: 1rem;
+    color: var(--color-primary);
+}
+
 .container {
     width: 80%;
     max-width: 800px;
@@ -47,6 +54,10 @@ body {
 
 .panel-sub {
     margin-top: 0.5rem;
+}
+
+.divider-small {
+    margin: 0 1rem;
 }
 
 .letter {
@@ -97,9 +108,42 @@ button {
     color: white;
 }
 
+.feedback {
+    position: right;
+    bottom: 20px;    
+    left: 20px;    
+    z-index: 1;   
+}
+
 .next-btn {
     padding: 1rem;
-    background-color: var(--color-muted);
-    color: white;
+    background-color: var(--color-primary);
+    color: var(--color-bg);
     border-radius: 6px;
+    font-weight: 600;
+}
+
+.loading-box {
+  position: relative;
+}
+
+.loading-box::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-muted),
+    transparent
+  );
+  animation: drop-line 3s linear infinite;
+  z-index: 0;          
+}
+
+.loading-box > * {
+  position: relative;
+  z-index: 1;         
 }
