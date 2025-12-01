@@ -1,0 +1,150 @@
+:root {
+    --color-bg: #040e1e;
+    --color-grid: rgba(0, 255, 255, 0.04);
+
+    --color-primary: #00f2ff;
+    --color-primary-soft: rgba(7, 219, 208, 0.2);
+    --color-accent: #00f382;
+    --color-text: #00f2ff;
+    --color-muted: #0d4263;
+    --color-card-bg: rgba(2, 12, 30, 0.95);
+    --color-muted-transparent: rgba(13, 66, 99, 0.25);
+
+    --font-xs: 0.7rem;
+    --font-sm: 0.8rem;
+    --font-md: 1.0rem;
+    --font-lg: 1.3rem;
+    --font-xl: 2.2rem;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.container-backbtn {
+  position: absolute;
+  top: 20px;    
+  left: 20px;    
+  z-index: 10;   
+}
+
+.back-btn {
+    border: 1px solid;
+    border-radius: 6px; 
+    padding: 1rem;
+    color: var(--color-primary);
+}
+
+.container {
+    width: 80%;
+    max-width: 800px;
+    padding: 30px;
+    background-color: var(--color-bg);
+    border: 1px solid;
+    border-radius: 6px;
+}
+
+.panel-title {
+    font-size: var(--font-lg);
+}
+
+.panel-sub {
+    margin-top: 0.5rem;
+    font-size: var(--font-sm);
+}
+
+.divider-small {
+    margin: 0 1rem;
+}
+
+.letter {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 1px solid;
+    border-radius: 6px;
+}
+
+.information {
+    font-size: var(--font-sm);
+}
+
+.body-text {
+    font-size: var(--font-md);
+}
+
+.answers {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;             
+}
+
+.answers button {
+    flex: 1;              
+    text-align: center;   
+}
+
+button {
+  font-family: "Orbitron", system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.safe, .phish {
+    padding: 1.5rem;
+    border-radius: 6px;
+    font-size: var(--font-md);
+}
+
+.safe {
+    background-color: var(--color-accent);
+}
+
+.phish {
+    background-color: #f30000;
+    color: white;
+}
+
+.feedback {
+    position: right;
+    bottom: 20px;    
+    left: 20px;    
+    z-index: 1;   
+}
+
+.next-btn {
+    padding: 1rem;
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.loading-box {
+  position: relative;
+}
+
+.loading-box::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-muted),
+    transparent
+  );
+  animation: drop-line 3s linear infinite;
+  z-index: 0;          
+}
+
+.loading-box > * {
+  position: relative;
+  z-index: 1;         
+}
