@@ -1,0 +1,282 @@
+// Manipulaatio peli javascript v2.0
+(function(){
+  const panelBody = document.querySelector('.panel-body');
+
+  try {
+    // Manipulaatio peli data
+    const data = {
+      ui: {
+        backBtnText: '←  Takaisin missioihin',
+        panelTitle: '🎭 SOSIAALISEN MANIPULAATION SKENAARIO',
+        panelSubPrefix: 'KYSYMYS',
+        scoreLabel: 'PISTEET:',
+        scenarioLabel: '📱 SKENAARIO:',
+        nextBtn: 'SEURAAVA SKENAARIO →',
+        backToIndex: 'Takaisin tehtäviin',
+        restart: 'Suorita uudelleen',
+        finishedHeading: 'Olet suorittanut tehtävän!'
+      },
+      questions: [
+        {
+          id: 'q1',
+          scenario: 'Henkilö soittaa ja väittää olevansa koulusi IT-osastolta. He sanovat, että tilisi okanssa on ongelma ja tarvitsevat salasanasi korjatakseen sen.<br><br>Mitä sinun pitäisi tehdä?',
+          options: [
+            {id:'A', text:'Antaa heille salasanasi, jotta he voivat korjata ongelman'},
+            {id:'B', text:'Lopettaa puhelu ja ottaa yhteyttä koulusi IT-osastoon suoraan'},
+            {id:'C', text:'Pyytää heitä soittamaan myöhemmin uudelleen'},
+            {id:'D', text:'Antaa heille käyttäjätunnuksesi mutta ei salasana'}
+          ],
+          correct: 'B',
+          explanation: 'Älä koskaan anna salasanasi kenellekkään, vaikka he väittäisivät olevansa IT-osastolta! Oikeat IT-osastot eivät koskaan kysy salasanoja. Vahvista aina ottamalla heihin yhteyttä suoraan virallisten kanavien kautta.'
+        },
+        {
+          id: 'q2',
+          scenario: 'Tuntematon henkilö sosiaalisessa mediassa tarjoaa sinulle ilmaisen lahjakortin, jos jaat kotiosoitteesi ja puhelinnumerosi.<br><br>Mitä sinun pitäisi tehdä?',
+          options: [
+            {id:'A', text:'Jättää huomiotta ja estää henkilö'},
+            {id:'B', text:'Jakaa tiedot saadaksesi lahjakortin'},
+            {id:'C', text:'Kysy ystävältäsi, saivatko he saman tarjouksen'},
+            {id:'D', text:'Anna väärä osoite'}
+          ],
+          correct: 'A',
+          explanation: 'Tämä on yleinen sosiaalinen manipuloinnin taktiikka! Älä koskaan jaa henkilökohtaisia tietoja tuntemattomien kanssa verkossa, erityisesti "ilmaisten" tarjousten vuoksi. Estä ja raportoi epäilyttävät tilit.'
+        },
+        {
+          id: 'q3',
+          scenario: 'Saat tekstiviestin tuntemattomasta numerosta, joka väittää olevan ystäväsi ja että hän on tällä hetkellä vaikeuksissa ja tarvitsee sinun lähettävän rahaa kiireellisesti mobilepaylla uuteen numeroon.<br><br>Mikä on paras vastaus?',
+          options: [
+            {id:'A', text:'Lähetä raha välittömästi MobilePaylle, koska ystävä on pulassa.'},
+            {id:'B', text:'Välittää tekstiviestiä muille ystäville.'},
+            {id:'C', text:'Jättää se täysin huomioitta.'},
+            {id:'D', text:'Soittaa tai lähettää viesti ystävällesi suoraan vahvistaaksesi.'}
+          ],
+          correct: 'D',
+          explanation: 'Vahvista aina kiirreelliset pyynnöt suoraan! Huijarit luovat vääriä hätätilanteita painostakseen sinut toimimaan nopeasti. Ota yhteyttä ystävääsi eri menetelmällä vahvistaksesi.'
+        },
+        {
+          id: 'q4',
+          scenario: 'Joku pelialustalla tarjoaa sinulle ilmaisen pelin sisäistä valuuttaa, jos annat heille tilin kirjautumistietosi väliaikaisesti.<br><br>Mitä sinun pitäisi tehdä?',
+          options: [
+            {id:'A', text:'Anna heille kirjautumistiedot, koska se on vain peli.'},
+            {id:'B', text:'Vaihtaa salasanasi ensin, sitten jakaa se'},
+            {id:'C', text:'Älä koskaan jaa tilisiäsi - se on huijaus.'},
+            {id:'D', text:'Pyytää heitä todistamaan, että he ovat laillisia'}
+          ],
+          correct: 'C',
+          explanation: 'Tilin jakaaminen voi johtaa tilin varastamiseen ja kaikkien tietojese menettämiseen! Oikeat pelit eivät koskaan vaadi kirjautumistietojasi. Älä koskaan jaa tilejäsi kenenkään kanssa, edes parhaan ystävän.'
+        },
+        {
+          id: 'q5',
+          scenario: 'Saat puhelun, jossa ääni kuulostaa täsmälleen ystävältäsi. Hän sanoo: "tarvitsen tunnuksei yhteen kouluprojektiin, voitko sanoa sen nopeasti"<br><br>Mitä sinun pitäisi tehdä?',
+          options: [
+            {id:'A', text:'Antaa tunnukset, koska ääni kuulostaa kaveriltasi'},
+            {id:'B', text:'Katkaista puhelu ja varmistaa asia ystävältä toisessa kanavassa'},
+            {id:'C', text:'Pyytää häntä lähettämään viestin oikeasta numerostaan'},
+            {id:'D', text:'Kysyä, mihin projektiin hän niitä tarvitsee'}
+          ],
+          correct: 'B',
+          explanation: 'Deepfake-äänet ovat yleistyneet. Ääni ei ole todiste - tärkeintä on varmistaa asia toisesta kanavasta kuten WhatsAppista tai kasvotusten.'
+        }
+      ]
+    };
+    
+    const questions = data.questions;
+    const ui = data.ui;
+    const totalQuestions = questions.length;
+
+    // Setup page text
+    document.querySelector('.back-btn').innerHTML = ui.backBtnText;
+    document.querySelector('.panel-title').innerHTML = ui.panelTitle;
+    document.querySelector('.panel-sub').innerHTML = `${ui.panelSubPrefix} <span id="qIndex">1</span> / <span id="qTotal">${totalQuestions}</span> | ${ui.scoreLabel} <span id="score">0</span> / <span id="maxScore">${totalQuestions}</span>`;
+    document.querySelector('.q-label').innerHTML = ui.scenarioLabel;
+
+    // tilanne tsekkaus
+    let currentQuestion = 0;
+    let playerScore = 0;
+
+    // Load saved progress
+    try {
+      const saved = JSON.parse(localStorage.getItem('manipulaatio_progress'));
+      if (saved) {
+        currentQuestion = saved.qIndex;
+        playerScore = saved.score;
+      }
+    } catch(e) {}
+
+    // elementit
+    const questionNumberEl = document.getElementById('qIndex');
+    const scoreEl = document.getElementById('score');
+    const scenarioEl = document.getElementById('scenario');
+    const optionsEl = document.getElementById('options');
+    const infoEl = document.getElementById('info');
+    const infoText = document.getElementById('infoText');
+    const nextBtn = document.getElementById('nextBtn');
+
+    // tallenna edistyminen
+    function saveProgress() {
+      localStorage.setItem('manipulaatio_progress', JSON.stringify({
+        qIndex: currentQuestion, 
+        score: playerScore
+      }));
+    }
+
+    // näytä kyssäri
+    function showQuestion() {
+      const question = questions[currentQuestion];
+      questionNumberEl.textContent = currentQuestion + 1;
+
+      
+      const parts = question.scenario.split('<br><br>');
+      scenarioEl.innerHTML = parts[0];
+      document.getElementById('followup').innerHTML = parts[1] || '';
+
+      
+      optionsEl.innerHTML = '';
+      infoEl.className = 'info-box';
+      infoEl.setAttribute('aria-hidden', 'true');
+      nextBtn.disabled = true;
+
+      // vastausnapit
+      question.options.forEach(function(option) {
+        const button = document.createElement('button');
+        button.className = 'option';
+        button.dataset.optId = option.id;
+        button.textContent = option.id + '. ' + option.text;
+        optionsEl.appendChild(button);
+      });
+
+      saveProgress();
+    }
+
+    // valmis
+    function finishQuiz() {
+      localStorage.removeItem('manipulaatio_progress');
+      document.querySelector('.panel-header').style.display = 'none';
+
+      // laske pisteet
+      const maxPoints = 150;
+      const earnedPoints = Math.round((playerScore / totalQuestions) * maxPoints);
+
+      // Tallenna pisteet
+      try {
+        const currentPoints = Number(localStorage.getItem('user_points') || 0);
+        localStorage.setItem('user_points', currentPoints + earnedPoints);
+      } catch(e) {}
+
+      // motivaatio tekstit
+      let message = '';
+      if (playerScore === totalQuestions) {
+        message = 'Täydellinen suoritus, agentti! Olet mestari manipulaation tunnistamisessa. Et tehnyt yhtäkään virhettä - juuri kuten huippuagentin kuuluukin!';
+      } else if (playerScore >= totalQuestions / 2) {
+        message = 'Hienoa työtä, agentti! Olet oikealla polulla - hio tarkuuttasi, niin murtaudut huipulle!';
+      } else {
+        message = 'Hyvä yritys, agentti! Joka virhe opettaa jotain uutta. Sinussa on enemmän potentiaalia kuin tulos näyttää!';
+      }
+
+      // näytä feedback screeni
+      panelBody.innerHTML = 
+        '<div class="completion-screen">' +
+        '<div class="completion-trophy">🏆</div>' +
+        '<h2 class="completion-title">' + ui.finishedHeading + '</h2>' +
+        '<div class="completion-card">' +
+        '<div class="completion-emoji">👍</div>' +
+        '<p class="completion-score">' + playerScore + ' / ' + totalQuestions + ' oikein</p>' +
+        '<p class="completion-message">' + message + '</p>' +
+        '<hr class="completion-divider">' +
+        '<div class="completion-points-wrapper">' +
+        '<span class="completion-points">+' + earnedPoints + ' pistettä</span>' +
+        '</div>' +
+        '</div>' +
+        '<div class="completion-buttons">' +
+        '<a href="index.html" class="next-btn completion-btn">' + ui.backToIndex + '</a>' +
+        '<button id="restartBtn" class="next-btn completion-btn">' + ui.restart + '</button>' +
+        '</div>' +
+        '</div>';
+
+      document.getElementById('restartBtn').addEventListener('click', function() {
+        location.reload();
+      });
+    }
+
+    // Tarkista vastaus
+    function checkAnswer(button, isCorrect) {
+      const allButtons = optionsEl.querySelectorAll('.option');
+      allButtons.forEach(function(btn) {
+        btn.classList.add('disabled');
+      });
+      
+      if (isCorrect) {
+        button.classList.add('selected-correct');
+        playerScore++;
+        infoEl.classList.add('info-success');
+        infoText.textContent = questions[currentQuestion].explanation;
+      } else {
+        button.classList.add('selected-wrong');
+        // Näytä oikea vastaus
+        const correctAnswer = questions[currentQuestion].correct;
+        allButtons.forEach(function(btn) {
+          if (btn.dataset.optId === correctAnswer) {
+            btn.classList.add('correct');
+          }
+        });
+        infoEl.classList.add('info-warn');
+        infoText.textContent = '💡 ' + questions[currentQuestion].explanation;
+      }
+      
+      infoEl.setAttribute('aria-hidden', 'false');
+      scoreEl.textContent = playerScore;
+      nextBtn.disabled = false;
+      saveProgress();
+    }
+
+    // Klikkaa vastausta
+    optionsEl.addEventListener('click', function(e) {
+      const button = e.target.closest('.option');
+      if (!button || button.classList.contains('disabled')) return;
+      
+      const isCorrect = button.dataset.optId === questions[currentQuestion].correct;
+      checkAnswer(button, isCorrect);
+    });
+
+    // Näppäimistön pikanäppäimet (A-D tai 1-4)
+    document.addEventListener('keydown', function(e) {
+      const key = e.key.toUpperCase();
+      
+      // Paina A, B, C tai D
+      if (key === 'A' || key === 'B' || key === 'C' || key === 'D') {
+        const allButtons = optionsEl.querySelectorAll('.option');
+        allButtons.forEach(function(btn) {
+          if (btn.dataset.optId === key && !btn.classList.contains('disabled')) {
+            btn.click();
+          }
+        });
+      }
+      
+      // Paina 1, 2, 3 tai 4
+      if (e.key >= '1' && e.key <= '4') {
+        const buttonIndex = Number(e.key) - 1;
+        const button = optionsEl.children[buttonIndex];
+        if (button && !button.classList.contains('disabled')) {
+          button.click();
+        }
+      }
+    });
+
+    // Seuraava nappi
+    nextBtn.addEventListener('click', function() {
+      currentQuestion++;
+      if (currentQuestion >= totalQuestions) {
+        finishQuiz();
+      } else {
+        showQuestion();
+      }
+    });
+
+    // Setup
+    nextBtn.textContent = ui.nextBtn;
+    showQuestion();
+
+  } catch(err) {
+    console.error(err);
+  }
+})();
