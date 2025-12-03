@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Missio — Kysymys 4/6</title>
+  <title>Missio — Turvallinen tiedustelu</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/turvallinentiedustelu.css">
@@ -12,40 +12,71 @@
   <div class="container-backbtn">
     <a class="back-btn" href="index.html">← Takaisin missioihin</a>
   </div>
-
   <main class="container level-main loading-box">
-    <section class="panel">
+    <!-- kysymykset -->
+    <section class="panel" id="quizPanel">
       <header class="panel-header">
-        <div class="panel-title">🌐MISSIO: TURVALLINEN TIEDUSTELU </div>
+        <div class="panel-title">🌐 TURVALLISEN SELAILUN HAASTE</div>
         <div class="panel-sub">
-          VIESTI <span id="qIndex">1</span> / <span id="qTotal">6</span> 
+          Kysymys <span id="qIndex">1</span> / <span id="qTotal">6</span>
           <span class="divider-small">|</span>
-          TARKISTUKSET OIKEIN: <span id="score">0</span> / <span id="maxScore">6</span>
+          Pisteet: <span id="points">0</span> / <span id="maxPoints">0</span>
         </div>
       </header>
-
-      <div class="letter">
-        <div class="information">
-          <p><strong>ONKO TÄMÄ VERKKOSIVUSTO TURVALLINEN VIERAILLA?</strong> <span id="sender"></span></p>
+      <p class="question-text">Onko tämä verkkosivusto turvallinen vierailla?</p>
+      <!-- URL + esikatselukuva-->
+      <div class="site-card">
+        <div class="site-url-bar">
+          <span class="site-lock">🔒</span>
+          <span id="siteUrl"></span>
         </div>
-        <div class="divider"></div>
-        <div class="body-text" id="bodyText">
+        <div class="site-preview">
+          <div class="site-preview-icon">🌐</div>
+          <div class="site-preview-text">Verkkosivuston esikatselu</div>
         </div>
       </div>
-
+      <!-- vastausnamiskat -->
       <div class="answers">
         <button id="btnSafe" class="answer-btn safe">✅ TURVALLINEN</button>
-        <button id="btnPhish" class="answer-btn phish">🎧 EPÄTURVALLINEN</button>
+        <button id="btnUnsafe" class="answer-btn unsafe">⚠️ EPÄTURVALLINEN!</button>
       </div>
-
-      <div id="feedback" class="feedback hidden">
-        <p id="feedbackTitle"></p>
-        <p id="feedbackText"></p>
-        <button id="nextBtn" class="next-btn">SEURAAVA SIVUSTO →</button>
+      <!-- palaute -->
+      <div id="feedbackSection" class="feedback-section hidden">
+        <div id="feedbackBox" class="feedback-box">
+          <p id="feedbackTitle" class="feedback-title"></p>
+          <p id="feedbackText" class="feedback-text"></p>
+        </div>
+        <div id="infoBox" class="info-box">
+          <p class="info-heading">🔍 Indikaattorit:</p>
+          <ul id="indicatorList"></ul>
+          <p class="info-heading">💡 Turvallisuusvinkit:</p>
+          <ul id="tipList"></ul>
+        </div>
+        <button id="nextBtn" class="next-btn">Seuraava sivusto →</button>
+      </div>
+    </section>
+    <section id="resultScreen" class="result-screen hidden">
+      <div class="result-trophy">🏆</div>
+      <h1 class="result-title">MISSIO SUORITETTU! 🎉</h1>
+      <div class="result-card">
+        <div class="result-emoji" id="resultEmoji">👏</div>
+        <p class="result-score" id="resultScoreText">0 / 0 oikein</p>
+        <p class="result-comment" id="resultComment">Hyvä työ, agentti!</p>
+        <hr class="result-divider">
+        <button class="result-points-btn">
+          ✧ <span id="resultPointsText">+0 pistettä</span>
+        </button>
+      </div>
+      <div class="result-actions">
+        <a href="index.html" class="result-btn result-btn-primary">
+          TAKAISIN MISSIOLISTAAN
+        </a>
+        <button id="retryBtn" class="result-btn result-btn-ghost">
+          UUDELLEENSUORITA MISSIO
+        </button>
       </div>
     </section>
   </main>
-
-<script src="./js/turvallinentiedustelu.js"></script>
+  <script src="./js/turvallinentiedustelu.js"></script>
 </body>
 </html>
