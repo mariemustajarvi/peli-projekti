@@ -18,11 +18,24 @@
 }
 
 body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;   
+  margin: 0;
+  padding: 2rem 1rem;   
+  background-color: var(--color-bg);
+  font-family: "Orbitron", system-ui, sans-serif;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  padding: 30px;
+  background-color: var(--color-bg);
+  border: 1px solid;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
 .container-backbtn {
@@ -54,6 +67,7 @@ body {
 
 .panel-sub {
     margin-top: 0.5rem;
+    font-size: var(--font-sm);
 }
 
 .divider-small {
@@ -73,7 +87,7 @@ body {
 }
 
 .body-text {
-    font-size: var(--font-md);
+    font-size: var(--font-lg);
 }
 
 .answers {
@@ -109,18 +123,44 @@ button {
 }
 
 .feedback {
-    position: right;
-    bottom: 20px;    
-    left: 20px;    
-    z-index: 1;   
+  margin-top: 1.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-size: var(--font-md);
+}
+
+#feedbackTitle {
+  font-size: var(--font-md);
+}
+
+.feedback.correct {
+  background-color: rgba(0, 243, 130, 0.08);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.feedback.wrong {
+  background-color: rgba(243, 0, 0, 0.08);
+  border-color: #f30000;
+  color: #f30000;
 }
 
 .next-btn {
-    padding: 1rem;
-    background-color: var(--color-primary);
-    color: var(--color-bg);
-    border-radius: 6px;
-    font-weight: 600;
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 1.2rem;
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  border-radius: 6px;
+  border: none;
+  font-size: var(--font-md);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hidden {
+  display: none;
 }
 
 .loading-box {
@@ -146,4 +186,168 @@ button {
 .loading-box > * {
   position: relative;
   z-index: 1;         
+}
+
+.result-screen {
+  margin-top: 1.5rem;
+  padding: 0 !important;
+  border-radius: 10px;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-align: center;
+}
+
+.result-trophy {
+  font-size: 3rem;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.result-title {
+  margin: 0 0 2rem;
+  font-size: var(--font-lg);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.result-card {
+  margin: 0 auto 2rem;
+  max-width: 500px;
+  padding: 2rem 1.5rem 2.2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 242, 255, 0.4);
+  background: radial-gradient(circle at top, rgba(0, 242, 255, 0.12), transparent),
+              #020813;
+}
+
+.result-emoji {
+  font-size: 2.3rem;
+  margin-bottom: 0.75rem;
+}
+
+.result-score {
+  margin: 0;
+  font-size: 1.6rem;
+  color: var(--color-primary);
+}
+
+.result-comment {
+  margin: 0.4rem 0 1.4rem;
+  font-size: var(--font-sm);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.result-divider {
+  margin: 0 0 1.4rem;
+  border: none;
+  border-top: 1px solid rgba(0, 242, 255, 0.2);
+}
+
+.result-points-btn {
+  padding: 0.8rem 1.8rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-primary);
+  background: rgba(0, 242, 255, 0.08);
+  color: var(--color-primary);
+  font-size: var(--font-sm);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: default;
+}
+
+.result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.result-btn {
+  display: block;
+  width: 100%;
+  padding: 1.1rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-primary);
+  font-size: var(--font-sm);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+}
+
+.result-btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.result-btn-ghost {
+  background-color: transparent;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+/* results on phones */
+@media (max-width: 600px) {
+  .result-screen {
+    padding: 2rem 1.2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 20px;
+  }
+
+  .panel-title {
+    font-size: var(--font-md);
+  }
+
+  .body-text {
+    font-size: var(--font-md);
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  body {
+    align-items: flex-start;   
+    padding-top: 4rem;        
+  }
+
+  .panel-title {
+    font-size: 1rem;
+  }
+
+  .panel-sub {
+    font-size: var(--font-xs);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;              
+  }
+
+  .letter {
+    padding: 0.75rem;
+  }
+
+  .body-text {
+    font-size: var(--font-sm);
+  }
+
+  .answers {
+    flex-direction: column;   
+    gap: 0.75rem;
+  }
+
+  .answers button {
+    width: 100%;
+    flex: none;
+  }
+
+  .back-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: var(--font-xs);
+  }
 }
