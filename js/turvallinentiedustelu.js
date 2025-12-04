@@ -14,9 +14,9 @@ const sites = [
       "Tunnettu ja luotettava palvelu"
     ],
     tips: [
-      "Etsi HTTPS ja lukko-ikoni selaimesta",
-      "Tarkista verkkotunnuksen oikeinkirjoitus",
-      "Suuret palvelut käyttävät omia, selkeitä domaineja"
+      "• Etsi HTTPS ja lukko-ikoni selaimesta",
+      "• Tarkista verkkotunnuksen oikeinkirjoitus",
+      "• Suuret palvelut käyttävät omia, selkeitä domaineja"
     ]
   },
   {
@@ -35,9 +35,10 @@ const sites = [
       "❌ Pyytää kirjautumista"
     ],
     tips: [
-      "• Ei HTTPS tarkoittaa että tietoja ei salata",
+      "• Ei HTTPS tarkoittaa, että tietoja ei salata",
       "• Verkkotunnus käyttää nollaa 'o':n sijaan",
-      "• Älä koskaan syötä salasanoja HTTP-sivustoillaÄlä seuraa tukilinkkejä sähköpostista – kirjoita osoite itse"
+      "• Älä koskaan syötä salasanoja HTTP-sivustoilla",
+      "• Älä seuraa tukilinkkejä sähköpostista – kirjoita osoite itse"
     ]
   },
   {
@@ -48,7 +49,7 @@ const sites = [
       "Tämä verkkosivusto on turvallinen!",
     wrongExplanation:
       "Ei aivan! ❌\n" +
-      "Tämä sivu on turvallinen",
+      "Tämä sivu on turvallinen.",
     indicators: [
       "🔒 HTTPS-yhteys",
       "✅ Tunnettu verkkotunnus",
@@ -78,8 +79,8 @@ const sites = [
     tips: [
       "• Vältä sivustoja, jotka lupaavat ilmaisia kalliita tuotteita",
       "• Ole varovainen ulkomaisten verkkotunnusten kanssa",
-      "• Mikään aito yritys ei anna ilmaisia iPhonejä",
-      "• HTTP tarkoittaa että tietosi ovat alttiina"
+      "• Mikään aito yritys ei anna ilmaisia iPhoneja",
+      "• HTTP tarkoittaa, että tietosi ovat alttiina"
     ]
   },
   {
@@ -120,13 +121,12 @@ const sites = [
     ],
     tips: [
       "• YouTube on luotettava alusta",
-      "• Vahvista aina että olet oikealla sivustolla",
+      "• Vahvista aina, että olet oikealla sivustolla",
       "• Etsi lukkokuvake"
     ]
   }
 ];
 
-// ----- tila -----
 
 let currentIndex = 0;
 let correctCount = 0;
@@ -134,7 +134,6 @@ let points = 0;
 const pointsPerCorrect = 25;
 const maxPoints = sites.length * pointsPerCorrect;
 
-// elementit
 
 const qIndexEl = document.getElementById("qIndex");
 const qTotalEl = document.getElementById("qTotal");
@@ -162,26 +161,21 @@ const resultPointsText = document.getElementById("resultPointsText");
 const resultEmoji = document.getElementById("resultEmoji");
 const retryBtn = document.getElementById("retryBtn");
 
-// alusta yläosan numerot
 qTotalEl.textContent = sites.length;
 maxPointsEl.textContent = maxPoints.toString();
 pointsEl.textContent = points.toString();
 
-// ----- funktiot -----
 
 function showSite(index) {
   const site = sites[index];
   siteUrlEl.textContent = site.url;
   qIndexEl.textContent = index + 1;
 
-  // nappien tila
   btnSafe.disabled = false;
   btnUnsafe.disabled = false;
 
-  // näytä napit, piilota palaute
   feedbackSection.classList.add("hidden");
 
-  // tyhjennä listat
   indicatorList.innerHTML = "";
   tipList.innerHTML = "";
 }
@@ -209,7 +203,6 @@ function handleAnswer(isSafeAnswer) {
     feedbackText.innerHTML = site.wrongExplanation.replace(/\n/g, "<br>");
   }
 
-  // täytä indikaattorit ja vinkit
   site.indicators.forEach((text) => {
     const li = document.createElement("li");
     li.textContent = text;

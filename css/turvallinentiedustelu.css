@@ -51,6 +51,48 @@ body {
   font-size: var(--font-xs);
 }
 
+.loading-box {
+  position: relative;
+}
+
+.loading-box::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-muted),
+    transparent
+  );
+  animation: tt-drop-line 3s linear infinite;
+  z-index: 0;
+}
+
+.loading-box > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes tt-drop-line {
+  0% {
+    top: -5%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
 .panel-title {
   font-size: var(--font-lg);
   color: var(--color-primary);
@@ -202,8 +244,6 @@ body {
   margin-bottom: 0.3rem;
 }
 
-/* seuraava-nappi */
-
 .next-btn {
   width: 100%;
   padding: 1.1rem;
@@ -217,15 +257,14 @@ body {
   cursor: pointer;
 }
 
-/* tulosnäkymä */
 
 .result-screen {
   margin-top: 1.5rem;
   padding: 2.3rem 2rem;
   border-radius: 10px;
-  border: 1px solid var(--color-primary);
+  border: none;
+  box-shadow: none;
   background-color: var(--color-bg);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
   text-align: center;
 }
 
@@ -319,7 +358,7 @@ body {
   cursor: pointer;
 }
 
-/* responsiivisuussäädöt */
+/* responsiivisuus */
 
 @media (max-width: 600px) {
   body {
