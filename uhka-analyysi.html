@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Missio — Uhka-analyysi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/uhka-analyysi.css">
+</head>
+<body class="level-page">
+  <div class="container-backbtn">
+    <a class="back-btn" href="index.html">← Takaisin missioihin</a>
+  </div>
+  <main class="container level-main loading-box">
+    <section class="panel" id="quizPanel">
+      <header class="panel-header">
+        <div class="panel-title">⚡ UHKA-ANALYYSI: NOPEA REAGOINTI</div>
+        <div class="panel-sub">
+          SKENAARIO <span id="qIndex">1</span> / <span id="qTotal">10</span>
+          <span class="divider-small">|</span>
+          TUNNISTETTU: <span id="correctCount">0</span> / <span id="answeredCount">0</span>
+          <span class="divider-small">|</span>
+          REAGOINTIAIKA: <span id="lastTime">–</span>s
+        </div>
+      </header>
+      <div class="scenario-box">
+        <p class="scenario-label">⚡ NOPEASTI! ONKO TÄMÄ UHKA?</p>
+        <div class="divider-small"></div>
+        <p class="scenario-text" id="scenarioText"></p>
+      </div>
+      <div class="answers">
+        <button id="btnSafe" class="answer-btn safe">✅ TURVALLINEN</button>
+        <button id="btnThreat" class="answer-btn threat">⚠️ UHKA!</button>
+      </div>
+      <div id="feedbackSection" class="feedback-section hidden">
+        <div id="feedbackBox" class="feedback-box">
+          <p id="feedbackTitle" class="feedback-title"></p>
+          <p id="feedbackText" class="feedback-text"></p>
+        </div>
+      </div>
+      <div class="tip-bar">
+        <p id="tipText">💡 Luota vaistoihisi – jos jokin tuntuu oudolta, se todennäköisesti on sitä!</p>
+      </div>
+    </section>
+    <section id="resultScreen" class="result-screen hidden">
+      <div class="result-trophy">🏆</div>
+      <h1 class="result-title">MISSIO SUORITETTU! 🎉</h1>
+      <div class="result-card">
+        <div class="result-emoji" id="resultEmoji">👏</div>
+        <p class="result-score" id="resultScoreText">0 / 0 oikein</p>
+        <p class="result-comment" id="resultComment">Hyvää työtä, agentti!</p>
+        <hr class="result-divider">
+        <button class="result-points-btn">
+          ✧ <span id="resultPointsText">+0 pistettä</span>
+        </button>
+      </div>
+      <div class="result-actions">
+        <a href="index.html" class="result-btn result-btn-primary">
+          TAKAISIN MISSIOLISTAAN
+        </a>
+        <button id="retryBtn" class="result-btn result-btn-ghost">
+          UUDELLEENSUORITA MISSIO
+        </button>
+      </div>
+    </section>
+  </main>
+  <script src="./js/uhka-analyysi.js"></script>
+</body>
+</html>
