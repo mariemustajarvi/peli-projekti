@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Missio — Kyberturva Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/quiz.css">
+</head>
+<body class="level-page">
+  <div class="container">
+    <a class="back-btn" href="index.html">←  Takaisin missioihin</a>
+  </div>
+
+  <main class="container level-main">
+    <section class="panel">
+      <header class="panel-header">
+        <div class="panel-title"></div>
+        <div class="panel-sub"></div>
+      </header>
+
+      <div class="panel-body">
+        <div class="question-box">
+          <p class="q-text" id="question">--</p>
+        </div>
+
+        <div class="options" id="options"></div>
+
+        <div class="info-box" id="info" aria-hidden="true"><div class="info-text" id="infoText"></div></div>
+
+        <div class="panel-actions">
+          <button id="nextBtn" class="next-btn" disabled></button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="./js/quiz.js"></script>
+</body>
+</html>
