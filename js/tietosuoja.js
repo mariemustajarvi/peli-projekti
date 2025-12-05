@@ -123,6 +123,21 @@
     const infoEl = document.getElementById('info');
     const infoText = document.getElementById('infoText');
     const nextBtn = document.getElementById('nextBtn');
+    
+    // Create screen reader announcement element
+    const srAnnouncer = document.createElement('div');
+    srAnnouncer.setAttribute('role', 'status');
+    srAnnouncer.setAttribute('aria-live', 'polite');
+    srAnnouncer.setAttribute('aria-atomic', 'true');
+    srAnnouncer.className = 'sr-only';
+    document.body.appendChild(srAnnouncer);
+    
+    function announceToScreenReader(message) {
+      srAnnouncer.textContent = '';
+      setTimeout(() => {
+        srAnnouncer.textContent = message;
+      }, 100);
+    }
 
     // Save progress
     function saveProgress() {
@@ -149,13 +164,22 @@
       nextBtn.disabled = true;
 
       // Create answer buttons
-      question.options.forEach(function(option) {
+      question.options.forEach(function(option, index) {
         const button = document.createElement('button');
         button.className = 'option';
         button.dataset.optId = option.id;
         button.textContent = option.id + '. ' + option.text;
+        button.setAttribute('aria-label', 'Vastausvaihtoehto ' + option.id + ': ' + option.text);
         optionsEl.appendChild(button);
+        
+        // Focus first option for keyboard users
+        if (index === 0) {
+          setTimeout(() => button.focus(), 100);
+        }
       });
+
+      // Announce question to screen readers
+      announceToScreenReader('Kysymys ' + (currentQuestion + 1) + ' / ' + totalQuestions + '. ' + parts[0].replace(/<[^>]*>/g, ''));
 
       saveProgress();
     }
@@ -216,29 +240,36 @@
       const allButtons = optionsEl.querySelectorAll('.option');
       allButtons.forEach(function(btn) {
         btn.classList.add('disabled');
+        btn.setAttribute('aria-disabled', 'true');
       });
       
       if (isCorrect) {
         button.classList.add('selected-correct');
+        button.setAttribute('aria-label', button.getAttribute('aria-label') + ' - Oikein!');
         playerScore++;
         infoEl.classList.add('info-success');
         infoText.textContent = questions[currentQuestion].explanation;
+        announceToScreenReader('Oikein! ' + questions[currentQuestion].explanation + ' Pisteet: ' + playerScore + ' / ' + totalQuestions);
       } else {
         button.classList.add('selected-wrong');
+        button.setAttribute('aria-label', button.getAttribute('aria-label') + ' - Väärin');
         // Show correct answer
         const correctAnswer = questions[currentQuestion].correct;
         allButtons.forEach(function(btn) {
           if (btn.dataset.optId === correctAnswer) {
             btn.classList.add('correct');
+            btn.setAttribute('aria-label', btn.getAttribute('aria-label') + ' - Oikea vastaus');
           }
         });
         infoEl.classList.add('info-warn');
         infoText.textContent = '💡 ' + questions[currentQuestion].explanation;
+        announceToScreenReader('Väärin. Oikea vastaus oli ' + correctAnswer + '. ' + questions[currentQuestion].explanation);
       }
       
       infoEl.setAttribute('aria-hidden', 'false');
       scoreEl.textContent = playerScore;
       nextBtn.disabled = false;
+      nextBtn.focus();
       saveProgress();
     }
 

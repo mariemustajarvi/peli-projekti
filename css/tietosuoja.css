@@ -46,6 +46,37 @@ body {
   color: var(--color-text);
 }
 
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary);
+  color: #001217;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-weight: 700;
+  z-index: 100;
+  border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 /* keskitys*/
 .app {
   max-width: 1050px;
@@ -451,10 +482,11 @@ body {
 
 .panel-title {
   font-family: 'Orbitron', sans-serif;
-  color: #5bfff2;
+  color: #6ffff5;
   letter-spacing: 2px;
   font-size: 0.98rem;
   font-weight: 700;
+  margin: 0;
 }
 
 .panel-sub {
@@ -480,19 +512,21 @@ body {
 
 .q-label {
   font-weight: 700;
-  color: #7a9fa8;
-  margin-bottom: 8px;
+  color: #8fc0ca;
+  margin: 0 0 8px 0;
   letter-spacing: 0.1em;
+  font-size: 0.95rem;
 }
 
 .q-text {
-  color: #5bfff2;
+  color: #6ffff5;
   line-height: 1.4;
   font-weight: 600;
+  margin: 0;
 }
 
 .q-followup {
-  color: #7a9fa8;
+  color: #8fc0ca;
   line-height: 1.4;
   font-weight: 400;
   margin-top: 12px;
@@ -900,7 +934,18 @@ body {
 }
 
 .option:focus {
-  outline: 2px solid rgba(7, 219, 208, 0.12);
-  box-shadow: 0 10px 30px rgba(7, 219, 208, 0.03);
+  outline: 3px solid #6ffff5;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 1px rgba(7, 219, 208, 0.5), 0 10px 30px rgba(7, 219, 208, 0.15);
   transform: translateY(-1px);
+}
+
+.next-btn:focus {
+  outline: 3px solid #6ffff5;
+  outline-offset: 3px;
+}
+
+.back-btn:focus {
+  outline: 3px solid #6ffff5;
+  outline-offset: 2px;
 }
