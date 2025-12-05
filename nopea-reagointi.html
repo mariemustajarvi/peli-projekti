@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Missio — Nopea reagointi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/nopea-reagointi.css">
+</head>
+<body class="level-page">
+  <div class="container-backbtn">
+    <a class="back-btn" href="index.html">← Takaisin missioihin</a>
+  </div>
+  <main class="container level-main loading-box">
+    <section class="panel" id="quizPanel">
+      <header class="panel-header">
+        <div class="panel-title">⏱️ Kenttäpäätökset: Totta vai Tarua</div>
+        <div class="panel-sub">
+          ANALYYSI <span id="qIndex">1</span> / <span id="qTotal">10</span>
+          <span class="divider-small">|</span>
+          OIKEIN: <span id="correctCount">0</span>
+        </div>
+      </header>
+      <div class="progress">
+        <div class="progress-bar" id="timeBar"></div>
+      </div>
+      <div class="timer-row">
+        ⏱ <span id="timeLeft">15</span>s
+      </div>
+      <div class="statement-card">
+        <p id="statementText"></p>
+      </div>
+      <div id="feedbackBox" class="feedback hidden">
+        <p id="feedbackTitle" class="feedback-title"></p>
+        <p id="feedbackText" class="feedback-text"></p>
+      </div>
+      <div class="answers">
+        <button id="btnTrue" class="answer-btn answer-btn-true">✔ TOTTA</button>
+        <button id="btnFalse" class="answer-btn answer-btn-false">✖ TARUA</button>
+      </div>
+    </section>
+    <section id="resultScreen" class="result-screen hidden">
+      <div class="result-trophy">🏆</div>
+      <h1 class="result-title">MISSIO SUORITETTU! 🎉</h1>
+      <div class="result-card">
+        <div class="result-emoji" id="resultEmoji">👏</div>
+        <p class="result-score" id="resultScoreText">0 / 0 oikein</p>
+        <p class="result-comment" id="resultComment">Hyvä työ, agentti!</p>
+        <hr class="result-divider">
+        <button class="result-points-btn">
+          ✧ <span id="resultPointsText">+0 pistettä</span>
+        </button>
+      </div>
+      <div class="result-actions">
+        <a href="index.html" class="result-btn result-btn-primary">
+          TAKAISIN MISSIOLISTAAN
+        </a>
+        <button id="retryBtn" class="result-btn result-btn-ghost">
+          UUDELLEENSUORITA MISSIO
+        </button>
+      </div>
+    </section>
+  </main>
+  <script src="./js/nopea-reagointi.js"></script>
+</body>
+</html>
