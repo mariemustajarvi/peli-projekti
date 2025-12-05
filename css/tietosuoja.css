@@ -77,6 +77,46 @@ body {
   border-width: 0;
 }
 
+/* Accessibility controls */
+.accessibility-controls {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+}
+
+.contrast-toggle {
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid rgba(7, 219, 208, 0.5);
+  color: #6ffff5;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.contrast-toggle:hover {
+  background: rgba(7, 219, 208, 0.2);
+  border-color: #6ffff5;
+  transform: scale(1.05);
+}
+
+.contrast-toggle:focus {
+  outline: 3px solid #6ffff5;
+  outline-offset: 2px;
+}
+
+.toggle-icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.contrast-toggle:hover .toggle-icon {
+  transform: rotate(180deg);
+}
+
 /* keskitys*/
 .app {
   max-width: 1050px;
@@ -948,4 +988,155 @@ body {
 .back-btn:focus {
   outline: 3px solid #6ffff5;
   outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+body.high-contrast {
+  background-image: none;
+  background-color: #000000;
+}
+
+body.high-contrast .level-page .panel {
+  background: #000000;
+  border: 3px solid #ffffff;
+  box-shadow: none;
+}
+
+body.high-contrast .panel::after {
+  display: none;
+}
+
+body.high-contrast .panel-title {
+  color: #ffffff;
+}
+
+body.high-contrast .panel-sub {
+  color: #ffffff;
+}
+
+body.high-contrast .q-label {
+  color: #ffffff;
+}
+
+body.high-contrast .q-text {
+  color: #ffffff;
+}
+
+body.high-contrast .q-followup {
+  color: #ffffff;
+}
+
+body.high-contrast .question-box {
+  background: #000000;
+  border: 2px solid #ffffff;
+  box-shadow: none;
+}
+
+body.high-contrast .option {
+  background: #000000;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  box-shadow: none;
+  clip-path: none;
+}
+
+body.high-contrast .option:hover {
+  background: #1a1a1a;
+  box-shadow: none;
+}
+
+body.high-contrast .option.selected-correct {
+  background: #000000;
+  border: 3px solid #00ff00;
+  color: #00ff00;
+  box-shadow: none;
+  animation: none;
+  text-shadow: none;
+}
+
+body.high-contrast .option.selected-correct::before {
+  display: none;
+}
+
+body.high-contrast .option.selected-wrong {
+  background: #000000;
+  border: 3px solid #ff0000;
+  color: #ff0000;
+  box-shadow: none;
+  animation: none;
+  text-shadow: none;
+}
+
+body.high-contrast .option.selected-wrong::before {
+  display: none;
+}
+
+body.high-contrast .option.correct {
+  background: #000000;
+  border: 3px solid #00ff00;
+  color: #00ff00;
+  box-shadow: none;
+}
+
+body.high-contrast .info-box.info-success {
+  background: #000000;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  box-shadow: none;
+  animation: none;
+}
+
+body.high-contrast .info-box.info-warn {
+  background: #000000;
+  border: 2px solid #ffff00;
+  color: #ffff00;
+  box-shadow: none;
+  animation: none;
+}
+
+body.high-contrast .next-btn {
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #ffffff;
+  box-shadow: none;
+}
+
+body.high-contrast .next-btn:disabled {
+  background: #333333;
+  color: #666666;
+  border: 2px solid #666666;
+}
+
+body.high-contrast .back-btn {
+  background: #000000;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  box-shadow: none;
+}
+
+body.high-contrast .contrast-toggle {
+  background: #000000;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+}
+
+body.high-contrast .completion-screen {
+  background: #000000;
+  color: #ffffff;
+}
+
+body.high-contrast .completion-card {
+  background: #000000;
+  border: 2px solid #ffffff;
+}
+
+body.high-contrast .completion-title,
+body.high-contrast .completion-score,
+body.high-contrast .completion-message,
+body.high-contrast .completion-points {
+  color: #ffffff;
+}
+
+body.high-contrast .completion-divider {
+  border-top: 2px solid #ffffff;
 }

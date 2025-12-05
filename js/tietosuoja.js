@@ -1,3 +1,34 @@
+// High Contrast Toggle
+(function() {
+  const contrastToggle = document.getElementById('contrastToggle');
+  const body = document.body;
+  
+  // Load saved preference
+  const savedContrast = localStorage.getItem('high_contrast_mode');
+  if (savedContrast === 'true') {
+    body.classList.add('high-contrast');
+    contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
+    contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
+  }
+  
+  contrastToggle.addEventListener('click', function() {
+    body.classList.toggle('high-contrast');
+    const isHighContrast = body.classList.contains('high-contrast');
+    
+    // Save preference
+    localStorage.setItem('high_contrast_mode', isHighContrast);
+    
+    // Update button label
+    if (isHighContrast) {
+      contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
+      contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
+    } else {
+      contrastToggle.setAttribute('aria-label', 'Vaihda korkean kontrastin tilaan');
+      contrastToggle.setAttribute('title', 'Vaihda korkean kontrastin tilaan');
+    }
+  });
+})();
+
 // Privacy Quiz Game
 (function(){
   const panelBody = document.querySelector('.panel-body');
