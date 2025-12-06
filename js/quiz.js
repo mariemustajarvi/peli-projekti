@@ -1,4 +1,36 @@
 // Quiz peli javascript v1.0
+
+// korkea kontrasti toggle
+(function() {
+  const contrastToggle = document.getElementById('contrastToggle');
+  const body = document.body;
+
+  // Lataa tallennettu asetus
+  const savedContrast = localStorage.getItem('high_contrast_mode');
+  if (savedContrast === 'true') {
+    body.classList.add('high-contrast');
+    contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
+    contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
+  }
+
+  contrastToggle.addEventListener('click', function() {
+    body.classList.toggle('high-contrast');
+    const isHighContrast = body.classList.contains('high-contrast');
+
+    // Tallenna asetus
+    localStorage.setItem('high_contrast_mode', isHighContrast);
+
+    // napin labelit
+    if (isHighContrast) {
+      contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
+      contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
+    } else {
+      contrastToggle.setAttribute('aria-label', 'Vaihda korkean kontrastin tilaan');
+      contrastToggle.setAttribute('title', 'Vaihda korkean kontrastin tilaan');
+    }
+  });
+})();
+
 (function(){
   const panelBody = document.querySelector('.panel-body');
 
@@ -283,6 +315,7 @@
       scoreEl.textContent = playerScore;
       maxScoreEl.textContent = currentQuestion + 1;
       nextBtn.disabled = false;
+      nextBtn.focus();
       saveProgress();
     }
 
@@ -316,6 +349,12 @@
         if (button && !button.classList.contains('disabled')) {
           button.click();
         }
+      }
+
+      // Enter tai Space seuraavaan kysymykseen
+      if ((e.key === 'Enter' || e.key === ' ') && !nextBtn.disabled) {
+        e.preventDefault();
+        nextBtn.click();
       }
     });
 
