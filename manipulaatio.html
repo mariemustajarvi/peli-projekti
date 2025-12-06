@@ -8,30 +8,36 @@
   <link rel="stylesheet" href="./css/manipulaatio.css">
 </head>
 <body class="level-page">
+  <a href="#main-content" class="skip-link">Siirry pääsisältöön</a>
   <div class="container">
+    <div class="accessibility-controls">
+      <button id="contrastToggle" class="contrast-toggle" aria-label="Vaihda korkean kontrastin tilaan" title="Vaihda korkean kontrastin tilaan">
+        <span class="toggle-icon">◐</span>
+      </button>
+    </div>
     <a class="back-btn" href="index.html">←  Takaisin missioihin</a>
   </div>
 
-  <main class="container level-main">
-    <section class="panel">
+  <main id="main-content" class="container level-main" role="main">
+    <section class="panel" aria-labelledby="panel-title">
       <header class="panel-header">
-        <div class="panel-title"></div>
-        <div class="panel-sub"></div>
+        <h1 id="panel-title" class="panel-title"></h1>
+        <div class="panel-sub" aria-live="polite" aria-atomic="true"></div>
       </header>
 
       <div class="panel-body">
-        <div class="question-box">
-          <div class="q-label"></div>
+        <div class="question-box" role="region" aria-labelledby="q-label">
+          <h2 id="q-label" class="q-label"></h2>
           <p class="q-text" id="scenario">--</p>
           <p class="q-followup" id="followup">--</p>
         </div>
 
-        <div class="options" id="options"></div>
+        <div class="options" id="options" role="group" aria-label="Vastausvaihtoehdot"></div>
 
-        <div class="info-box" id="info" aria-hidden="true"><div class="info-text" id="infoText"></div></div>
+        <div class="info-box" id="info" role="status" aria-live="polite" aria-hidden="true"><div class="info-text" id="infoText"></div></div>
 
         <div class="panel-actions">
-          <button id="nextBtn" class="next-btn" disabled></button>
+          <button id="nextBtn" class="next-btn" disabled aria-label="Siirry seuraavaan kysymykseen"></button>
         </div>
       </div>
     </section>

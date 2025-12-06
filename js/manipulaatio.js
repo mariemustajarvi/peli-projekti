@@ -1,3 +1,34 @@
+// High Contrast Toggle
+(function() {
+  const contrastToggle = document.getElementById('contrastToggle');
+  const body = document.body;
+  
+  // Load saved preference
+  const savedContrast = localStorage.getItem('high_contrast_mode');
+  if (savedContrast === 'true') {
+    body.classList.add('high-contrast');
+    contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
+    contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
+  }
+  
+  contrastToggle.addEventListener('click', function() {
+    body.classList.toggle('high-contrast');
+    const isHighContrast = body.classList.contains('high-contrast');
+    
+    // Save preference
+    localStorage.setItem('high_contrast_mode', isHighContrast);
+    
+    // Update button label
+    if (isHighContrast) {
+      contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
+      contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
+    } else {
+      contrastToggle.setAttribute('aria-label', 'Vaihda korkean kontrastin tilaan');
+      contrastToggle.setAttribute('title', 'Vaihda korkean kontrastin tilaan');
+    }
+  });
+})();
+
 // Manipulaatio peli javascript v2.0
 (function(){
   const panelBody = document.querySelector('.panel-body');
@@ -111,6 +142,21 @@
     const infoEl = document.getElementById('info');
     const infoText = document.getElementById('infoText');
     const nextBtn = document.getElementById('nextBtn');
+    
+    // Create screen reader announcement element
+    const srAnnouncer = document.createElement('div');
+    srAnnouncer.setAttribute('role', 'status');
+    srAnnouncer.setAttribute('aria-live', 'polite');
+    srAnnouncer.setAttribute('aria-atomic', 'true');
+    srAnnouncer.className = 'sr-only';
+    document.body.appendChild(srAnnouncer);
+    
+    function announceToScreenReader(message) {
+      srAnnouncer.textContent = '';
+      setTimeout(() => {
+        srAnnouncer.textContent = message;
+      }, 100);
+    }
 
     // tallenna edistyminen
     function saveProgress() {
@@ -137,13 +183,22 @@
       nextBtn.disabled = true;
 
       // vastausnapit
-      question.options.forEach(function(option) {
+      question.options.forEach(function(option, index) {
         const button = document.createElement('button');
         button.className = 'option';
         button.dataset.optId = option.id;
         button.textContent = option.id + '. ' + option.text;
+        button.setAttribute('aria-label', 'Vastausvaihtoehto ' + option.id + ': ' + option.text);
         optionsEl.appendChild(button);
+        
+        // Focus first option for keyboard users
+        if (index === 0) {
+          setTimeout(() => button.focus(), 100);
+        }
       });
+
+      // Announce question to screen readers
+      announceToScreenReader('Kysymys ' + (currentQuestion + 1) + ' / ' + totalQuestions + '. ' + parts[0].replace(/<[^>]*>/g, ''));
 
       saveProgress();
     }
@@ -203,29 +258,36 @@
       const allButtons = optionsEl.querySelectorAll('.option');
       allButtons.forEach(function(btn) {
         btn.classList.add('disabled');
+        btn.setAttribute('aria-disabled', 'true');
       });
       
       if (isCorrect) {
         button.classList.add('selected-correct');
+        button.setAttribute('aria-label', button.getAttribute('aria-label') + ' - Oikein!');
         playerScore++;
         infoEl.classList.add('info-success');
         infoText.textContent = questions[currentQuestion].explanation;
+        announceToScreenReader('Oikein! ' + questions[currentQuestion].explanation + ' Pisteet: ' + playerScore + ' / ' + totalQuestions);
       } else {
         button.classList.add('selected-wrong');
+        button.setAttribute('aria-label', button.getAttribute('aria-label') + ' - Väärin');
         // Näytä oikea vastaus
         const correctAnswer = questions[currentQuestion].correct;
         allButtons.forEach(function(btn) {
           if (btn.dataset.optId === correctAnswer) {
             btn.classList.add('correct');
+            btn.setAttribute('aria-label', btn.getAttribute('aria-label') + ' - Oikea vastaus');
           }
         });
         infoEl.classList.add('info-warn');
         infoText.textContent = '💡 ' + questions[currentQuestion].explanation;
+        announceToScreenReader('Väärin. Oikea vastaus oli ' + correctAnswer + '. ' + questions[currentQuestion].explanation);
       }
       
       infoEl.setAttribute('aria-hidden', 'false');
       scoreEl.textContent = playerScore;
       nextBtn.disabled = false;
+      nextBtn.focus();
       saveProgress();
     }
 
