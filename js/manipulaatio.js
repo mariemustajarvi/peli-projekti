@@ -1,9 +1,9 @@
-// High Contrast Toggle
+// korkea kontrasti toggle
 (function() {
   const contrastToggle = document.getElementById('contrastToggle');
   const body = document.body;
   
-  // Load saved preference
+  // Lataa tallennettu asetus
   const savedContrast = localStorage.getItem('high_contrast_mode');
   if (savedContrast === 'true') {
     body.classList.add('high-contrast');
@@ -15,10 +15,10 @@
     body.classList.toggle('high-contrast');
     const isHighContrast = body.classList.contains('high-contrast');
     
-    // Save preference
+    // Tallenna asetus
     localStorage.setItem('high_contrast_mode', isHighContrast);
     
-    // Update button label
+    // napin labelit
     if (isHighContrast) {
       contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
       contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
@@ -29,12 +29,12 @@
   });
 })();
 
-// Manipulaatio peli javascript v2.0
+// Manipulaatio peli 
 (function(){
   const panelBody = document.querySelector('.panel-body');
 
   try {
-    // Manipulaatio peli data
+    // kyssärit
     const data = {
       ui: {
         backBtnText: '←  Takaisin missioihin',
@@ -143,7 +143,7 @@
     const infoText = document.getElementById('infoText');
     const nextBtn = document.getElementById('nextBtn');
     
-    // Create screen reader announcement element
+    // screen readeri ilmoitukset
     const srAnnouncer = document.createElement('div');
     srAnnouncer.setAttribute('role', 'status');
     srAnnouncer.setAttribute('aria-live', 'polite');
@@ -191,13 +191,13 @@
         button.setAttribute('aria-label', 'Vastausvaihtoehto ' + option.id + ': ' + option.text);
         optionsEl.appendChild(button);
         
-        // Focus first option for keyboard users
+        // set up näppäimistö käyttäjäjille
         if (index === 0) {
           setTimeout(() => button.focus(), 100);
         }
       });
 
-      // Announce question to screen readers
+      // kyssäri ruudunlukijalle
       announceToScreenReader('Kysymys ' + (currentQuestion + 1) + ' / ' + totalQuestions + '. ' + parts[0].replace(/<[^>]*>/g, ''));
 
       saveProgress();
