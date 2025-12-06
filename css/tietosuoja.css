@@ -77,7 +77,7 @@ body {
   border-width: 0;
 }
 
-/* Accessibility controls */
+/* saavutettavuus */
 .accessibility-controls {
   position: fixed;
   top: 16px;
@@ -890,7 +890,7 @@ body {
   box-shadow: none;
 }
 
-/* Completion screen styles */
+/* feedback näyttö tyylit */
 .completion-screen {
   padding: 18px;
   text-align: center;
@@ -990,7 +990,7 @@ body {
   outline-offset: 2px;
 }
 
-/* High Contrast Mode */
+/* korkean kontrastin tila */
 body.high-contrast {
   background-image: none;
   background-color: #000000;

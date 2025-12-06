@@ -1,9 +1,9 @@
-// High Contrast Toggle
+// toggle korkean kontrastin tilaa
 (function() {
   const contrastToggle = document.getElementById('contrastToggle');
   const body = document.body;
   
-  // Load saved preference
+  // Lataa tallennettu asetus
   const savedContrast = localStorage.getItem('high_contrast_mode');
   if (savedContrast === 'true') {
     body.classList.add('high-contrast');
@@ -15,10 +15,10 @@
     body.classList.toggle('high-contrast');
     const isHighContrast = body.classList.contains('high-contrast');
     
-    // Save preference
+    // tallenna asetus
     localStorage.setItem('high_contrast_mode', isHighContrast);
     
-    // Update button label
+    // buttoni testit
     if (isHighContrast) {
       contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
       contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
@@ -29,12 +29,12 @@
   });
 })();
 
-// Privacy Quiz Game
+// tietosuoja peli
 (function(){
   const panelBody = document.querySelector('.panel-body');
 
   try {
-    // Quiz data
+    // kyssärit
     const data = {
       ui: {
         backBtnText: '←  Takaisin missioihin',
@@ -133,11 +133,11 @@
     document.querySelector('.panel-sub').innerHTML = `${ui.panelSubPrefix} <span id="qIndex">1</span> / <span id="qTotal">${totalQuestions}</span> | ${ui.scoreLabel} <span id="score">0</span> / <span id="maxScore">${totalQuestions}</span>`;
     document.querySelector('.q-label').innerHTML = ui.scenarioLabel;
 
-    // Game state
+    // Pelin tila
     let currentQuestion = 0;
     let playerScore = 0;
 
-    // Load saved progress
+    // Lataa tallennettu edistyminen
     try {
       const saved = JSON.parse(localStorage.getItem('tietosuoja_progress'));
       if (saved) {
@@ -146,7 +146,7 @@
       }
     } catch(e) {}
 
-    // Get elements
+    // elementit
     const questionNumberEl = document.getElementById('qIndex');
     const scoreEl = document.getElementById('score');
     const scenarioEl = document.getElementById('scenario');
@@ -178,23 +178,23 @@
       }));
     }
 
-    // Display question
+    // näytä kysymys
     function showQuestion() {
       const question = questions[currentQuestion];
       questionNumberEl.textContent = currentQuestion + 1;
 
-      // Split scenario text
+      // Jaa skenaarion teksti
       const parts = question.scenario.split('<br><br>');
       scenarioEl.innerHTML = parts[0];
       document.getElementById('followup').innerHTML = parts[1] || '';
 
-      // Clear previous options
+      // Tyhjennä aiemmat vaihtoehdot
       optionsEl.innerHTML = '';
       infoEl.className = 'info-box';
       infoEl.setAttribute('aria-hidden', 'true');
       nextBtn.disabled = true;
 
-      // Create answer buttons
+      // vastausnapit
       question.options.forEach(function(option, index) {
         const button = document.createElement('button');
         button.className = 'option';
@@ -203,34 +203,33 @@
         button.setAttribute('aria-label', 'Vastausvaihtoehto ' + option.id + ': ' + option.text);
         optionsEl.appendChild(button);
         
-        // Focus first option for keyboard users
+        // näppäimistöllä liikkuminen
         if (index === 0) {
           setTimeout(() => button.focus(), 100);
         }
       });
 
-      // Announce question to screen readers
       announceToScreenReader('Kysymys ' + (currentQuestion + 1) + ' / ' + totalQuestions + '. ' + parts[0].replace(/<[^>]*>/g, ''));
 
       saveProgress();
     }
 
-    // Quiz complete
+    // peli valmis
     function finishQuiz() {
       localStorage.removeItem('tietosuoja_progress');
       document.querySelector('.panel-header').style.display = 'none';
 
-      // Calculate points
+      // laske pisteet
       const maxPoints = 200;
       const earnedPoints = Math.round((playerScore / totalQuestions) * maxPoints);
 
-      // Save points
+      // Tallenna pisteet
       try {
         const currentPoints = Number(localStorage.getItem('user_points') || 0);
         localStorage.setItem('user_points', currentPoints + earnedPoints);
       } catch(e) {}
 
-      // Get motivational message
+      // buusteri teskstit
       let message = '';
       if (playerScore === totalQuestions) {
         message = 'Täydellinen suoritus, agentti! Olet mestari yksityisyyden suojaamisessa. Ansaitsit täydet pisteet!';
@@ -240,7 +239,7 @@
         message = 'Hyvä yritys, agentti! Joka virhe opettaa jotain uutta. Yritä uudelleen ja paranna taitojasi!';
       }
 
-      // Show finish screen
+      // feedbackki näyttö
       panelBody.innerHTML = 
         '<div class="completion-screen">' +
         '<div class="completion-trophy">🏆</div>' +
@@ -265,7 +264,7 @@
       });
     }
 
-    // Check answer
+    // Tarkista vastaus
     function checkAnswer(button, isCorrect) {
       // Disable all buttons
       const allButtons = optionsEl.querySelectorAll('.option');
@@ -284,7 +283,7 @@
       } else {
         button.classList.add('selected-wrong');
         button.setAttribute('aria-label', button.getAttribute('aria-label') + ' - Väärin');
-        // Show correct answer
+        // näytä oikeet vastauakset
         const correctAnswer = questions[currentQuestion].correct;
         allButtons.forEach(function(btn) {
           if (btn.dataset.optId === correctAnswer) {
@@ -304,7 +303,7 @@
       saveProgress();
     }
 
-    // Click answer
+    // Klikkaa vastausta
     optionsEl.addEventListener('click', function(e) {
       const button = e.target.closest('.option');
       if (!button || button.classList.contains('disabled')) return;
@@ -313,11 +312,11 @@
       checkAnswer(button, isCorrect);
     });
 
-    // Keyboard shortcuts (A-D or 1-4)
+    // Näppäimistön pikanäppäimet (A-D tai 1-4)
     document.addEventListener('keydown', function(e) {
       const key = e.key.toUpperCase();
       
-      // Press A, B, C, or D
+      // Paina A, B, C tai D
       if (key === 'A' || key === 'B' || key === 'C' || key === 'D') {
         const allButtons = optionsEl.querySelectorAll('.option');
         allButtons.forEach(function(btn) {
@@ -327,7 +326,7 @@
         });
       }
       
-      // Press 1, 2, 3, or 4
+      // Paina 1, 2, 3 tai 4
       if (e.key >= '1' && e.key <= '4') {
         const buttonIndex = Number(e.key) - 1;
         const button = optionsEl.children[buttonIndex];
@@ -337,7 +336,7 @@
       }
     });
 
-    // Next button
+    // seuraava kyssäri nappi enter tai space
     nextBtn.addEventListener('click', function() {
       currentQuestion++;
       if (currentQuestion >= totalQuestions) {
