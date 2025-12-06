@@ -1,9 +1,9 @@
-// toggle korkean kontrastin tilaa
+// korkea kontrasti toggle
 (function() {
   const contrastToggle = document.getElementById('contrastToggle');
   const body = document.body;
   
-  // Lataa tallennettu asetus
+  // Load saved preference
   const savedContrast = localStorage.getItem('high_contrast_mode');
   if (savedContrast === 'true') {
     body.classList.add('high-contrast');
@@ -15,10 +15,10 @@
     body.classList.toggle('high-contrast');
     const isHighContrast = body.classList.contains('high-contrast');
     
-    // tallenna asetus
+    // Save preference
     localStorage.setItem('high_contrast_mode', isHighContrast);
     
-    // buttoni testit
+    // buttoni labelit
     if (isHighContrast) {
       contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
       contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
@@ -29,7 +29,7 @@
   });
 })();
 
-// tietosuoja peli
+// tietosuoja quiz
 (function(){
   const panelBody = document.querySelector('.panel-body');
 
@@ -133,11 +133,11 @@
     document.querySelector('.panel-sub').innerHTML = `${ui.panelSubPrefix} <span id="qIndex">1</span> / <span id="qTotal">${totalQuestions}</span> | ${ui.scoreLabel} <span id="score">0</span> / <span id="maxScore">${totalQuestions}</span>`;
     document.querySelector('.q-label').innerHTML = ui.scenarioLabel;
 
-    // Pelin tila
+    // Game state
     let currentQuestion = 0;
     let playerScore = 0;
 
-    // Lataa tallennettu edistyminen
+    // Load saved progress
     try {
       const saved = JSON.parse(localStorage.getItem('tietosuoja_progress'));
       if (saved) {
@@ -155,7 +155,7 @@
     const infoText = document.getElementById('infoText');
     const nextBtn = document.getElementById('nextBtn');
     
-    // Create screen reader announcement element
+    // Luo ruudunlukijan ilmoituselementti
     const srAnnouncer = document.createElement('div');
     srAnnouncer.setAttribute('role', 'status');
     srAnnouncer.setAttribute('aria-live', 'polite');
@@ -170,7 +170,7 @@
       }, 100);
     }
 
-    // Save progress
+    // tallennus
     function saveProgress() {
       localStorage.setItem('tietosuoja_progress', JSON.stringify({
         qIndex: currentQuestion, 
@@ -178,7 +178,7 @@
       }));
     }
 
-    // näytä kysymys
+    // Näytä kyssäri
     function showQuestion() {
       const question = questions[currentQuestion];
       questionNumberEl.textContent = currentQuestion + 1;
@@ -194,7 +194,7 @@
       infoEl.setAttribute('aria-hidden', 'true');
       nextBtn.disabled = true;
 
-      // vastausnapit
+      // vastaus buttonit
       question.options.forEach(function(option, index) {
         const button = document.createElement('button');
         button.className = 'option';
@@ -203,12 +203,13 @@
         button.setAttribute('aria-label', 'Vastausvaihtoehto ' + option.id + ': ' + option.text);
         optionsEl.appendChild(button);
         
-        // näppäimistöllä liikkuminen
+        // optionit näppäimistö käyttäjille
         if (index === 0) {
           setTimeout(() => button.focus(), 100);
         }
       });
 
+      // näytä kysymys ruudunlukijoille
       announceToScreenReader('Kysymys ' + (currentQuestion + 1) + ' / ' + totalQuestions + '. ' + parts[0].replace(/<[^>]*>/g, ''));
 
       saveProgress();
@@ -219,17 +220,17 @@
       localStorage.removeItem('tietosuoja_progress');
       document.querySelector('.panel-header').style.display = 'none';
 
-      // laske pisteet
+      // laske pojut
       const maxPoints = 200;
       const earnedPoints = Math.round((playerScore / totalQuestions) * maxPoints);
 
-      // Tallenna pisteet
+      // tallenna pojut
       try {
         const currentPoints = Number(localStorage.getItem('user_points') || 0);
         localStorage.setItem('user_points', currentPoints + earnedPoints);
       } catch(e) {}
 
-      // buusteri teskstit
+      // kirjaa motivaatioviesti
       let message = '';
       if (playerScore === totalQuestions) {
         message = 'Täydellinen suoritus, agentti! Olet mestari yksityisyyden suojaamisessa. Ansaitsit täydet pisteet!';
@@ -239,7 +240,7 @@
         message = 'Hyvä yritys, agentti! Joka virhe opettaa jotain uutta. Yritä uudelleen ja paranna taitojasi!';
       }
 
-      // feedbackki näyttö
+      // näytä feedback screeni
       panelBody.innerHTML = 
         '<div class="completion-screen">' +
         '<div class="completion-trophy">🏆</div>' +
@@ -264,9 +265,9 @@
       });
     }
 
-    // Tarkista vastaus
+    // näytä vastaukset
     function checkAnswer(button, isCorrect) {
-      // Disable all buttons
+      // buttonit pois päältä
       const allButtons = optionsEl.querySelectorAll('.option');
       allButtons.forEach(function(btn) {
         btn.classList.add('disabled');
@@ -283,7 +284,7 @@
       } else {
         button.classList.add('selected-wrong');
         button.setAttribute('aria-label', button.getAttribute('aria-label') + ' - Väärin');
-        // näytä oikeet vastauakset
+        // Näytä oikea vastaus
         const correctAnswer = questions[currentQuestion].correct;
         allButtons.forEach(function(btn) {
           if (btn.dataset.optId === correctAnswer) {
@@ -312,7 +313,7 @@
       checkAnswer(button, isCorrect);
     });
 
-    // Näppäimistön pikanäppäimet (A-D tai 1-4)
+    // Näppäimistö pikanäppäimet (A-D tai 1-4)
     document.addEventListener('keydown', function(e) {
       const key = e.key.toUpperCase();
       
@@ -336,7 +337,7 @@
       }
     });
 
-    // seuraava kyssäri nappi enter tai space
+    // Seuraava nappi
     nextBtn.addEventListener('click', function() {
       currentQuestion++;
       if (currentQuestion >= totalQuestions) {
