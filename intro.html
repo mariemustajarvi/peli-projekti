@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Openscene</title>
+    <style>
+        .kirjoitus {
+            font-size: 24px;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 4px solid black; /* Tämä luo kursorin */
+            display: inline-block;
+        }
+    </style>
+     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href=".//css/introstyle.css">
+    
+</head>
+<body>
+
+<div class="content">
+  <div class="textcontainer1" id="text1"></div>
+  <div class="textcontainer2" id="text2"></div>
+</div>
+
+<script>
+  // Ensimmäinen teksti
+  const teksti1 = "Tervetuloa, AGENTTI";
+  let index1 = 0;
+  const element1 = document.getElementById('text1');
+
+  function kirjoita1() {
+    if (index1 < teksti1.length) {
+      element1.innerHTML += teksti1.charAt(index1);
+      index1++;
+      setTimeout(kirjoita1, 180);
+    } else {
+      element1.style.borderRight = "none";
+    }
+  }
+  kirjoita1();
+
+  // Toinen teksti
+  const teksti2 = "Digitaalinen maailma tarvitsee apuasi. Aloita painamalla painiketta";
+  let index2 = 0;
+  const element2 = document.getElementById('text2');
+
+  function kirjoita2() {
+    if (index2 < teksti2.length) {
+      element2.innerHTML += teksti2.charAt(index2);
+      index2++;
+      setTimeout(kirjoita2, 180);
+    } else {
+      element2.style.borderRight = "none";
+    }
+  }
+
+  // Käynnistetään toinen teksti vasta kun ensimmäinen on valmis
+  setTimeout(kirjoita2, teksti1.length * 180 + 500);
+</script>
+
+ <div class="logocontainer" id="action">
+    <a href="https://www.example.com">
+      <img src="./img/logo.png" alt="logo" id="logokuva">
+    </a>
+  </div>
+
+  <script>
+    const logo = document.getElementById("logokuva");
+    // Aluksi piilotetaan kuva
+    logo.style.opacity = 0;
+    logo.style.transition = "opacity 2s ease";
+
+    // 5 sekunnin kuluttua kuva ilmestyy näkyviin
+    setTimeout(() => {
+      logo.style.opacity = 2;
+    }, 16000);
+  </script>
+</body>
+</html>
