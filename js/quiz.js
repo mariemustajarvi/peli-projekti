@@ -74,39 +74,39 @@
         },
         {
           id: 'q3',
-          question: 'Mikä näistä on phishing-hyökkäyksen merkki?',
+          question: 'Mikä on tietojenkalastelu (phishing)?',
           options: [
-            {id:'A', text:'Viesti tutulta yritykseltä'},
-            {id:'B', text:'Epäilyttävä lähettäjän osoite ja kiireellinen pyyntö'},
-            {id:'C', text:'Mukana on yrityksen logo'},
-            {id:'D', text:'Viesti on kirjoitettu hyvin'}
+            {id:'A', text:'Laillinen tapa hankkia tietoja'},
+            {id:'B', text:'Yritys huijata sinua luovuttamaan henkilö- tai kirjautumistietoja'},
+            {id:'C', text:'Pelin sisäinen tapahtuma, jossa kalastetaan virtuaalisia kaloja'},
+            {id:'D', text:'Tietokoneen automaattinen virustarkistus'}
           ],
           correct: 'B',
-          explanation: 'Phishing-viestit usein sisältävät epäilyttäviä lähettäjän osoitteita, kirjoitusvirheitä ja kiireellisiä pyyntöjä. Ne yrittävät saada sinut toimimaan nopeasti antamatta aikaa ajatella.'
+          explanation: 'Tietojenkalastelu on huijausyritys, jossa hyökkääjä yrittää saada sinut luovuttamaan henkilökohtaisia tai kirjautumistietoja, usein naamioitumalla luotettavaksi tahoksi sähköpostin, viestien tai väärennettyjen verkkosivustojen kautta.'
         },
         {
           id: 'q4',
           question: 'Kuinka usein sinun tulisi päivittää ohjelmistosi?',
           options: [
             {id:'A', text:'Kerran vuodessa'},
-            {id:'B', text:'Kun päivitykset tulevat saataville'},
+            {id:'B', text:'Vain jos tietokonen on hidas'},
             {id:'C', text:'Ei koskaan, ne rikkovat asioita'},
-            {id:'D', text:'Vain jos tietokone on hidas'}
+            {id:'D', text:'Kun päivitykset tulevat saataville'}
           ],
-          correct: 'B',
+          correct: 'D',
           explanation: 'Päivitä ohjelmistot aina kun päivitykset tulevat saataville! Päivitykset sisältävät tärkeitä tietoturvapäivityksiä jotka suojaavat sinua uusilta uhilta ja haavoittuvuuksilta.'
         },
         {
           id: 'q5',
-          question: 'Mikä on paras tapa säilyttää arkaluontoisia tietoja verkossa?',
+          question: 'Mitä sinun pitöisi tehdä, jos klikkasit vahingossa epäilyttävää linkkiä?',
           options: [
-            {id:'A', text:'Tallentaa ne selaimeen'},
-            {id:'B', text:'Käyttää salausta ja vahvoja salasanoja'},
-            {id:'C', text:'Lähettää ne sähköpostilla itsellesi'},
-            {id:'D', text:'Kirjoittaa ne muistivihkoon'}
+            {id:'A', text:'Sulkea sivu välittömästi, suoritaa virustarkistus ja vaihda salasanat'},
+            {id:'B', text:'Huolehtia vain jos jokin näyttää oudolta'},
+            {id:'C', text:'Ei mitään, jatkaa normaalisti'},
+            {id:'D', text:'Ilmoittaa ystäville, että linkki on hauska'}
           ],
-          correct: 'B',
-          explanation: 'Käytä aina salausta ja vahvoja, uniikkeja salasanoja arkaluontoisten tietojen suojaamiseen. Harkitse myös salasananhallintaohjelman käyttöä turvalliseen tallennukseen.'
+          correct: 'A',
+          explanation: 'Jos klikkaat epäilyttävää linkkiä, sulje sivu välittömästi. Suorita täydellinen virustarkistus laitteellasi ja vaihda salasanasi erityisesti, jos syötit tietoja kyseisellä sivulla.'
         },
         {
           id: 'q6',
@@ -134,39 +134,39 @@
         },
         {
           id: 'q8',
-          question: 'Mikä on sosiaalisen manipuloinnin päätavoite?',
+          question: 'Mitä HTTPS verkkosivuston URL-osoitteessa tarkoittaa?',
           options: [
-            {id:'A', text:'Korjata tietokoneitasi'},
-            {id:'B', text:'Huijata sinut luovuttamaan luottamuksellisia tietoja'},
-            {id:'C', text:'Parantaa kyberturvallisuuttasi'},
-            {id:'D', text:'Auttaa sinua unohtamaan salasanasi'}
+            {id:'A', text:'Verkkosivusto on nopea'},
+            {id:'B', text:'Verkkosivusto on ilmainen'},
+            {id:'C', text:'Verkkosivusto on suosittu'},
+            {id:'D', text:'Verkkosivusto on turvallinen ja salattu'}
           ],
-          correct: 'B',
-          explanation: 'Sosiaalinen manipulointi tarkoittaa ihmisten manipulointia luovuttamaan luottamuksellisia tietoja tai tekemään turvallisuusvirheitä. Se luottaa ihmispsykologiaan teknisen hakkeroinnin sijaan.'
+          correct: 'D',
+          explanation: 'HTTPS tarkoittaa, että verkkosivuston ja selaimesi välinen yhteys on salattu. Tämä suojaa tietojasi siirron aikana, mutta ei takaa että sivusto itsessään on luotettava - tarkista aina verkkosivuston aitous.'
         },
         {
           id: 'q9',
-          question: 'Mikä on turvallisin tapa jakaa arkaluontoisia tiedostoja verkossa?',
+          question: 'Mitä kiristysohjelmisto (ransomware) on',
           options: [
-            {id:'A', text:'Lähettää ne sähköpostilla'},
-            {id:'B', text:'Käyttää salattua pilvipalvelua jossa on salasanasuojaus'},
-            {id:'C', text:'Julkaista ne sosiaalisessa mediassa'},
-            {id:'D', text:'Ladata ne julkiselle verkkosivulle'}
+            {id:'A', text:'Ohjelmisto joka parantaa tietokoneen suorituskykyä'},
+            {id:'B', text:'Eräänläinen virustorjuntaohjelma'},
+            {id:'C', text:'Haittaohjelma, joka lukitsee tiedostosi ja vaatii lunnaita niiden palauttamiseksi'},
+            {id:'D', text:'Videopilin latausohjelma'}
           ],
-          correct: 'B',
-          explanation: 'Käytä aina salattuja pilvipalveluita joissa on salasanasuojaus arkaluontoisten tiedostojen jakamiseen. Älä koskaan jaa arkaluontoisia tietoja tavallisella sähköpostilla tai julkisissa paikoissa.'
+          correct: 'C',
+          explanation: 'Kiristysohjelmisto on haittaohjelma, joka lukitsee tietokoneesi tiedostot tai järjestelmän ja vaatii lunnaita niiden palauttamiseksi. On tärkeää pitää varmuuskopiot tiedoistasi ja välttää epäilyttäviä linkkejä tai liitteitä.'
         },
         {
           id: 'q10',
-          question: 'Mitä HTTPS-protokolla tarkoittaa verkkosivulla?',
+          question: 'Mikä sovelluksen käyttöoikeus on epäilyttävä taskulamppusovellukselle?',
           options: [
-            {id:'A', text:'Se on hitaampi kuin HTTP'},
-            {id:'B', text:'Sivusto on suojattu ja tietosi salataan'},
-            {id:'C', text:'Sivusto on varmasti turvallinen'},
-            {id:'D', text:'Se ei tarkoita mitään erityistä'}
+            {id:'A', text:'Pääsy yhteystietoihisi ja viesteihisi'},
+            {id:'B', text:'Ei mikään - kaikki ovat normaaleja'},
+            {id:'C', text:'Kameran käyttöoikeus'},
+            {id:'D', text:'Taskulamppu/soihtu'}
           ],
-          correct: 'B',
-          explanation: 'HTTPS tarkoittaa, että verkkosivuston ja selaimesi välinen yhteys on salattu. Tämä suojaa tietojasi siirron aikana, mutta ei takaa että sivusto itsessään on luotettava - tarkista aina verkkosivuston aitous.'
+          correct: 'A',
+          explanation: 'Taskulamppusovelluksen ei pitäisi tarvita pääsyä yhteystietoihisi tai viesteihisi. Tällaiset käyttöoikeudet voivat viitata siihen, että sovellus yrittää kerätä henkilökohtaisia tietojasi ilman hyvää syytä.'
         }
       ]
     };
