@@ -1,18 +1,19 @@
 :root {
-    --color-bg: #040e1e;
-    --color-primary: #00f2ff;
-    --color-primary-soft: rgba(7, 219, 208, 0.2);
-    --color-accent: #00f382;
-    --color-text: #00f2ff;
-    --color-muted: #0d4263;
-    --color-card-bg: rgba(2, 12, 30, 0.95);
-    --font-xxs: 0.5rem;
-    --font-xs: 0.7rem;
-    --font-sm: 0.8rem;
-    --font-md: 1.0rem;
-    --font-lg: 1.3rem;
-    --font-xl: 2.2rem;
+  --color-bg: #040e1e;
+  --color-primary: #00f2ff;
+  --color-primary-soft: rgba(7, 219, 208, 0.2);
+  --color-accent: #00f382;
+  --color-text: #00f2ff;
+  --color-muted: #0d4263;
+  --color-card-bg: rgba(2, 12, 30, 0.95);
+  --font-xxs: 0.5rem;
+  --font-xs: 0.7rem;
+  --font-sm: 0.8rem;
+  --font-md: 1.0rem;
+  --font-lg: 1.3rem;
+  --font-xl: 2.2rem;
 }
+
 
 body {
   margin: 0;
@@ -97,24 +98,23 @@ body {
   color: var(--color-primary);
 }
 
+
 .ach-grid {
   display: grid;
   gap: 0.8rem;
 }
 
-.ach-grid--missions {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
+.ach-grid--missions,
 .ach-grid--special {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
+
 
 .ach-card {
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
+  align-items: center;           
   padding: 0.9rem 1rem;
   border-radius: 8px;
   border: 1px solid rgba(0, 242, 255, 0.2);
@@ -149,25 +149,28 @@ body {
   margin: 0;
   font-size: var(--font-xs);
   opacity: 0.85;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .ach-card-points {
-  display: flex;
+  margin-left: 1rem;            
+  flex: 0 0 auto;                
+  display: inline-flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0.25rem 0.6rem;
+  padding: 0.25rem 0.7rem;      
   border-radius: 6px;
   border: 1px solid rgba(0, 242, 255, 0.6);
   background-color: rgba(0, 242, 255, 0.06);
   font-size: var(--font-xxs);
-  white-space: nowrap;
-  align-self: center;
+  white-space: nowrap;          
+  align-self: center;         
 }
 
 .ach-card-points-value {
-  font-size: var(--font-xs)
-
+  font-size: var(--font-xs);
 }
 
 .ach-card-points-label {
@@ -183,16 +186,6 @@ body {
   color: var(--color-primary);
 }
 
-.ach-card--unlocked .angled-box {
-  border-color: var(--color-accent);
-  background: rgba(0, 243, 130, 0.1);
-  color: var(--color-accent);
-}
-
-.ach-card--locked .angled-box {
-  opacity: 0.6;
-  border-style: dashed;
-}
 
 .ach-card--unlocked {
   border-color: rgba(0, 243, 130, 0.7);
@@ -217,6 +210,7 @@ body {
 .ach-card--locked .ach-card-icon {
   opacity: 0.8;
 }
+
 
 .container-backbtn {
   position: absolute;
@@ -276,7 +270,6 @@ body {
   }
 }
 
-/* responsiivisuus */
 
 @media (max-width: 900px) {
   .ach-grid--missions,
@@ -297,5 +290,9 @@ body {
   body {
     align-items: flex-start;
     padding-top: 4rem;
+  }
+
+  .ach-card {
+    padding-right: 5.5rem;
   }
 }
