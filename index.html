@@ -41,6 +41,7 @@
     </header>
 
     <main class="dashboard">
+      <!-- Statsit -->
       <section class="stats" aria-label="Player statistics">
         <article class="stat-card">
           <h2 class="stat-card__label">Pisteet yhteensä</h2>
@@ -49,7 +50,7 @@
 
         <article class="stat-card">
           <h2 class="stat-card__label">Läpäistyt pelit</h2>
-          <p class="stat-card__value">0 / 13</p>
+          <p class="stat-card__value">0 / 10</p>
         </article>
 
         <article class="stat-card">
@@ -60,8 +61,9 @@
 
       <div class="divider"></div>
 
+      <!-- Pelit -->
       <section class="game-list" aria-label="Available games">
-        
+        <!-- Ensimmäinen, heti auki -->
         <article class="game-card game-card--active loading-box">
           <div class="loading-box__content">
             <div class="game-card__header">
@@ -84,6 +86,7 @@
           </div>
         </article>
 
+        <!-- Loput, alkuun lukittuja / himmennettyjä -->
         <article class="game-card game-card--locked loading-box">
           <div class="game-card__header">
             <div class="game-card__icon">📧</div>
@@ -98,25 +101,6 @@
             <div class="game-card__reward">
               <span class="reward-badge">★</span>
               <span class="reward-text">150 pistettä</span>
-            </div>
-            <div class="game-card__lock">🔒</div>
-          </div>
-        </article>
-
-        <article class="game-card game-card--locked loading-box">
-          <div class="game-card__header">
-            <div class="game-card__icon">🔥</div>
-            <div class="game-card__titles">
-              <h2 class="game-card__title">Missio: Palomuurin hallinta</h2>
-              <p class="game-card__subtitle">
-                Havaitse ja estä haitallinen verkkoliikenne. Vain valtuutettu data saa kulkea.
-              </p>
-            </div>
-          </div>
-          <div class="game-card__footer">
-            <div class="game-card__reward">
-              <span class="reward-badge">★</span>
-              <span class="reward-text">200 pistettä</span>
             </div>
             <div class="game-card__lock">🔒</div>
           </div>
@@ -162,25 +146,6 @@
 
         <article class="game-card game-card--locked loading-box">
           <div class="game-card__header">
-            <div class="game-card__icon">🦠</div>
-            <div class="game-card__titles">
-              <h2 class="game-card__title">Missio: Haittaohjelman eristys</h2>
-              <p class="game-card__subtitle">
-                Järjestelmässä on troijalainen. Etsi saastuneet tiedostot ja karanteenaa ne välittömästi.
-              </p>
-            </div>
-          </div>
-          <div class="game-card__footer">
-            <div class="game-card__reward">
-              <span class="reward-badge">★</span>
-              <span class="reward-text">300 pistettä</span>
-            </div>
-            <div class="game-card__lock">🔒</div>
-          </div>
-        </article>
-
-        <article class="game-card game-card--locked loading-box">
-          <div class="game-card__header">
             <div class="game-card__icon">🔒</div>
             <div class="game-card__titles">
               <h2 class="game-card__title">Missio: Tietosuojaoperaatio</h2>
@@ -212,25 +177,6 @@
             <div class="game-card__reward">
               <span class="reward-badge">★</span>
               <span class="reward-text">150 pistettä</span>
-            </div>
-            <div class="game-card__lock">🔒</div>
-          </div>
-        </article>
-
-        <article class="game-card game-card--locked loading-box">
-          <div class="game-card__header">
-            <div class="game-card__icon">🔑</div>
-            <div class="game-card__titles">
-              <h2 class="game-card__title">Missio: Salausavaimen purku</h2>
-              <p class="game-card__subtitle">
-                Vihollinen on kryptannut viestinsä. Käytä logiikkaa purkaaksesi salainen koodi.
-              </p>
-            </div>
-          </div>
-          <div class="game-card__footer">
-            <div class="game-card__reward">
-              <span class="reward-badge">★</span>
-              <span class="reward-text">350 pistettä</span>
             </div>
             <div class="game-card__lock">🔒</div>
           </div>
