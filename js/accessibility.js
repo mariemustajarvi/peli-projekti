@@ -1,26 +1,26 @@
-// Accessibility features - Reusable across all levels
-// High contrast mode toggle with localStorage persistence
+// saavutettavuus asetukset
+// korkea kontrasti tila
 
 (function() {
   'use strict';
 
-  // High contrast toggle functionality
+  // Korkean kontrastin tilan toiminnallisuus
   function initHighContrastToggle() {
     const contrastToggle = document.getElementById('contrastToggle');
     if (!contrastToggle) return;
 
     const body = document.body;
 
-    // Reset high contrast mode on page load (don't persist)
+    // Nollaa korkean kontrastin tila sivun latauksessa (ei tallenneta)
     body.classList.remove('high-contrast');
     localStorage.removeItem('high_contrast_mode');
 
-    // Toggle event listener
+    // eventti kuuntelija
     contrastToggle.addEventListener('click', function() {
       body.classList.toggle('high-contrast');
       const isHighContrast = body.classList.contains('high-contrast');
 
-      // Update button labels
+      // buttoni tekstit
       if (isHighContrast) {
         contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
         contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
@@ -31,7 +31,7 @@
     });
   }
 
-  // Initialize when DOM is ready
+  // Alusta kun valmis
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initHighContrastToggle);
   } else {

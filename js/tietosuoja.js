@@ -1,5 +1,4 @@
 // tietosuoja quiz
-// Note: Accessibility features loaded from accessibility.js
 (function(){
   const panelBody = document.querySelector('.panel-body');
 
@@ -144,7 +143,7 @@
     const ui = data.ui;
     const allQuestions = data.allQuestions;
     
-    // Randomize and select 6 questions
+    // satunnaista kyssärit mutta aina 6 kpl
     function shuffleArray(array) {
       const shuffled = [...array];
       for (let i = shuffled.length - 1; i > 0; i--) {
@@ -157,17 +156,17 @@
     const questions = shuffleArray(allQuestions).slice(0, 6);
     const totalQuestions = questions.length;
 
-    // Setup page text
+    // Aseta sivun tekstit
     document.querySelector('.back-btn').innerHTML = ui.backBtnText;
     document.querySelector('.panel-title').innerHTML = ui.panelTitle;
     document.querySelector('.panel-sub').innerHTML = `${ui.panelSubPrefix} <span id="qIndex">1</span> / <span id="qTotal">${totalQuestions}</span> | ${ui.scoreLabel} <span id="score">0</span> / <span id="maxScore">${totalQuestions}</span>`;
     document.querySelector('.q-label').innerHTML = ui.scenarioLabel;
 
-    // Game state
+    // Pelin tila
     let currentQuestion = 0;
     let playerScore = 0;
 
-    // Load saved progress
+    // Lataa tallennettu edistys
     try {
       const saved = JSON.parse(localStorage.getItem('tietosuoja_progress'));
       if (saved) {

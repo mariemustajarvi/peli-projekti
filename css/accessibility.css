@@ -1,6 +1,6 @@
-/* Accessibility styles - Reusable across all levels */
+/* saavutettavuus asetukset */
 
-/* Skip link for keyboard navigation */
+/* skippaus saavutettavuudelle navigointiin */
 .skip-link {
   position: absolute;
   top: -40px;
@@ -18,7 +18,7 @@
   top: 0;
 }
 
-/* Screen reader only content */
+/* Näytönlukijan sisältö */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -31,7 +31,7 @@
   border-width: 0;
 }
 
-/* Accessibility controls container */
+/* Saavutettavuuden ohjaimet */
 .accessibility-controls {
   position: fixed;
   top: 16px;
@@ -39,7 +39,7 @@
   z-index: 1000;
 }
 
-/* High contrast toggle button */
+/* Korkean kontrastin tilan kytkin */
 .contrast-toggle {
   background: rgba(0, 0, 0, 0.7);
   border: 2px solid rgba(7, 219, 208, 0.5);
@@ -72,7 +72,7 @@
   transform: rotate(180deg);
 }
 
-/* Focus styles for interactive elements */
+/* elementit */
 .back-btn:focus,
 a.back-btn:focus {
   outline: 3px solid #6ffff5;
@@ -85,7 +85,7 @@ button.next-btn:focus {
   outline-offset: 3px;
 }
 
-/* High contrast mode styles */
+/* Korkean kontrastin tilan tyylit */
 body.high-contrast {
   background-image: none;
   background-color: #000000;
