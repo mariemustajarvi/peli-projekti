@@ -1,35 +1,4 @@
-// Quiz peli javascript v1.0
-
-// korkea kontrasti toggle
-(function() {
-  const contrastToggle = document.getElementById('contrastToggle');
-  const body = document.body;
-
-  // Lataa tallennettu asetus
-  const savedContrast = localStorage.getItem('high_contrast_mode');
-  if (savedContrast === 'true') {
-    body.classList.add('high-contrast');
-    contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
-    contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
-  }
-
-  contrastToggle.addEventListener('click', function() {
-    body.classList.toggle('high-contrast');
-    const isHighContrast = body.classList.contains('high-contrast');
-
-    // Tallenna asetus
-    localStorage.setItem('high_contrast_mode', isHighContrast);
-
-    // napin labelit
-    if (isHighContrast) {
-      contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
-      contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
-    } else {
-      contrastToggle.setAttribute('aria-label', 'Vaihda korkean kontrastin tilaan');
-      contrastToggle.setAttribute('title', 'Vaihda korkean kontrastin tilaan');
-    }
-  });
-})();
+// Quiz peli
 
 (function(){
   const panelBody = document.querySelector('.panel-body');
@@ -175,10 +144,10 @@
     const ui = data.ui;
     const totalQuestions = questions.length;
 
-    // Setup page text
+    // pagen tekstit
     document.querySelector('.back-btn').innerHTML = ui.backBtnText;
     document.querySelector('.panel-title').innerHTML = ui.panelTitle;
-    document.querySelector('.panel-sub').innerHTML = `${ui.panelSubPrefix} <span id="qIndex">1</span> / <span id="qTotal">${totalQuestions}</span> | ${ui.scoreLabel} <span id="score">0</span> / <span id="maxScore">0</span>`;
+    document.querySelector('.panel-sub').innerHTML = `${ui.panelSubPrefix} <span id="qIndex">1</span> / <span id="qTotal">${totalQuestions}</span> | ${ui.scoreLabel} <span id="score">0</span> / <span id="maxScore">${totalQuestions}</span>`;
 
     // tilanne tsekkaus
     let currentQuestion = 0;
@@ -215,7 +184,6 @@
     function showQuestion() {
       const question = questions[currentQuestion];
       questionNumberEl.textContent = currentQuestion + 1;
-      maxScoreEl.textContent = currentQuestion;
 
       questionEl.textContent = question.question;
 
@@ -313,7 +281,6 @@
       
       infoEl.setAttribute('aria-hidden', 'false');
       scoreEl.textContent = playerScore;
-      maxScoreEl.textContent = currentQuestion + 1;
       nextBtn.disabled = false;
       nextBtn.focus();
       saveProgress();
