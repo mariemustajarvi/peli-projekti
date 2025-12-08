@@ -1,35 +1,5 @@
-// korkea kontrasti toggle
-(function() {
-  const contrastToggle = document.getElementById('contrastToggle');
-  const body = document.body;
-  
-  // Load saved preference
-  const savedContrast = localStorage.getItem('high_contrast_mode');
-  if (savedContrast === 'true') {
-    body.classList.add('high-contrast');
-    contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
-    contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
-  }
-  
-  contrastToggle.addEventListener('click', function() {
-    body.classList.toggle('high-contrast');
-    const isHighContrast = body.classList.contains('high-contrast');
-    
-    // Save preference
-    localStorage.setItem('high_contrast_mode', isHighContrast);
-    
-    // buttoni labelit
-    if (isHighContrast) {
-      contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
-      contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
-    } else {
-      contrastToggle.setAttribute('aria-label', 'Vaihda korkean kontrastin tilaan');
-      contrastToggle.setAttribute('title', 'Vaihda korkean kontrastin tilaan');
-    }
-  });
-})();
-
 // tietosuoja quiz
+// Note: Accessibility features loaded from accessibility.js
 (function(){
   const panelBody = document.querySelector('.panel-body');
 
@@ -47,7 +17,7 @@
         restart: 'Suorita uudelleen',
         finishedHeading: 'Olet suorittanut tehtävän!'
       },
-      questions: [
+      allQuestions: [
         {
           id: 'q1',
           scenario: 'Luot sosiaalisen median profiilia. Mitkä tiedot on turvallista jakaa julkisesti? <br><br>Mitä sinun pitäisi jakaa?</br></br>',
@@ -110,7 +80,7 @@
         },
         {
           id: 'q6',
-          scenario: 'Sovellus haluaa tietää sijaintisi "aina", jopa kun et käytä sovellusta. <br><br>Mitä sinun piäisi tehdä?</br></br>',
+          scenario: 'Sovellus haluaa tietää sijaintisi "aina", jopa kun et käytä sovellusta. <br><br>Mitä sinun pitäisi tehdä?</br></br>',
           options: [
             {id:'A', text:'Vaihtaa se "vain sovelluksen käytön aikana" tai estää'},
             {id:'B', text:'Sillä ei ole väliä'},
@@ -119,12 +89,72 @@
           ],
           correct: 'A',
           explanation: 'Sovellukset harvoin tarvitsevat sijaintiasi "aina"! Tämä seuraa sinua jatkuvasti. Valitse "sovelluksen käytön aikana", jotta voit hallita milloin ne näkevät sijaintisi. Suojaa yksityisyyttäsi rajoittamalla seurantaa.'
+        },
+        {
+          id: 'q7',
+          scenario: 'Etsit uutta peliä, Googlesta löytyy useita sivustoja, jotka tarjoavat pelin "ilmaisena". Yhdellä sivustolla on iso "DOWNLOAD NOW" -nappi ja paljon vilkkuvia mainoksia. <br><br>Mistä peli kannattaa ladata?</br></br>',
+          options: [
+            {id:'A', text:'Sivustolta, jossa on iso "DOWNLOAD NOW" -painike'},
+            {id:'B', text:'Sattumanvaraiselta sivulta, joka tarjoaa pelin ilmaiseksi'},
+            {id:'C', text:'Pelin viralliselta kotisivulta tai tunnetuilta kauppapaikoilta (Steam, Epic Games)'},
+            {id:'D', text:'Torrent sivustolta - koska muutkin käyttävät'}
+          ],
+          correct: 'C',
+          explanation: 'Lataa pelit vain virallisilta sivuilta kuten Steam, Epic Games, Origin tai pelin oikealta kotisivulta. Sivut, jotka tarjoavat "ilmaisia" latauksia tulevat usein mukana haittaohjelmia.'
+        },
+        {
+          id: 'q8',
+          scenario: 'TikTokissa leviää trendi, jossa käyttäjät kertovat "10 faktaa itsestään" - monet paljastavat lempivärin lisäksi syntymäpäivän, lemmikin nimen ja vanhempien etunimet. <br><br>Mitä sinun pitäisi tehdä?</br></br>',
+          options: [
+            {id:'A', text:'Jakaa samat tiedot koska kaikki muutkin tekevät niin'},
+            {id:'B', text:'Jättää henkilökohtaiset tiedot kertomatta ja jakaa vain harmittomia faktoja'},
+            {id:'C', text:'Antaa vääriä tietoja varmuuden vuoksi'},
+            {id:'D', text:'Jakaa syntymäpäiväsi mutta ei muuta'}
+          ],
+          correct: 'B',
+          explanation: 'Moni somehaaste kerää tietoja, joita käytetään turvakysymyksissä: lemmikin nimi, syntymäpäivä, vanhempien nimet jne. Jaa vain harmittomia faktoja - älä mitään, mitä voisi käyttää salasanojen tai tilien palautukseen.'
+        },
+        {
+          id: 'q9',
+          scenario: 'Uusi peli tarjoaa mahdollisuuden "kirjautua sisään Instagram-tililläsi", jotta voit jakaa saavutuksia. <br><br>Onko tämä turvallista?</br></br>',
+          options: [
+            {id:'A', text:'Kyllä koska kaikki sovellukset ovat luotettavia'},
+            {id:'B', text:'Kyllä jos peli on virallinen ja tunnettu'},
+            {id:'C', text:'Ei, käytä mieluummin sähköpostia tai anonyymiä kirjautumistapaa'},
+            {id:'D', text:'Ei, mutta vain jos peli pyytää myös puhelinnumeroasi'}
+          ],
+          correct: 'C',
+          explanation: 'Tilien yhdistäminen lisää riskiä: jos peli hakkeroidaan myös oma some-tilisi on vaarassa. Käytä aina erillistä kirjautumista - älä yhdistä sosiaalisen median tilejä satunnaisiin sovelluksiin.'
+        },
+        {
+          id: 'q10',
+          scenario: 'Saat Instagramissa viestin tuntemattomalta tililtä: "Haluaisin oppia tuntemaan sinut, mikä on osoitteesi? Voidaan tavata!" <br><br>Mitä sinun pitäisi tehdä?</br></br>',
+          options: [
+            {id:'A', text:'Antaa osoitteesi mutta vain postinumeron tarkkuudella'},
+            {id:'B', text:'Vastata ja kysyä ensin, kuka hän on'},
+            {id:'C', text:'Antaa vain kaupungin nimen - se ei voi olla vaarallista'},
+            {id:'D', text:'Jättää vastaamatta ja estää tilin'}
+          ],
+          correct: 'D',
+          explanation: 'Älä koskaan jaa osoitetta, kaupunkia, kouluasi tai muita henkilötietoja tuntemattomille! Estä ja raportoi epäilyttävä tili heti - tämä on yleinen lähestymistaktiikka huijareilla.'
         }
       ]
     };
     
-    const questions = data.questions;
     const ui = data.ui;
+    const allQuestions = data.allQuestions;
+    
+    // Randomize and select 6 questions
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+    
+    const questions = shuffleArray(allQuestions).slice(0, 6);
     const totalQuestions = questions.length;
 
     // Setup page text
