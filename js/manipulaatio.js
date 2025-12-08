@@ -1,35 +1,5 @@
-// korkea kontrasti toggle
-(function() {
-  const contrastToggle = document.getElementById('contrastToggle');
-  const body = document.body;
-  
-  // Lataa tallennettu asetus
-  const savedContrast = localStorage.getItem('high_contrast_mode');
-  if (savedContrast === 'true') {
-    body.classList.add('high-contrast');
-    contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
-    contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
-  }
-  
-  contrastToggle.addEventListener('click', function() {
-    body.classList.toggle('high-contrast');
-    const isHighContrast = body.classList.contains('high-contrast');
-    
-    // Tallenna asetus
-    localStorage.setItem('high_contrast_mode', isHighContrast);
-    
-    // napin labelit
-    if (isHighContrast) {
-      contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
-      contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
-    } else {
-      contrastToggle.setAttribute('aria-label', 'Vaihda korkean kontrastin tilaan');
-      contrastToggle.setAttribute('title', 'Vaihda korkean kontrastin tilaan');
-    }
-  });
-})();
-
-// Manipulaatio peli 
+// Manipulaatio peli
+// Note: Accessibility features loaded from accessibility.js 
 (function(){
   const panelBody = document.querySelector('.panel-body');
 
@@ -47,7 +17,7 @@
         restart: 'Suorita uudelleen',
         finishedHeading: 'Olet suorittanut tehtävän!'
       },
-      questions: [
+      allQuestions: [
         {
           id: 'q1',
           scenario: 'Henkilö soittaa ja väittää olevansa koulusi IT-osastolta. He sanovat, että tilisi okanssa on ongelma ja tarvitsevat salasanasi korjatakseen sen.<br><br>Mitä sinun pitäisi tehdä?',
@@ -107,12 +77,60 @@
           ],
           correct: 'B',
           explanation: 'Deepfake-äänet ovat yleistyneet. Ääni ei ole todiste - tärkeintä on varmistaa asia toisesta kanavasta kuten WhatsAppista tai kasvotusten.'
+        },
+        {
+          id: 'q6',
+          scenario: 'Opettaja lähettää Teamsissa linkin videokutsuun: "Liity tähän uuteen etätuntihuoneeseen". Linkin domain näyttää tältä: teams-school-verify.net<br><br>Mitä tekisit?',
+          options: [
+            {id:'A', text:'Klikkaat ja liityt tapaamiseen'},
+            {id:'B', text:'Varmistat linkin luokkakaverilta'},
+            {id:'C', text:'Tarkistat opettajalta tai Wilmasta onko kyse oikeasta linkista'},
+            {id:'D', text:'Kopioi linkin selaimeen ja toivot parasta'}
+          ],
+          correct: 'C',
+          explanation: 'Väärennetyt Teams/Google Meet -linkit keräävät tunnuksia. Aito Teams-linkki päättyy microsoft.com tai teams.microsoft.com. Jos linkki näyttää erilaiselta --> se on vaarallinen.'
+        },
+        {
+          id: 'q7',
+          scenario: 'Saat TikTokissa kommentin: "Hei! Olet voittanut iPhone 15 - arvonnassa! Vastaa DM:llä niin lähetän paketin! ⭐🎁"<br><br>Miten sinun tulisi toimia?',
+          options: [
+            {id:'A', text:'Lähetä DM:ssä omat yhteystiedot voiton lunastamiseksi'},
+            {id:'B', text:'Klikkaa profiilia ja tarkista arvonnan'},
+            {id:'C', text:'Poista kommentti ja estä käyttäjän'},
+            {id:'D', text:'Kysyä, mitä tietoja he tarvitsevat'}
+          ],
+          correct: 'C',
+          explanation: 'TikTok-arvontahuijaukset ovat yleisiä. Jos et ole osallistunut arvontaan, et voi voittaa sitä. Estä ja raportoi, älä koskaan anna osoitetta tai puhelinnumeroa tuntemattomille.'
+        },
+        {
+          id: 'q8',
+          scenario: 'Kaveri lähettää sinulle Instagramissa linkin ja sanoo: "Voitko auttaa? Mun IG on bugannut, kirjaudu sisään tästä ja testaa"<br><br>Mikä on paras vaihtoehto?',
+          options: [
+            {id:'A', text:'Kirjautua sisään, koska haluat auttaa.'},
+            {id:'B', text:'Klikata linkkiä, mutta olla kirjautumatta.'},
+            {id:'C', text:'Kysyä kaverilta esim. WhatsAppissa/Snapchatissa, lähettikö hän viestin.'},
+            {id:'D', text:'Jättää huomiotta koska tiedät, että se on huijaus.'}
+          ],
+          correct: 'C',
+          explanation: 'IG-tilien kaappaukset tapahtuvat usein kavereiden kautta. Jos viesti tuntuu oudolta --> tili on näköisesti varastettu. Varmistus toisesta sovelluksesta pelastaa molempien tilit.'
         }
       ]
     };
     
-    const questions = data.questions;
     const ui = data.ui;
+    const allQuestions = data.allQuestions;
+    
+    // Randomize and select 5 questions
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+    
+    const questions = shuffleArray(allQuestions).slice(0, 5);
     const totalQuestions = questions.length;
 
     // Setup page text
