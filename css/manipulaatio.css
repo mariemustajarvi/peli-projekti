@@ -46,8 +46,6 @@ body {
   color: var(--color-text);
 }
 
-/* Note: Accessibility styles loaded from accessibility.css */
-
 /* keskitys*/
 .app {
   max-width: 1050px;
@@ -917,4 +915,3 @@ body {
   transform: translateY(-1px);
 }
 
-/* Note: High contrast mode and focus styles loaded from accessibility.css */

@@ -120,7 +120,7 @@
     const ui = data.ui;
     const allQuestions = data.allQuestions;
     
-    // Randomize and select 5 questions
+    // satunnaista kyssärit mutta aina 5 kpl
     function shuffleArray(array) {
       const shuffled = [...array];
       for (let i = shuffled.length - 1; i > 0; i--) {
@@ -133,7 +133,7 @@
     const questions = shuffleArray(allQuestions).slice(0, 5);
     const totalQuestions = questions.length;
 
-    // Setup page text
+    // page tekstit
     document.querySelector('.back-btn').innerHTML = ui.backBtnText;
     document.querySelector('.panel-title').innerHTML = ui.panelTitle;
     document.querySelector('.panel-sub').innerHTML = `${ui.panelSubPrefix} <span id="qIndex">1</span> / <span id="qTotal">${totalQuestions}</span> | ${ui.scoreLabel} <span id="score">0</span> / <span id="maxScore">${totalQuestions}</span>`;
@@ -143,7 +143,7 @@
     let currentQuestion = 0;
     let playerScore = 0;
 
-    // Load saved progress
+    // lataa tallennettu edistyminen
     try {
       const saved = JSON.parse(localStorage.getItem('manipulaatio_progress'));
       if (saved) {
