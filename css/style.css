@@ -62,7 +62,6 @@ body {
   border: 1px solid var(--color-primary);
 }
 
-/* vasen yläkulma */
 .app.content-frame::before {
   top: -20px;
   left: 0px;   
@@ -70,7 +69,6 @@ body {
   border-bottom: none;
 }
 
-/* oikea yläkulma */
 .app.content-frame::after {
   top: -20px;
   right: -0px;  
@@ -78,7 +76,6 @@ body {
   border-bottom: none;
 }
 
-/* header */
 .site-header {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -120,7 +117,6 @@ body {
   color: var(--color-primary);
 }
 
-/* yläosan nnavit */
 .top-nav {
   margin-top: 1.6rem;
   display: flex;
@@ -134,7 +130,6 @@ body {
   gap: 0.8rem;
 }
 
-/* navin yleissäädöt */
 .nav-btn {
   position: relative;
   display: inline-flex;
@@ -170,7 +165,6 @@ body {
   white-space: nowrap;
 }
 
-/* navin värit*/
 .nav-btn--primary {
   border-color: var(--color-primary);
   color: var(--color-primary);
@@ -197,7 +191,6 @@ body {
   );
 }
 
-/* hover */
 .nav-btn:hover {
   background-color: var(--color-primary-soft);
   transform: translateY(-1px);
@@ -216,7 +209,6 @@ body {
   margin-top: 2rem;
 }
 
-/* statsit */
 .stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -248,13 +240,11 @@ body {
   font-weight: 700;
 }
 
-/* erotinviiva */
 .divider {
   margin: 1.7rem 0 1.2rem;
   border-bottom: 2px solid rgba(7, 219, 208, 0.35);
 }
 
-/* PELIT */
 
 .game-card.loading-box {
   position: relative;
@@ -267,7 +257,6 @@ body {
   display: contents; 
 }
 
-/* viiva taustalla */
 .game-card.loading-box::before {
   content: "";
   position: absolute;
@@ -352,7 +341,6 @@ body {
   gap: 1rem;
 }
 
-/* pisteet pelejen esikatselussa */
 .game-card__reward {
   display: inline-flex;
   align-items: center;
@@ -375,7 +363,6 @@ body {
   color: var(--color-primary);
 }
 
-/* toimintakehotenappi */
 .game-card__cta {
   padding: var(--space-md);
   background: var(--color-primary);
@@ -398,7 +385,6 @@ body {
   filter: brightness(1.05);
 }
 
-/* lukittujen korttien tyylit */
 .game-card--locked {
   opacity: 0.55;
   position: relative;
@@ -417,7 +403,6 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.7);
 }
 
-/* responsiivisuusasetukset */
 
 @media (max-width: 800px) {
   .stats {
