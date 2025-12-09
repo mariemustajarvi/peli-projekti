@@ -244,14 +244,31 @@
         '</div>' +
         '</div>' +
         '<div class="completion-buttons">' +
-        '<a href="index.html" class="next-btn completion-btn">' + ui.backToIndex + '</a>' +
-        '<button id="restartBtn" class="next-btn completion-btn">' + ui.restart + '</button>' +
+        '<a href="index.html" class="next-btn completion-btn" aria-label="' + ui.backToIndex + ' (Paina Enter)">' + ui.backToIndex + '</a>' +
+        '<button id="restartBtn" class="next-btn completion-btn" aria-label="' + ui.restart + ' (Paina R)">' + ui.restart + '</button>' +
         '</div>' +
+        '<p class="keyboard-hint" style="text-align: center; margin-top: 15px; font-size: 0.9rem; opacity: 0.7;">💡 Vinkki: Pikanäppäimet: R = Uudelleen | Enter = Etusivulle</p>' +
         '</div>';
 
       document.getElementById('restartBtn').addEventListener('click', function() {
         location.reload();
       });
+
+      // Näppäimistön pikanäppäimet feedback screenille
+      function handleCompletionKeys(e) {
+        // R näppäin --> suorita uudelleen
+        if (e.key === 'r' || e.key === 'R') {
+          e.preventDefault();
+          location.reload();
+        }
+        // enterillä etusivulle
+        else if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          window.location.href = 'index.html';
+        }
+      }
+
+      document.addEventListener('keydown', handleCompletionKeys);
     }
 
     // Tarkista vastaus
@@ -282,6 +299,14 @@
       infoEl.setAttribute('aria-hidden', 'false');
       scoreEl.textContent = playerScore;
       nextBtn.disabled = false;
+      
+      // jos vika kyssäri, napin teksti muuttuu
+      if (currentQuestion === totalQuestions - 1) {
+        nextBtn.textContent = 'VALMIS 🎉';
+      } else {
+        nextBtn.textContent = ui.nextBtn;
+      }
+      
       nextBtn.focus();
       saveProgress();
     }
@@ -337,6 +362,14 @@
 
     // Setup
     nextBtn.textContent = ui.nextBtn;
+    
+    // vinkki tekstit
+    const permanentHint = document.createElement('p');
+    permanentHint.className = 'keyboard-hint-permanent';
+    permanentHint.style.cssText = 'text-align: center; margin-top: 15px; font-size: 0.9rem; opacity: 0.7;';
+    permanentHint.textContent = '💡 Vinkki: Pikanäppäimet: A-D / 1-4 = Valitse vastaus | Enter/Välilyönti = Seuraava';
+    infoEl.parentNode.insertBefore(permanentHint, infoEl.nextSibling);
+    
     showQuestion();
 
   } catch(err) {

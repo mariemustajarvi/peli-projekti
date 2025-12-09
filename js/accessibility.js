@@ -31,10 +31,29 @@
     });
   }
 
+  // ESC-näppäin palaa takaisin etusivulle
+  function initEscapeKey() {
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        // Tarkista onko popup auki jos ei palaa etusivulle
+        const hasModal = document.querySelector('.modal:not([aria-hidden="true"])') || 
+                         document.querySelector('[role="dialog"]:not([aria-hidden="true"])');
+        
+        if (!hasModal) {
+          window.location.href = 'index.html';
+        }
+      }
+    });
+  }
+
   // Alusta kun on valmis
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHighContrastToggle);
+    document.addEventListener('DOMContentLoaded', function() {
+      initHighContrastToggle();
+      initEscapeKey();
+    });
   } else {
     initHighContrastToggle();
+    initEscapeKey();
   }
 })();

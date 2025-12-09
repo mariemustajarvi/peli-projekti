@@ -89,7 +89,7 @@ body {
   padding-left: 0;
 }
 
-/* pääpaneeli */
+/* pääpaneeli + CLIP-PATH ON SE RIKKINÄINEN KULMA EFEKTI!!!! */
 .level-page .panel {
   max-width: 760px;
   width: 100%;
@@ -189,6 +189,7 @@ body {
   font-family: 'Orbitron', sans-serif;
 }
 
+/* CLIP-PATH ON SE RIKKINÄINEN KULMA EFEKTI!!!! */
 .option {
   display: block;
   text-align: left;
