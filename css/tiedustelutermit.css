@@ -130,4 +130,3 @@
   .completion-title { color: var(--color-primary); font-size: 1.5rem; margin-bottom: 1rem; }
   .completion-card { background: rgba(0,0,0,0.3); border: 1px solid var(--color-primary); padding: 2rem; border-radius: 10px; max-width: 500px; margin: 0 auto; }
   .completion-buttons { margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; }
-  
