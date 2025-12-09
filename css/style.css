@@ -28,8 +28,6 @@
   --shadow-card: 0 0 20px rgba(0, 0, 0, 0.9);
 }
 
-/* perusasetukset */
-
 *,
 *::before,
 *::after {
@@ -48,15 +46,13 @@ body {
   background-size: 35px 35px;
 }
 
-/* sisällön keskitys*/
 .app.content-frame {
-  max-width: 1150px;       
+  max-width: 1150px;
   margin: 3rem auto;
-  padding: 3rem 2rem 3rem;  
+  padding: 3rem 2rem 3rem;
   position: relative;
 }
 
-/*kulmaelementit*/
 .app.content-frame::before,
 .app.content-frame::after {
   content: "";
@@ -66,23 +62,20 @@ body {
   border: 1px solid var(--color-primary);
 }
 
-/* vasen yläkulma */
 .app.content-frame::before {
   top: -20px;
-  left: 0px;   
+  left: 0px;
   border-right: none;
   border-bottom: none;
 }
 
-/* oikea yläkulma */
 .app.content-frame::after {
   top: -20px;
-  right: -0px;  
+  right: -0px;
   border-left: none;
   border-bottom: none;
 }
 
-/* header */
 .site-header {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -95,10 +88,13 @@ body {
   margin-bottom: 0.75rem;
 }
 
-.brand__icon {
-  font-size: 2rem;
-  color: var(--color-primary);
+.brand__logo {
+  height: 38px;            
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 0 8px rgba(7,219,208,0.6));
 }
+
 
 .brand__text {
   color: var(--color-primary);
@@ -124,7 +120,6 @@ body {
   color: var(--color-primary);
 }
 
-/* yläosan nnavit */
 .top-nav {
   margin-top: 1.6rem;
   display: flex;
@@ -138,7 +133,6 @@ body {
   gap: 0.8rem;
 }
 
-/* navin yleissäädöt */
 .nav-btn {
   position: relative;
   display: inline-flex;
@@ -174,7 +168,6 @@ body {
   white-space: nowrap;
 }
 
-/* navin värit*/
 .nav-btn--primary {
   border-color: var(--color-primary);
   color: var(--color-primary);
@@ -201,7 +194,6 @@ body {
   );
 }
 
-/* hover */
 .nav-btn:hover {
   background-color: var(--color-primary-soft);
   transform: translateY(-1px);
@@ -220,58 +212,164 @@ body {
   margin-top: 2rem;
 }
 
-/* statsit */
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-}
+/* AGENTTIPANEELI */
 
-.stat-card {
+.agent-panel {
   background: var(--color-card-bg);
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(7, 219, 208, 0.5);
+  border: 1px solid rgba(7, 219, 208, 0.6);
   box-shadow: var(--shadow-card);
+
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.agent-panel__header {
+  margin-top: 0;
+  background: #28ADF1;
+  color: white;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: var(--space-lg) var(--space-md);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+.agent-panel__content {
+  padding: var(--space-lg) var(--space-md) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+
+.agent-panel__rank {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.agent-panel__rank-label {
+  font-size: var(--font-sm);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: white;
+}
+
+.agent-panel__rank-value {
+  font-size: var(--font-xl);
+  font-weight: 700;
+}
+
+.agent-panel__code {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.agent-panel__code-label {
+  font-size: var(--font-sm);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: white;
+}
+
+.agent-panel__code-value {
+  font-size: var(--font-md);
+  font-weight: 600;
+}
+
+.agent-panel__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.agent-stat {
+  background: rgba(0, 10, 26, 0.85);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(7, 219, 208, 0.4);
   padding: var(--space-md);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.stat-card__label {
-  margin: 0 0 0.7rem;
-  font-size: var(--font-sm);
+.agent-stat__label {
+  margin: 0 0 0.4rem;
+  font-size: var(--font-xs);
   letter-spacing: 0.22em;
-  font-weight: 400;
+  text-transform: uppercase;
   color: var(--color-primary);
+  opacity: 0.9;
 }
 
-.stat-card__value {
+.agent-stat__value {
   margin: 0;
-  font-size: var(--font-xl);
+  font-size: var(--font-lg);
   font-weight: 700;
 }
 
-/* erotinviiva */
+.agent-panel__next-rank {
+  margin-top: var(--space-md);
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(7, 219, 208, 0.35);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.agent-panel__next-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xs);
+  font-size: var(--font-xs);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.agent-panel__next-label {
+  color: var(--color-primary);
+}
+
+.agent-progress-bar {
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(7, 219, 208, 0.4);
+  background: rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.agent-progress-bar__fill {
+  position: absolute;
+  inset: 0;
+  width: 0%; /* alkaa nollasta, päivitetään JS:llä */
+  background: linear-gradient(to right, #00f2ff, #00f382);
+  border-radius: inherit;
+}
+
 .divider {
   margin: 1.7rem 0 1.2rem;
   border-bottom: 2px solid rgba(7, 219, 208, 0.35);
 }
 
-/* PELIT */
-
 .game-card.loading-box {
   position: relative;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .loading-box__content {
   position: relative;
   z-index: 1;
-  display: contents; 
+  display: contents;
 }
 
-/* viiva taustalla */
 .game-card.loading-box::before {
   content: "";
   position: absolute;
@@ -334,9 +432,9 @@ body {
 }
 
 .game-card__title {
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.6rem;
   color: var(--color-primary);
-  font-size: var(--font-md);
+  font-size: var(--font-lg);
   font-weight: 400;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -344,7 +442,7 @@ body {
 
 .game-card__subtitle {
   margin: 0;
-  font-size: var(--font-sm);
+  font-size: var(--font-md);
   opacity: 0.9;
 }
 
@@ -356,36 +454,25 @@ body {
   gap: 1rem;
 }
 
-/* pisteet pelejen esikatselussa */
 .game-card__reward {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
+  padding: 6px 8px;               
+  border-radius: var(--radius-md); 
+  border: 1px solid rgba(7, 219, 208, 0.4); 
+  background: rgba(0, 0, 0, 0.45); 
+  box-shadow: 0 0 8px rgba(7, 219, 208, 0.35);
   font-size: var(--font-sm);
 }
 
-.reward-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 18px;
-  border-radius: 999px;
-  background: rgba(7, 219, 208, 0.15);
-  border: 1px solid rgba(7, 219, 208, 0.7);
-}
-
 .reward-text {
-  color: var(--color-primary);
+  color: var(--color-accent);
 }
 
-/* toimintakehotenappi */
 .game-card__cta {
   padding: var(--space-md);
   background: var(--color-primary);
   color: #001217;
   border-radius: var(--radius-md);
-  font-size: var(--font-sm);
+  font-size: var(--font-md);
   font-weight: 600;
   text-decoration: none;
   letter-spacing: 0.12em;
@@ -402,9 +489,8 @@ body {
   filter: brightness(1.05);
 }
 
-/* lukittujen korttien tyylit */
 .game-card--locked {
-  opacity: 0.55;
+  opacity: 0.7;
   position: relative;
   background-color: var(--color-bg);
 }
@@ -424,7 +510,17 @@ body {
 /* responsiivisuusasetukset */
 
 @media (max-width: 800px) {
-  .stats {
+  .agent-panel__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .agent-panel__code {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .agent-panel__stats {
     grid-template-columns: 1fr;
   }
 
