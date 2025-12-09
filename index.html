@@ -82,10 +82,13 @@
   </div>
 </section>
       <div class="divider"></div>
-      <!-- pelit -->
+           <!-- pelit -->
       <section class="game-list" aria-label="Available games">
-        <!-- eka peli -->
-        <article class="game-card game-card--active loading-box">
+        <!-- 1: eka peli – heti auki -->
+        <article
+          class="game-card game-card--active loading-box"
+          data-mission-id="mission1"
+          data-mission-url="missions/mission1-salasanasuojaus.html">
           <div class="loading-box__content">
             <div class="game-card__header">
               <div class="game-card__icon">🔐</div>
@@ -101,12 +104,17 @@
                 <span class="reward-badge">⭐</span>
                 <span class="reward-text">100 pistettä</span>
               </div>
-              <a href="../" class="game-card__cta">Aloita missio</a>
+              <a href="./salasanasuojaus.html" class="game-card__cta">
+                Aloita missio
+              </a>
             </div>
           </div>
         </article>
-        <!-- loput pelit -->
-        <article class="game-card game-card--locked loading-box">
+        <!-- 2: Tietojenkalastelu -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission2"
+          data-mission-url="./tietojenkalastelu.html">
           <div class="game-card__header">
             <div class="game-card__icon">📧</div>
             <div class="game-card__titles">
@@ -124,7 +132,11 @@
             <div class="game-card__lock">🔒</div>
           </div>
         </article>
-        <article class="game-card game-card--locked loading-box">
+        <!-- Manipulaatio -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission3"
+          data-mission-url="missions/mission3-manipulaatio.html">
           <div class="game-card__header">
             <div class="game-card__icon">🕵</div>
             <div class="game-card__titles">
@@ -142,7 +154,11 @@
             <div class="game-card__lock">🔒</div>
           </div>
         </article>
-        <article class="game-card game-card--locked loading-box">
+        <!-- Turvallinen tiedustelu -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission4"
+          data-mission-url="./turvallinen-tiedustelu.html">
           <div class="game-card__header">
             <div class="game-card__icon">🌐</div>
             <div class="game-card__titles">
@@ -160,7 +176,11 @@
             <div class="game-card__lock">🔒</div>
           </div>
         </article>
-        <article class="game-card game-card--locked loading-box">
+        <!-- Tietosuojaoperaatio -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission5"
+          data-mission-url="./tietosuojao.html">
           <div class="game-card__header">
             <div class="game-card__icon">🔒</div>
             <div class="game-card__titles">
@@ -178,7 +198,11 @@
             <div class="game-card__lock">🔒</div>
           </div>
         </article>
-        <article class="game-card game-card--locked loading-box">
+        <!-- Tietoturvakäytännöt -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission6"
+          data-mission-url="./tietoturvakaytannot.html">
           <div class="game-card__header">
             <div class="game-card__icon">🎯</div>
             <div class="game-card__titles">
@@ -196,7 +220,11 @@
             <div class="game-card__lock">🔒</div>
           </div>
         </article>
-        <article class="game-card game-card--locked loading-box">
+        <!-- Tiedustelutermit -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission7"
+          data-mission-url="./tiedustelutermit.html">
           <div class="game-card__header">
             <div class="game-card__icon">🧩</div>
             <div class="game-card__titles">
@@ -214,7 +242,11 @@
             <div class="game-card__lock">🔒</div>
           </div>
         </article>
-        <article class="game-card game-card--locked loading-box">
+        <!-- Uhka-analyysi -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission8"
+          data-mission-url="./uhka-analyysi.html">
           <div class="game-card__header">
             <div class="game-card__icon">🧩</div>
             <div class="game-card__titles">
@@ -232,7 +264,11 @@
             <div class="game-card__lock">🔒</div>
           </div>
         </article>
-        <article class="game-card game-card--locked loading-box">
+        <!-- Nopea reagointi -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission9"
+          data-mission-url="./nopea-reagointi.html">
           <div class="game-card__header">
             <div class="game-card__icon">⏱️</div>
             <div class="game-card__titles">
@@ -250,7 +286,11 @@
             <div class="game-card__lock">🔒</div>
           </div>
         </article>
-        <article class="game-card game-card--locked loading-box">
+        <!-- Lopullinen arviointi -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission10"
+          data-mission-url="./quiz.html">
           <div class="game-card__header">
             <div class="game-card__icon">🏆</div>
             <div class="game-card__titles">
