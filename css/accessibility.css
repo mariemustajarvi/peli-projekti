@@ -1,6 +1,5 @@
 /* saavutettavuus asetukset */
-
-/* skippaus saavutettavuudelle navigointiin */
+/* skippaus navigaatio varten */
 .skip-link {
   position: absolute;
   top: -40px;
@@ -18,7 +17,7 @@
   top: 0;
 }
 
-/* Näytönlukijan sisältö */
+/* Näytönlukijan vain sisältö */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -31,7 +30,7 @@
   border-width: 0;
 }
 
-/* Saavutettavuuden ohjaimet */
+/* saavutettavuus ohjaimet kontti */
 .accessibility-controls {
   position: fixed;
   top: 16px;
@@ -39,7 +38,7 @@
   z-index: 1000;
 }
 
-/* Korkean kontrastin tilan kytkin */
+/* korkean kontrastin vaihtopainike */
 .contrast-toggle {
   background: rgba(0, 0, 0, 0.7);
   border: 2px solid rgba(7, 219, 208, 0.5);
@@ -85,7 +84,7 @@ button.next-btn:focus {
   outline-offset: 3px;
 }
 
-/* Korkean kontrastin tilan tyylit */
+/* korkean kontrastin tila tyylit */
 body.high-contrast {
   background-image: none;
   background-color: #000000;
@@ -227,8 +226,7 @@ body.high-contrast .completion-card {
 
 body.high-contrast .completion-title,
 body.high-contrast .completion-score,
-body.high-contrast .completion-message,
-body.high-contrast .completion-points {
+body.high-contrast .completion-message {
   color: #ffffff;
 }
 
@@ -249,3 +247,56 @@ body.high-contrast .completion-btn {
 body.high-contrast .completion-divider {
   border-top: 2px solid #ffffff;
 }
+
+/* Login/Register page high contrast */
+body.high-contrast .login-panel {
+  background: #000000 !important;
+  border: 3px solid #ffffff !important;
+  box-shadow: none !important;
+}
+
+body.high-contrast .login-title,
+body.high-contrast .login-subtitle {
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+body.high-contrast .form-label {
+  color: #ffffff !important;
+}
+
+body.high-contrast .form-input {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .login-btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: none !important;
+}
+
+body.high-contrast .google-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: none !important;
+}
+
+body.high-contrast .google-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+body.high-contrast .divider-text,
+body.high-contrast .register-link__text,
+body.high-contrast .back-link__text {
+  color: #ffffff !important;
+}
+
+body.high-contrast .divider::before {
+  background: #ffffff !important;
+}
+
