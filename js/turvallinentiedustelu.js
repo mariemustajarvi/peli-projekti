@@ -6,12 +6,11 @@ const sites = [
       "Tämä verkkosivusto on turvallinen! ✅\n" +
       "Tämä näyttää oikealta Amazon-verkkokaupalta.",
     wrongExplanation:
-      "Ei aivan! ❌\n" +
       "Tämä verkkosivusto on oikeasti turvallinen.",
     indicators: [
-      "HTTPS-yhteys (lukko-ikoni)",
-      "Aito verkkotunnus amazon.com",
-      "Tunnettu ja luotettava palvelu"
+      "⚠️ HTTPS-yhteys (lukko-ikoni)",
+      "❌ Aito verkkotunnus amazon.com",
+      "❌ Tunnettu ja luotettava palvelu"
     ],
     tips: [
       "• Etsi HTTPS ja lukko-ikoni selaimesta",
@@ -23,10 +22,8 @@ const sites = [
     url: "http://amaz0n-deals.biz/login",
     isSafe: false,
     rightExplanation:
-      "Oikein! 🎉\n" +
       "Tämä verkkosivusto on epäturvallinen!",
     wrongExplanation:
-      "Ei aivan! ❌\n" +
       "Tämä sivu on itse asiassa vaarallinen huijaussivu.",
     indicators: [
       "⚠️ HTTP (ei turvallinen)",
@@ -45,10 +42,8 @@ const sites = [
     url: "https://www.wikipedia.org",
     isSafe: true,
     rightExplanation:
-      "Oikein! 🎉\n" +
       "Tämä verkkosivusto on turvallinen!",
     wrongExplanation:
-      "Ei aivan! ❌\n" +
       "Tämä sivu on turvallinen.",
     indicators: [
       "🔒 HTTPS-yhteys",
@@ -65,10 +60,8 @@ const sites = [
     url: "http://free-iphones-now.ru/claim",
     isSafe: false,
     rightExplanation:
-      "Oikein! 🎉\n" +
       "Tämä verkkosivusto on epäturvallinen!",
     wrongExplanation:
-      "Ei aivan! ❌\n" +
       "Tämä verkkosivusto on epäturvallinen!",
     indicators: [
       "⚠️ HTTP (ei turvallinen)",
@@ -87,10 +80,8 @@ const sites = [
     url: "https://bank0famerica.com/login",
     isSafe: false,
     rightExplanation:
-      "Oikein! 🎉\n" +
       "Tämä verkkosivusto on epäturvallinen!",
     wrongExplanation:
-      "Ei aivan! ❌\n" +
       "Tämä verkkosivusto on epäturvallinen!",
     indicators: [
       "🔒 On HTTPS mutta...",
@@ -109,10 +100,8 @@ const sites = [
     url: "https://www.youtube.com",
     isSafe: true,
     rightExplanation:
-      "Oikein! 🎉\n" +
       "Tämä verkkosivusto on turvallinen!",
     wrongExplanation:
-      "Ei aivan! ❌\n" +
       "Tämä sivu on turvallinen.",
     indicators: [
       "🔒 HTTPS-yhteys",
@@ -161,6 +150,7 @@ const resultPointsText = document.getElementById("resultPointsText");
 const resultEmoji = document.getElementById("resultEmoji");
 const retryBtn = document.getElementById("retryBtn");
 
+
 qTotalEl.textContent = sites.length;
 maxPointsEl.textContent = maxPoints.toString();
 pointsEl.textContent = points.toString();
@@ -175,29 +165,37 @@ function showSite(index) {
   btnUnsafe.disabled = false;
 
   feedbackSection.classList.add("hidden");
+  feedbackBox.classList.remove("correct", "wrong");
+  feedbackTitle.textContent = "";
+  feedbackText.textContent = "";
 
   indicatorList.innerHTML = "";
   tipList.innerHTML = "";
+
+  btnSafe.focus();
 }
 
+
 function handleAnswer(isSafeAnswer) {
+  if (btnSafe.disabled && btnUnsafe.disabled) return;
+
   const site = sites[currentIndex];
   const correct = isSafeAnswer === site.isSafe;
 
   btnSafe.disabled = true;
   btnUnsafe.disabled = true;
 
+  feedbackBox.classList.remove("correct", "wrong");
+
   if (correct) {
     correctCount++;
     points += pointsPerCorrect;
     pointsEl.textContent = points.toString();
 
-    feedbackBox.classList.remove("wrong");
     feedbackBox.classList.add("correct");
     feedbackTitle.textContent = "✅ Oikein!";
     feedbackText.innerHTML = site.rightExplanation.replace(/\n/g, "<br>");
   } else {
-    feedbackBox.classList.remove("correct");
     feedbackBox.classList.add("wrong");
     feedbackTitle.textContent = "❌ Ei aivan!";
     feedbackText.innerHTML = site.wrongExplanation.replace(/\n/g, "<br>");
@@ -222,7 +220,10 @@ function handleAnswer(isSafeAnswer) {
   } else {
     nextBtn.textContent = "Seuraava sivusto →";
   }
+
+  nextBtn.focus();
 }
+
 
 function finishGame() {
   quizPanel.classList.add("hidden");
@@ -246,6 +247,8 @@ function finishGame() {
   resultComment.textContent = comment;
   resultEmoji.textContent = emoji;
   resultPointsText.textContent = `+${points} pistettä`;
+
+  retryBtn.focus();
 }
 
 function restartGame() {
@@ -276,5 +279,115 @@ btnUnsafe.addEventListener("click", () => handleAnswer(false));
 nextBtn.addEventListener("click", nextSite);
 retryBtn.addEventListener("click", restartGame);
 
-// käynnistä peli
+// -------------------------
+// NÄPPÄIMISTÖOHJAUS
+// -------------------------
+//
+// Kysymysvaihe (ei palautetta):
+//   T tai ← = TURVALLINEN
+//   E tai → = EPÄTURVALLINEN
+//
+// Palautteen aikana:
+//   Enter, Space tai N = seuraava sivusto / tulos
+//
+// Aina:
+//   Esc tai B = takaisin missiolistaan
+//
+// Tulosnäyttö:
+//   R tai Enter = uudelleensuorita missio
+//   Esc tai B   = takaisin missiolistaan
+//
+
+document.addEventListener("keydown", (event) => {
+  const key = event.key;          // esim. "ArrowLeft", "Escape", "Enter", " "
+  const lower = key.toLowerCase();
+
+  const quizVisible = !quizPanel.classList.contains("hidden");
+  const resultVisible = !resultScreen.classList.contains("hidden");
+  const feedbackVisible = !feedbackSection.classList.contains("hidden");
+
+  const handledKeys = [
+    "ArrowLeft",
+    "ArrowRight",
+    "Escape",
+    "Enter",
+    " ",
+    "t",
+    "e",
+    "n",
+    "r",
+    "b"
+  ];
+
+  if (handledKeys.includes(key) || handledKeys.includes(lower)) {
+    event.preventDefault();
+  }
+
+  if (key === "Escape" || lower === "b") {
+    window.location.href = "index.html";
+    return;
+  }
+
+  if (quizVisible) {
+    if (!feedbackVisible) {
+      if (lower === "t" || key === "ArrowLeft") {
+        handleAnswer(true);
+        return;
+      }
+
+      if (lower === "e" || key === "ArrowRight") {
+        handleAnswer(false);
+        return;
+      }
+
+      return;
+    }
+
+    if (key === "Enter" || key === " " || lower === "n") {
+      nextSite();
+      return;
+    }
+
+    return;
+  }
+
+  if (resultVisible) {
+    if (lower === "r" || key === "Enter") {
+      restartGame();
+      return;
+    }
+  }
+});
+
+
+function initHighContrastToggle() {
+  const contrastToggle = document.getElementById("contrastToggle");
+  if (!contrastToggle) return;
+
+  const body = document.body;
+
+  body.classList.remove("high-contrast");
+  localStorage.removeItem("high_contrast_mode");
+
+  contrastToggle.addEventListener("click", function () {
+    body.classList.toggle("high-contrast");
+    const isHighContrast = body.classList.contains("high-contrast");
+
+    if (isHighContrast) {
+      contrastToggle.setAttribute("aria-label", "Vaihda takaisin normaaliin tilaan");
+      contrastToggle.setAttribute("title", "Vaihda takaisin normaaliin tilaan");
+    } else {
+      contrastToggle.setAttribute("aria-label", "Vaihda korkean kontrastin tilaan");
+      contrastToggle.setAttribute("title", "Vaihda korkean kontrastin tilaan");
+    }
+  });
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initHighContrastToggle);
+} else {
+  initHighContrastToggle();
+}
+
+
 showSite(currentIndex);

@@ -11,9 +11,15 @@
 <body class="level-page">
   <div class="container-backbtn">
     <a class="back-btn" href="index.html">← Takaisin missioihin</a>
+    <button
+      id="contrastToggle"
+      class="contrast-btn"
+      aria-label="Vaihda korkean kontrastin tilaan"
+      title="Vaihda korkean kontrastin tilaan">
+      ♿ Kontrasti
+    </button>
   </div>
   <main class="container level-main loading-box">
-    <!-- kysymykset -->
     <section class="panel" id="quizPanel">
       <header class="panel-header">
         <div class="panel-title">🌐 TURVALLISEN SELAILUN HAASTE</div>
@@ -24,7 +30,6 @@
         </div>
       </header>
       <p class="question-text">Onko tämä verkkosivusto turvallinen vierailla?</p>
-      <!-- URL + esikatselukuva-->
       <div class="site-card">
         <div class="site-url-bar">
           <span class="site-lock">🔒</span>
@@ -35,12 +40,14 @@
           <div class="site-preview-text">Verkkosivuston esikatselu</div>
         </div>
       </div>
-      <!-- vastausnamiskat -->
       <div class="answers">
         <button id="btnSafe" class="answer-btn safe">✅ TURVALLINEN</button>
         <button id="btnUnsafe" class="answer-btn unsafe">⚠️ EPÄTURVALLINEN!</button>
       </div>
-      <!-- palaute -->
+      <p class="controls-hint">
+        Näppäimet: T / ← = Turvallinen, E / → = Epäturvallinen, Enter / N = Seuraava,
+        Esc / B = Takaisin missiolistaan, R = Uudelleensuorita tulosnäkymässä.
+      </p>
       <div id="feedbackSection" class="feedback-section hidden">
         <div id="feedbackBox" class="feedback-box">
           <p id="feedbackTitle" class="feedback-title"></p>
