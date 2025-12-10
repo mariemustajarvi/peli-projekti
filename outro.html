@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>outro</title>
+    <style>
+        .kirjoitus {
+            font-size: 24px;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 4px solid black; /* Tämä luo kursorin */
+            display: inline-block;
+        }
+    </style>
+     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href=".//css/outrostyle.css">
+    
+</head>
+<body>
+
+<h1 class="sr-only">Outro - Tehtävä suoritettu</h1>
+    
+<img src=".//pictures/logo.png" alt="Kyberturvallisuusakatemia logo - Palaa etusivulle" id="logokuva" onclick="window.location.href='index.html'" role="button" aria-label="Palaa etusivulle" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){window.location.href='index.html'}">
+    
+  
+<div class="content">
+  <div class="textcontainer1" id="text1"></div>
+  <div class="textcontainer2" id="text2"></div>
+</div>
+
+<script>
+  // Ensimmäinen teksti
+  const teksti1 = "Hienoa työtä, agentti! Olet selvinnyt kyberuhkista.";
+  let index1 = 0;
+  const element1 = document.getElementById('text1');
+  let timeout1, timeout2;
+  let isTyping = true;
+
+  function kirjoita1() {
+    if (index1 < teksti1.length) {
+      element1.innerHTML += teksti1.charAt(index1);
+      index1++;
+      timeout1 = setTimeout(kirjoita1, 180);
+    } else {
+      element1.style.borderRight = "none";
+    }
+  }
+  kirjoita1();
+
+  // Toinen teksti
+  const teksti2 = "Muista: digitaalinen maailma tarvitsee sankareita myös jatkossa.";
+  let index2 = 0;
+  const element2 = document.getElementById('text2');
+
+  function kirjoita2() {
+    if (index2 < teksti2.length) {
+      element2.innerHTML += teksti2.charAt(index2);
+      index2++;
+      timeout2 = setTimeout(kirjoita2, 180);
+    } else {
+      element2.style.borderRight = "none";
+      isTyping = false;
+    }
+  }
+
+  // Käynnistetään toinen teksti vasta kun ensimmäinen on valmis
+  const delayedStart = setTimeout(kirjoita2, teksti1.length * 180 + 500);
+
+  // Skip animation on click
+  document.body.addEventListener('click', function() {
+    if (isTyping) {
+      // Clear all timeouts
+      clearTimeout(timeout1);
+      clearTimeout(timeout2);
+      clearTimeout(delayedStart);
+      
+      // Show all text immediately
+      element1.innerHTML = teksti1;
+      element1.style.borderRight = "none";
+      element2.innerHTML = teksti2;
+      element2.style.borderRight = "none";
+      
+      isTyping = false;
+    }
+  });
+
+  // ESC key navigation to return to index
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      window.location.href = 'index.html';
+    }
+  });
+</script>
+
+</body>
+</html>

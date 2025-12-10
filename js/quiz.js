@@ -244,10 +244,10 @@
         '</div>' +
         '</div>' +
         '<div class="completion-buttons">' +
-        '<a href="index.html" class="next-btn completion-btn" aria-label="' + ui.backToIndex + ' (Paina Enter)">' + ui.backToIndex + '</a>' +
+        '<a href="outro.html" class="next-btn completion-btn" aria-label="Jatka outroon (Paina Enter)">JATKA →</a>' +
         '<button id="restartBtn" class="next-btn completion-btn" aria-label="' + ui.restart + ' (Paina R)">' + ui.restart + '</button>' +
         '</div>' +
-        '<p class="keyboard-hint" style="text-align: center; margin-top: 15px; font-size: 0.9rem; opacity: 0.7;">💡 Vinkki: Pikanäppäimet: R = Uudelleen | Enter = Etusivulle</p>' +
+        '<p class="keyboard-hint" style="text-align: center; margin-top: 15px; font-size: 0.9rem; opacity: 0.7;">💡 Vinkki: Pikanäppäimet: R = Uudelleen | Enter = Jatka</p>' +
         '</div>';
 
       document.getElementById('restartBtn').addEventListener('click', function() {
@@ -261,10 +261,10 @@
           e.preventDefault();
           location.reload();
         }
-        // enterillä etusivulle
+        // enterillä outroon
         else if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          window.location.href = 'index.html';
+          window.location.href = 'outro.html';
         }
       }
 
