@@ -12,7 +12,7 @@
         scoreLabel: 'PISTEET:',
         scenarioLabel: '📱 SKENAARIO:',
         nextBtn: 'SEURAAVA SKENAARIO →',
-        backToIndex: 'Takaisin tehtäviin',
+        backToIndex: 'Takaisin missioihin',
         restart: 'Suorita uudelleen',
         finishedHeading: 'Olet suorittanut tehtävän!'
       },
