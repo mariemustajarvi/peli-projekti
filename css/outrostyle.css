@@ -1,0 +1,108 @@
+:root {
+  --color-bg: #040e1e;
+  --color-grid: rgba(0, 255, 255, 0.04);
+
+  --color-primary: #00f2ff;
+  --color-primary-soft: rgba(7, 219, 208, 0.2);
+  --color-accent: #00f382;
+  --color-text: #00f2ff;
+  --color-muted: #0d4263;
+  --color-card-bg: rgba(2, 12, 30, 0.95);
+  --color-muted-transparent: rgba(13, 66, 99, 0.25);
+
+  --font-xs: 0.7rem;
+  --font-sm: 0.8rem;
+  --font-md: 1.0rem;
+  --font-lg: 1.3rem;
+  --font-xl: 2.2rem;
+
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  --space-xs: 0.35rem;
+  --space-sm: 0.6rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+
+  --shadow-card: 0 0 20px rgba(0, 0, 0, 0.9);
+}
+
+/* perusasetukset */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Orbitron", system-ui, sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(to right, var(--color-muted-transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-muted-transparent) 1px, transparent 1px);
+  background-size: 35px 35px;
+}
+
+
+.textcontainer1,
+.textcontainer2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-size: var(--font-lg);
+  text-align: center;
+  width: 90%;
+  margin: 40px auto 0 auto;
+}
+
+
+#logokuva {
+    width: 200px;  
+    height: auto;
+    margin-top: 70px; 
+    margin-left: 50px;  
+}
+
+/* Mobiili (pienet näytöt) alle 480px */
+@media (max-width: 480px) {
+  .textcontainer1,
+  .textcontainer2 {
+    font-size: var(--font-md);
+    margin-top: 30px;
+  }
+
+  #logokuva {
+    width: 130px;
+    margin-top: 40px;
+  }
+}
+
+/* Tabletit (>= 768px) */
+@media (min-width: 768px) {
+  .textcontainer1,
+  .textcontainer2 {
+    font-size: 1.6rem;
+  }
+
+  #logokuva {
+    width: 220px;
+  }
+}
+
+/* Desktop (>= 1024px) */
+@media (min-width: 1024px) {
+  .textcontainer1,
+  .textcontainer2 {
+    font-size: 2rem;
+  }
+
+  #logokuva {
+    width: 260px;
+  }
+}
