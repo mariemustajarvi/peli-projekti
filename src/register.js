@@ -39,7 +39,6 @@ let writeUserData = (userId, name) => {
     set(reference, {
         username: name
     }).then(() => {
-        console.log("lisätty");
         window.location.href = 'index.html'
     })
 }

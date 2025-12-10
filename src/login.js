@@ -1,8 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js';
-//import { initializeApp } from 'firebase/app';
 
 import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
-//import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const firebaseConfig = {
 
@@ -31,8 +29,7 @@ form.addEventListener('submit', event => {
     const password = document.getElementById('password').value;
 
     signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
+        .then(() => {
             window.location.href = "index.html";
         })
         .catch((error) => {

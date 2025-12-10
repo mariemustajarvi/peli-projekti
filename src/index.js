@@ -1,8 +1,8 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js';
-//import { initializeApp } from 'firebase/app';
 
 import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
-//import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
+import { getDatabase, ref, child, get } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
 
 const firebaseConfig = {
 
@@ -16,12 +16,23 @@ const firebaseConfig = {
 
     messagingSenderId: "362924183192",
 
-    appId: "1:362924183192:web:337b854b2ecc8b53e48aed"
+    appId: "1:362924183192:web:337b854b2ecc8b53e48aed",
+
+    databaseURL: "https://tuotekehitysprojekti-5f330-default-rtdb.europe-west1.firebasedatabase.app"
 
 };
 
 const app = initializeApp(firebaseConfig);
+const db = getDatabase();
 const auth = getAuth(app);
+
+/*const userId = auth.currentUser.uid;
+onValue(ref(db, 'users/' + userId), (snapshot) => {
+    const username = (snapshot.val() && snapshot.val().username);
+    console.log(username);
+}, {
+    onlyOnce: true
+});*/
 
 const loginBtn = document.getElementById('loginBtn')
 const loginBtnText = document.getElementById('loginBtnText')
@@ -32,7 +43,13 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         userLoggedIn = true;
         loginBtnText.innerHTML = 'Kirjaudu ulos';
-        const uid = user.uid;
+        const userId = user.uid;
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, `users/${userId}`)).then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val().username);
+            }
+        });
     } else {
         userLoggedIn = false;
     }
@@ -47,4 +64,4 @@ loginBtn.addEventListener('click', (event) => {
     } else {
         window.location.href = loginBtn.href;
     }
-})
+});
