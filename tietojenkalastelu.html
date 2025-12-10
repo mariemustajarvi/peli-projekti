@@ -11,6 +11,13 @@
 <body class="level-page">
   <div class="container-backbtn">
     <a class="back-btn" href="index.html">← Takaisin missioihin</a>
+    <button
+      id="contrastToggle"
+      class="contrast-btn"
+      aria-label="Vaihda korkean kontrastin tilaan"
+      title="Vaihda korkean kontrastin tilaan">
+      ♿ Kontrasti
+    </button>
   </div>
   <main class="container level-main loading-box">
     <section class="panel" id="quizPanel">
@@ -29,20 +36,22 @@
           <p><strong>Aihe:</strong> <span id="subject"></span></p>
         </div>
         <div class="divider"></div>
-        <div class="body-text" id="bodyText">
-        </div>
+        <div class="body-text" id="bodyText"></div>
       </div>
       <div class="answers">
         <button id="btnSafe" class="answer-btn safe">✅ TURVALLINEN VIESTI</button>
         <button id="btnPhish" class="answer-btn phish">🎧 TIETOJENKALASTELU!</button>
       </div>
+      <p class="controls-hint">
+        Näppäimet: T / ← = Turvallinen viesti, U / → = Tietojenkalastelu, Enter / N = Seuraava viesti,
+        <br/>Esc / B = Takaisin missiolistaan, R = Uudelleensuorita tulosnäkymässä.
+      </p>
       <div id="feedback" class="feedback hidden">
         <p id="feedbackTitle"></p>
         <p id="feedbackText"></p>
         <button id="nextBtn" class="next-btn">SEURAAVA VIESTI →</button>
       </div>
     </section>
-
     <section id="resultScreen" class="result-screen hidden">
       <div class="result-trophy">🏆</div>
       <h1 class="result-title">MISSIO SUORITETTU! 🎉</h1>
@@ -64,7 +73,6 @@
         </button>
       </div>
     </section>
-
   </main>
   <script src="./js/tietojenkalastelu.js"></script>
 </body>
