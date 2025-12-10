@@ -205,7 +205,7 @@
         const button = document.createElement('button');
         button.className = 'option';
         button.dataset.optId = option.id;
-        button.textContent = option.id + '. ' + option.text;
+        button.innerHTML = '<span style="color: #00f382; font-weight: 800;" aria-hidden="true">' + option.id + '.</span> ' + option.text;
         button.setAttribute('aria-label', 'Vastausvaihtoehto ' + option.id + ': ' + option.text);
         optionsEl.appendChild(button);
         

@@ -1,10 +1,10 @@
-// Saavutettavuus asetukset: Korkean kontrastin tilan kytkin
-
+// saavutettavuus asetukset
+// korkean kontrastin tila
 
 (function() {
   'use strict';
 
-  // Korkean kontrastin tilan kytkin
+  // korkean kontrastin tilan toiminnallisuus
   function initHighContrastToggle() {
     const contrastToggle = document.getElementById('contrastToggle');
     if (!contrastToggle) return;
@@ -15,7 +15,7 @@
     body.classList.remove('high-contrast');
     localStorage.removeItem('high_contrast_mode');
 
-    // Kytkimen tapahtumankuuntelija
+    // eventti listener
     contrastToggle.addEventListener('click', function() {
       body.classList.toggle('high-contrast');
       const isHighContrast = body.classList.contains('high-contrast');
@@ -31,10 +31,29 @@
     });
   }
 
-  // Alusta kun valmis
+  // ESC-näppäin palaa takaisin etusivulle
+  function initEscapeKey() {
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        // Tarkista onko popup auki jos ei palaa etusivulle
+        const hasModal = document.querySelector('.modal:not([aria-hidden="true"])') || 
+                         document.querySelector('[role="dialog"]:not([aria-hidden="true"])');
+        
+        if (!hasModal) {
+          window.location.href = 'index.html';
+        }
+      }
+    });
+  }
+
+  // Alusta kun on valmis
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHighContrastToggle);
+    document.addEventListener('DOMContentLoaded', function() {
+      initHighContrastToggle();
+      initEscapeKey();
+    });
   } else {
     initHighContrastToggle();
+    initEscapeKey();
   }
 })();
