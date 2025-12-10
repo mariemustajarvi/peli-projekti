@@ -10,8 +10,14 @@
 </head>
 <body class="level-page">
   <div class="container-backbtn">
-    <a class="back-btn" href="index.html">← Takaisin missioihin</a>
-  </div>
+  <a class="back-btn" href="index.html">← Takaisin missioihin</a>
+  <button id="contrastToggle"
+          class="contrast-btn"
+          aria-label="Vaihda korkean kontrastin tilaan"
+          title="Vaihda korkean kontrastin tilaan">
+    ♿ Kontrasti
+  </button>
+</div>
   <main class="container level-main loading-box">
     <section class="panel" id="quizPanel">
       <header class="panel-header">
@@ -30,6 +36,11 @@
       </div>
       <div class="statement-card">
         <p id="statementText"></p>
+      </div>
+      <div>
+        <p style="margin-top:1rem;font-size:0.8rem;opacity:0.8;text-align:center;">
+  Näppäimet: T/nuoli vasemmalle= TOTTA, F/nuoli oikealle = TARUA, Esc/B = Takaisin missioihin,<br />Enter/R = uudelleensuorita missio
+</p>
       </div>
       <div id="feedbackBox" class="feedback hidden">
         <p id="feedbackTitle" class="feedback-title"></p>

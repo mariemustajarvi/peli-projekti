@@ -91,16 +91,18 @@ const questions = [
   }
 ];
 
+
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
+
 shuffle(questions);
 
 
-const ROUND_TIME = 15; // sekuntia
+const ROUND_TIME = 15; // sekuntia / kierros
 
 let currentIndex = 0;
 let correctCount = 0;
@@ -135,10 +137,10 @@ const resultPointsText = document.getElementById("resultPointsText");
 const resultEmoji = document.getElementById("resultEmoji");
 const retryBtn = document.getElementById("retryBtn");
 
+
 qTotalEl.textContent = questions.length.toString();
 correctCountEl.textContent = "0";
 
-// ----- ajastin -----
 
 function updateTimerUI() {
   const percent = (timeLeft / ROUND_TIME) * 100;
@@ -173,7 +175,6 @@ function startTimer() {
   }, 50);
 }
 
-// ----- kysymys -----
 
 function showQuestion(index) {
   const q = questions[index];
@@ -181,7 +182,7 @@ function showQuestion(index) {
   qIndexEl.textContent = (index + 1).toString();
   statementTextEl.textContent = q.text;
 
-  // nollaa palaute
+
   feedbackBox.classList.add("hidden");
   feedbackBox.classList.remove("correct", "wrong");
   feedbackTitle.textContent = "";
@@ -194,7 +195,6 @@ function showQuestion(index) {
   startTimer();
 }
 
-// ----- vastaus -----
 
 function endRound() {
   roundActive = false;
@@ -211,6 +211,9 @@ function handleAnswer(userSaysTrue) {
   const q = questions[currentIndex];
   const correct = userSaysTrue === q.isTrue;
 
+  feedbackBox.classList.remove("hidden");
+  feedbackBox.classList.remove("correct", "wrong");
+
   if (correct) {
     correctCount++;
     correctCountEl.textContent = correctCount.toString();
@@ -222,7 +225,7 @@ function handleAnswer(userSaysTrue) {
   }
 
   feedbackText.textContent = q.feedback;
-  feedbackBox.classList.remove("hidden");
+
 
   setTimeout(nextQuestion, 1500);
 }
@@ -230,14 +233,14 @@ function handleAnswer(userSaysTrue) {
 function handleTimeout() {
   endRound();
 
+  feedbackBox.classList.remove("hidden");
+  feedbackBox.classList.remove("correct", "wrong");
   feedbackBox.classList.add("wrong");
   feedbackTitle.textContent = "⏱ Aika loppui!";
   feedbackText.textContent = "Et saanut pistettä tästä analyysistä.";
-  feedbackBox.classList.remove("hidden");
 
   setTimeout(nextQuestion, 1000);
 }
-
 
 function nextQuestion() {
   currentIndex++;
@@ -248,11 +251,12 @@ function nextQuestion() {
   }
 }
 
+
 function finishGame() {
   roundActive = false;
   stopTimer();
 
-  container.classList.add("result-active"); 
+  container.classList.add("result-active");
   quizPanel.classList.add("hidden");
   resultScreen.classList.remove("hidden");
 
@@ -279,6 +283,42 @@ function finishGame() {
   const pointsPerCorrect = 15;
   const points = correctCount * pointsPerCorrect;
   resultPointsText.textContent = `+${points} pistettä`;
+
+
+  if (retryBtn) {
+    retryBtn.focus();
+  }
+}
+
+
+function initHighContrastToggle() {
+  const contrastToggle = document.getElementById('contrastToggle');
+  if (!contrastToggle) return;
+
+  const body = document.body;
+
+  body.classList.remove('high-contrast');
+  localStorage.removeItem('high_contrast_mode');
+
+  contrastToggle.addEventListener('click', function () {
+    body.classList.toggle('high-contrast');
+    const isHighContrast = body.classList.contains('high-contrast');
+
+    if (isHighContrast) {
+      contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
+      contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
+    } else {
+      contrastToggle.setAttribute('aria-label', 'Vaihda korkean kontrastin tilaan');
+      contrastToggle.setAttribute('title', 'Vaihda korkean kontrastin tilaan');
+    }
+  });
+}
+
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initHighContrastToggle);
+} else {
+  initHighContrastToggle();
 }
 
 function restartGame() {
@@ -300,6 +340,61 @@ function restartGame() {
 btnTrue.addEventListener("click", () => handleAnswer(true));
 btnFalse.addEventListener("click", () => handleAnswer(false));
 retryBtn.addEventListener("click", restartGame);
+
+
+
+document.addEventListener("keydown", (event) => {
+  const key = event.key;          // esim. "ArrowLeft", "Escape", "t"
+  const lower = key.toLowerCase();
+  const resultVisible = !resultScreen.classList.contains("hidden");
+
+  const handledKeys = [
+    "ArrowLeft",
+    "ArrowRight",
+    "Escape",
+    "Enter",
+    "t",
+    "f",
+    "r",
+    "b"
+  ];
+
+  if (handledKeys.includes(key) || handledKeys.includes(lower)) {
+    event.preventDefault();
+  }
+
+
+  if (!resultVisible) {
+    if (lower === "t" || key === "ArrowLeft") {
+      handleAnswer(true);
+      return;
+    }
+
+    if (lower === "f" || key === "ArrowRight") {
+      handleAnswer(false);
+      return;
+    }
+
+    if (key === "Escape" || lower === "b") {
+      window.location.href = "index.html";
+      return;
+    }
+
+    return;
+  }
+
+  if (resultVisible) {
+    if (lower === "r" || key === "Enter") {
+      restartGame();
+      return;
+    }
+
+    if (key === "Escape" || lower === "b") {
+      window.location.href = "index.html";
+      return;
+    }
+  }
+});
 
 
 showQuestion(currentIndex);
