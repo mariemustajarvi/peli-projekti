@@ -11,11 +11,18 @@
 <body class="level-page">
   <div class="container-backbtn">
     <a class="back-btn" href="index.html">← Takaisin missioihin</a>
+    <button
+      id="contrastToggle"
+      class="contrast-btn"
+      aria-label="Vaihda korkean kontrastin tilaan"
+      title="Vaihda korkean kontrastin tilaan">
+      ♿ Kontrasti
+    </button>
   </div>
   <main class="container level-main loading-box">
     <section class="panel" id="quizPanel">
       <header class="panel-header">
-        <div class="panel-title">⚡ UHKA-ANALYYSI: NOPEA REAGOINTI</div>
+        <div class="panel-title">⚡UHKA-ANALYYSI: NOPEA REAGOINTI</div>
         <div class="panel-sub">
           SKENAARIO <span id="qIndex">1</span> / <span id="qTotal">10</span>
           <span class="divider-small">|</span>
@@ -29,10 +36,14 @@
         <div class="divider-small"></div>
         <p class="scenario-text" id="scenarioText"></p>
       </div>
+
       <div class="answers">
         <button id="btnSafe" class="answer-btn safe">✅ TURVALLINEN</button>
         <button id="btnThreat" class="answer-btn threat">⚠️ UHKA!</button>
       </div>
+      <p class="controls-hint">
+        Näppäimet: T / ← = Turvallinen, U / → = Uhka, Esc / B = Takaisin missiolistaan, R / Enter = Uudelleensuorita tulosnäkymässä.
+      </p>
       <div id="feedbackSection" class="feedback-section hidden">
         <div id="feedbackBox" class="feedback-box">
           <p id="feedbackTitle" class="feedback-title"></p>

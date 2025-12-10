@@ -39,6 +39,9 @@ body {
   top: 20px;
   left: 20px;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .back-btn {
@@ -48,6 +51,21 @@ body {
   color: var(--color-primary);
   text-decoration: none;
   font-size: var(--font-xs);
+}
+
+.contrast-btn {
+  padding: 0.55rem 0.85rem;
+  font-size: var(--font-xs);
+  border-radius: 6px;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.contrast-btn:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
 }
 
 .panel-title {
@@ -60,7 +78,7 @@ body {
 .panel-sub {
   margin-top: 0.4rem;
   font-size: var(--font-sm);
-  color: #ffffff;
+  color: var(--color-primary);
 }
 
 .divider-small {
@@ -87,6 +105,7 @@ body {
 .scenario-text {
   margin: 0;
   font-size: var(--font-lg);
+  color: white;
 }
 
 /* vastausnapit */
@@ -118,11 +137,19 @@ body {
   color: white;
 }
 
-/* palaute */
+/* näppäinohjevihje */
+.controls-hint {
+  margin-top: 0.9rem;
+  font-size: var(--font-xs);
+  color: var(--color-primary);
+  opacity: 0.85;
+}
+
 .hidden {
   display: none;
 }
 
+/* palaute */
 .feedback-section {
   margin-top: 1.7rem;
 }
@@ -157,19 +184,18 @@ body {
 
 .tip-bar {
   margin-top: 1.7rem;
-  padding: 0.9rem 1.3rem;
+  padding: 0.4rem 1.3rem;
   border-radius: 8px;
   border: 1px solid rgba(0, 242, 255, 0.4);
   background-color: var(--color-bg);
-  font-size: var(--font-md);
-  color: #ffffff;
+  font-size: var(--font-sm);
+  color: var(--color-primary);
 }
 
 .result-screen {
   margin-top: 1.5rem;
   padding: 2.3rem 2rem;
   border-radius: 10px;
-
   border: none;
   box-shadow: none;
   background-color: var(--color-bg);
@@ -306,6 +332,22 @@ body {
     top: 100%;
     opacity: 0;
   }
+}
+
+/* KORKEAN KONTRASTIN TILA */
+body.high-contrast * {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+  box-shadow: none !important;
+}
+
+body.high-contrast button,
+body.high-contrast .answer-btn,
+body.high-contrast .result-btn,
+body.high-contrast .contrast-btn {
+  background: #fff !important;
+  color: #000 !important;
 }
 
 /* responsiivisuus */

@@ -3,81 +3,81 @@ const scenarios = [
     text: "Google Chrome päivitys viralliselta asetussivulta",
     isThreat: false,
     category: "Normaali",
-    rightMessage: "Tämä on TURVALLINEN - kategoria: xxx",
-    wrongMessage: "Tämä on TURVALLINEN - kategoria: xxx",
-    tip: "Google Chrome päivittyy sovelluksen omista asetuksista - tämä on oikea reitti"
+    rightMessage: "Tämä on TURVALLINEN \nGoogle Chrome päivittyy sovelluksen omista asetuksista - tämä on oikea reitti",
+    wrongMessage: "Tämä on TURVALLINEN \nGoogle Chrome päivittyy sovelluksen omista asetuksista - tämä on oikea reitti",
+    tip: "Luota vaistoihisi - jos jokin tuntuu oudolta, se todennäköisesti on sitä!"
   },
   {
     text: "Selaimesi on vanhentunut - lataa uusi versio tästä .exe-tiedostona",
     isThreat: true,
     category: "Korkea uhka",
-    rightMessage: "Tämä on UHKA – Kategoria: xxxx.",
-    wrongMessage: "Tämä on UHKA – Kategoria: xxxx.",
-    tip: "Selain EI koskaan jaa päivitystä satunnaisella latauslinkillä. Tämä on yleinen malware-ansoitus."
+    rightMessage: "Tämä on UHKA \nSelain EI koskaan jaa päivitystä satunnaisella latauslinkillä. Tämä on yleinen malware-ansoitus",
+    wrongMessage: "Tämä on UHKA \nSelain EI koskaan jaa päivitystä satunnaisella latauslinkillä. Tämä on yleinen malware-ansoitus",
+    tip: "Luota vaistoihisi - jos jokin tuntuu oudolta, se todennäköisesti on sitä!"
   },
   {
     text: " Steam lähettää ilmoituksen: 'Kirjatuminen uudelta laitteelta - oliko tämä sinä?'",
     isThreat: false,
     category: "Normaali",
-    rightMessage: "Tämä on TURVALLINEN - kategoria: xxx",
-    wrongMessage: "Tämä on TURVALLINEN - kategoria: xxx",
-    tip: "Steamin virallinen turvailmoitus näyttää yleensä tämän kysymyksen."
+    rightMessage: "Tämä on TURVALLINEN \nSteamin virallinen turvailmoitus näyttää yleensä tämän kysymyksen",
+    wrongMessage: "Tämä on TURVALLINEN \nSteamin virallinen turvailmoitus näyttää yleensä tämän kysymyksen",
+    tip: "Luota vaistoihisi - jos jokin tuntuu oudolta, se todennäköisesti on sitä!"
   },
   {
     text: "Discord Nitro -lahja tuntemattomasta linkistä",
     isThreat: true,
     category: "Korkea uhka",
-    rightMessage: "Tämä on UHKA – Kategoria: xxxx.",
-    wrongMessage: "Tämä on UHKA – Kategoria: xxxx.",
-    tip: "Ilmaiset Nitro-linkit ovat lähes aina huijaus, joka varastaa tilin"
+    rightMessage: "Tämä on UHKA \nIlmaiset Nitro-linkit ovat lähes aina huijaus, joka varastaa tilin",
+    wrongMessage: "Tämä on UHKA \nIlmaiset Nitro-linkit ovat lähes aina huijaus, joka varastaa tilin",
+    tip: "Luota vaistoihisi - jos jokin tuntuu oudolta, se todennäköisesti on sitä!"
   },
   {
     text: "Windows Defender ilmoitus: Troijalainen poistettu onnistuneesti",
     isThreat: false,
     category: "Keskitasoinen uhka",
-    rightMessage: "Tämä on TURVALLINEN - kategoria: xxx",
-    wrongMessage: "Tämä on TURVALLINEN - kategoria: xxx",
-    tip: "Windoes Defender antaa oikeita suojaviestejä järjestelmän omassa käyttöliittymässä, ei selaimessa."
+    rightMessage: "Tämä on TURVALLINEN \nWindows Defender antaa oikeita suojaviestejä järjestelmän omassa käyttöliittymässä, ei selaimessa",
+    wrongMessage: "Tämä on TURVALLINEN \nWindows Defender antaa oikeita suojaviestejä järjestelmän omassa käyttöliittymässä, ei selaimessa",
+    tip: "Luota vaistoihisi - jos jokin tuntuu oudolta, se todennäköisesti on sitä!"
   },
   {
     text: "Nettisivulle ilmestyy ponnahdus: 'Laitteesi on lukittu! Soita Microsoft-tukeen: +41....'",
     isThreat: true,
     category: "Korkea uhka",
-    rightMessage: "Tämä on UHKA – Kategoria: xxxx.",
-    wrongMessage: "Tämä on UHKA – Kategoria: xxxx.",
-    tip: "Microsoft EI koskaan pyydä soittamaan numeroon. Klassinen tech-support -huijaus."
+    rightMessage: "Tämä on UHKA\nMicrosoft EI koskaan pyydä soittamaan numeroon. Klassinen tech-support -huijaus",
+    wrongMessage: "Tämä on UHKA \nMicrosoft EI koskaan pyydä soittamaan numeroon. Klassinen tech-support -huijaus",
+    tip: "Luota vaistoihisi - jos jokin tuntuu oudolta, se todennäköisesti on sitä!"
   },
   {
     text: "WhatsAppissa kaveri lähettää viestin: 'Onko tämä sinä videolle?' + epäilyttävä linkki",
     isThreat: true,
     category: "Korkea uhka",
-    rightMessage: "Tämä on UHKA – Kategoria: xxxx.",
-    wrongMessage: "Tämä on UHKA – Kategoria: xxxx.",
-    tip: "Tili on näköisesti kaapattu ja linkki vie phishing-sivulle."
+    rightMessage: "Tämä on UHKA\nTili on näköisesti kaapattu ja linkki vie phishing-sivulle",
+    wrongMessage: "Tämä on UHKA\nTili on näköisesti kaapattu ja linkki vie phishing-sivulle",
+    tip: "Luota vaistoihisi - jos jokin tuntuu oudolta, se todennäköisesti on sitä!"
   },
   {
     text: "Sovellus pyytää luvan 'Päästä kaäsiksi koko mediasisältöösi ja kaikkiin tiedostoihin' vaikka se on taskulamppusovellus",
     isThreat: true,
     category: "Korkea uhka",
-    rightMessage: "Tämä on UHKA – Kategoria: xxxx.",
-    wrongMessage: "Tämä on UHKA – Kategoria: xxxx.",
-    tip: "Lupa ei vastaa sovelluksen tarkoitusta --> viittaa väärinkäyttöön"
+    rightMessage: "Tämä on UHKA\nLupa ei vastaa sovelluksen tarkoitusta --> viittaa väärinkäyttöön",
+    wrongMessage: "Tämä on UHKA\nLupa ei vastaa sovelluksen tarkoitusta --> viittaa väärinkäyttöön",
+    tip: "Luota vaistoihisi - jos jokin tuntuu oudolta, se todennäköisesti on sitä!"
   },
   {
     text: "Windows Defender ilmoitus: 'Troijalainen poistettu onnistuneesti'",
     isThreat: false,
     category: "Korkea uhka",
-    rightMessage: "Tämä on TURVALLINEN - kategoria: xxx",
-    wrongMessage: "Tämä on TURVALLINEN - kategoria: xxx",
-    tip: "Windows Defender antaa oikeita suojaviestejä järjestelmän omassa käyttöliittymässä, ei selaimessa."
+    rightMessage: "Tämä on TURVALLINEN\nWindows Defender antaa oikeita suojaviestejä järjestelmän omassa käyttöliittymässä, ei selaimessa",
+    wrongMessage: "Tämä on TURVALLINEN\nWindows Defender antaa oikeita suojaviestejä järjestelmän omassa käyttöliittymässä, ei selaimessa",
+    tip: "Luota vaistoihisi - jos jokin tuntuu oudolta, se todennäköisesti on sitä!"
   },
   {
     text: "Opettajan lähettämä sähköposti, jossa on liitteenä PDF-tehtävä",
     isThreat: false,
     category: "Normaali",
-    rightMessage: "Tämä on TURVALLINEN - kategoria: xxx",
-    wrongMessage: "Tämä on TURVALLINEN - kategoria: xxx",
-    tip: "Tarkista silti aina, että liitteet tulevat odotetuilta henkilöiltä."
+    rightMessage: "Tämä on TURVALLINEN\nTarkista silti aina, että liitteet tulevat odotetuilta henkilöiltä",
+    wrongMessage: "Tämä on TURVALLINEN\nTarkista silti aina, että liitteet tulevat odotetuilta henkilöiltä",
+    tip: "Luota vaistoihisi - jos jokin tuntuu oudolta, se todennäköisesti on sitä!"
   }
 ];
 
@@ -116,13 +116,15 @@ const resultPointsText = document.getElementById("resultPointsText");
 const resultEmoji = document.getElementById("resultEmoji");
 const retryBtn = document.getElementById("retryBtn");
 
-// yläosan numerot
+
 qTotalEl.textContent = scenarios.length.toString();
 correctCountEl.textContent = "0";
 answeredCountEl.textContent = "0";
 lastTimeEl.textContent = "–";
 
-// ----- funktiot -----
+let nextTimeoutId = null;
+
+
 function showScenario(index) {
   const s = scenarios[index];
   scenarioTextEl.textContent = s.text;
@@ -130,25 +132,32 @@ function showScenario(index) {
 
   qIndexEl.textContent = index + 1;
 
-  // resetoi palaute
   feedbackSection.classList.add("hidden");
   feedbackBox.classList.remove("correct", "wrong");
   feedbackTitle.textContent = "";
   feedbackText.textContent = "";
 
-  // aktivoi napit
   btnSafe.disabled = false;
   btnThreat.disabled = false;
 
-  // aloitt ajastin
+  btnSafe.focus();
+
   questionStartTime = performance.now();
 }
 
+function clearNextTimeout() {
+  if (nextTimeoutId !== null) {
+    clearTimeout(nextTimeoutId);
+    nextTimeoutId = null;
+  }
+}
+
 function handleAnswer(isThreatAnswer) {
+  if (btnSafe.disabled && btnThreat.disabled) return;
+
   const s = scenarios[currentIndex];
   const correct = isThreatAnswer === s.isThreat;
 
-  // reaktioaika
   const endTime = performance.now();
   const seconds = (endTime - questionStartTime) / 1000;
   const secondsFixed = seconds.toFixed(1);
@@ -160,12 +169,13 @@ function handleAnswer(isThreatAnswer) {
   answeredCount++;
   answeredCountEl.textContent = answeredCount.toString();
 
+  feedbackBox.classList.remove("correct", "wrong");
+
   if (correct) {
     correctCount++;
     points += pointsPerCorrect;
     correctCountEl.textContent = correctCount.toString();
 
-    feedbackBox.classList.remove("wrong");
     feedbackBox.classList.add("correct");
     feedbackTitle.textContent = "✅ Oikein!";
     feedbackText.innerHTML =
@@ -174,7 +184,6 @@ function handleAnswer(isThreatAnswer) {
       secondsFixed +
       "s";
   } else {
-    feedbackBox.classList.remove("correct");
     feedbackBox.classList.add("wrong");
     feedbackTitle.textContent = "❌ Ei aivan!";
     feedbackText.innerHTML =
@@ -186,11 +195,12 @@ function handleAnswer(isThreatAnswer) {
 
   feedbackSection.classList.remove("hidden");
 
- 
+  clearNextTimeout();
+
   if (currentIndex >= scenarios.length - 1) {
-    setTimeout(finishGame, 1800);
+    nextTimeoutId = setTimeout(finishGame, 1800);
   } else {
-    setTimeout(() => {
+    nextTimeoutId = setTimeout(() => {
       currentIndex++;
       showScenario(currentIndex);
     }, 1800);
@@ -224,9 +234,13 @@ function finishGame() {
   resultComment.textContent = comment;
   resultEmoji.textContent = emoji;
   resultPointsText.textContent = `+${points} pistettä`;
+
+  retryBtn.focus();
 }
 
 function restartGame() {
+  clearNextTimeout();
+
   currentIndex = 0;
   correctCount = 0;
   answeredCount = 0;
@@ -242,10 +256,98 @@ function restartGame() {
   showScenario(currentIndex);
 }
 
-
 btnSafe.addEventListener("click", () => handleAnswer(false));
 btnThreat.addEventListener("click", () => handleAnswer(true));
 retryBtn.addEventListener("click", restartGame);
 
+// ----- näppäimistöohjaus -----
+// Kysymys aktiivinen (napit eivät disabloitu):
+//   T / ← = TURVALLINEN
+//   U / → = UHKA
+//
+// Aina:
+//   Esc / B = Takaisin missiolistaan
+//
+// Tulosnäyttö näkyvissä:
+//   R / Enter = Uudelleensuorita missio
+//
+document.addEventListener("keydown", (event) => {
+  const key = event.key;
+  const lower = key.toLowerCase();
 
-showScenario(currentIndex);
+  const quizVisible = !quizPanel.classList.contains("hidden");
+  const resultVisible = !resultScreen.classList.contains("hidden");
+
+  const handledKeys = [
+    "ArrowLeft",
+    "ArrowRight",
+    "Escape",
+    "Enter",
+    "t",
+    "u",
+    "r",
+    "b"
+  ];
+  if (handledKeys.includes(key) || handledKeys.includes(lower)) {
+    event.preventDefault();
+  }
+
+  if (key === "Escape" || lower === "b") {
+    window.location.href = "index.html";
+    return;
+  }
+
+  if (quizVisible) {
+    if (!btnSafe.disabled && !btnThreat.disabled) {
+      if (lower === "t" || key === "ArrowLeft") {
+        handleAnswer(false); // TURVALLINEN
+        return;
+      }
+      if (lower === "u" || key === "ArrowRight") {
+        handleAnswer(true); // UHKA
+        return;
+      }
+    }
+    return;
+  }
+
+  if (resultVisible) {
+    if (lower === "r" || key === "Enter") {
+      restartGame();
+      return;
+    }
+  }
+});
+
+function initHighContrastToggle() {
+  const contrastToggle = document.getElementById("contrastToggle");
+  if (!contrastToggle) return;
+
+  const body = document.body;
+
+  body.classList.remove("high-contrast");
+  localStorage.removeItem("high_contrast_mode");
+
+  contrastToggle.addEventListener("click", function () {
+    body.classList.toggle("high-contrast");
+    const isHighContrast = body.classList.contains("high-contrast");
+
+    if (isHighContrast) {
+      contrastToggle.setAttribute("aria-label", "Vaihda takaisin normaaliin tilaan");
+      contrastToggle.setAttribute("title", "Vaihda takaisin normaaliin tilaan");
+    } else {
+      contrastToggle.setAttribute("aria-label", "Vaihda korkean kontrastin tilaan");
+      contrastToggle.setAttribute("title", "Vaihda korkean kontrastin tilaan");
+    }
+  });
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => {
+    initHighContrastToggle();
+    showScenario(currentIndex);
+  });
+} else {
+  initHighContrastToggle();
+  showScenario(currentIndex);
+}
