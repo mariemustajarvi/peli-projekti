@@ -247,3 +247,56 @@ body.high-contrast .completion-btn {
 body.high-contrast .completion-divider {
   border-top: 2px solid #ffffff;
 }
+
+/* Login/Register page high contrast */
+body.high-contrast .login-panel {
+  background: #000000 !important;
+  border: 3px solid #ffffff !important;
+  box-shadow: none !important;
+}
+
+body.high-contrast .login-title,
+body.high-contrast .login-subtitle {
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+body.high-contrast .form-label {
+  color: #ffffff !important;
+}
+
+body.high-contrast .form-input {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+body.high-contrast .login-btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 3px solid #000000 !important;
+  box-shadow: none !important;
+}
+
+body.high-contrast .google-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: none !important;
+}
+
+body.high-contrast .google-btn:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+body.high-contrast .divider-text,
+body.high-contrast .register-link__text,
+body.high-contrast .back-link__text {
+  color: #ffffff !important;
+}
+
+body.high-contrast .divider::before {
+  background: #ffffff !important;
+}
+
