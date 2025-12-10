@@ -197,7 +197,8 @@
         const button = document.createElement('button');
         button.className = 'option';
         button.dataset.optId = option.id;
-        button.textContent = option.id + '. ' + option.text;
+        button.innerHTML = '<span style="color: #00f382; font-weight: 800;" aria-hidden="true">' + option.id + '.</span> ' + option.text;
+        button.setAttribute('aria-label', 'Vaihtoehto ' + option.id + ': ' + option.text);
         optionsEl.appendChild(button);
       });
 
@@ -244,10 +245,10 @@
         '</div>' +
         '</div>' +
         '<div class="completion-buttons">' +
-        '<a href="outro.html" class="next-btn completion-btn" aria-label="Jatka outroon (Paina Enter)">JATKA →</a>' +
+        '<a href="outro.html" class="next-btn completion-btn" aria-label="Missio suoritettu (Paina Enter)">MISSIO SUORITETTU! 🎉</a>' +
         '<button id="restartBtn" class="next-btn completion-btn" aria-label="' + ui.restart + ' (Paina R)">' + ui.restart + '</button>' +
         '</div>' +
-        '<p class="keyboard-hint" style="text-align: center; margin-top: 15px; font-size: 0.9rem; opacity: 0.7;">💡 Vinkki: Pikanäppäimet: R = Uudelleen | Enter = Jatka</p>' +
+        '<p class="keyboard-hint" style="text-align: center; margin: 15px auto 0; font-size: 0.9rem; opacity: 0.7; max-width: fit-content;">💡 Vinkki: Pikanäppäimet: R = Uudelleen | Enter = Missio suoritettu</p>' +
         '</div>';
 
       document.getElementById('restartBtn').addEventListener('click', function() {
@@ -366,7 +367,7 @@
     // vinkki tekstit
     const permanentHint = document.createElement('p');
     permanentHint.className = 'keyboard-hint-permanent';
-    permanentHint.style.cssText = 'text-align: center; margin-top: 15px; font-size: 0.9rem; opacity: 0.7;';
+    permanentHint.style.cssText = 'text-align: center; margin: 15px auto 0; font-size: 0.9rem; opacity: 0.7; max-width: fit-content;';
     permanentHint.textContent = '💡 Vinkki: Pikanäppäimet: A-D / 1-4 = Valitse vastaus | Enter/Välilyönti = Seuraava';
     infoEl.parentNode.insertBefore(permanentHint, infoEl.nextSibling);
     
