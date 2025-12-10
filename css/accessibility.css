@@ -226,9 +226,22 @@ body.high-contrast .completion-card {
 
 body.high-contrast .completion-title,
 body.high-contrast .completion-score,
-body.high-contrast .completion-message,
-body.high-contrast .completion-points {
+body.high-contrast .completion-message {
   color: #ffffff;
+}
+
+body.high-contrast .completion-points {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+  box-shadow: none !important;
+}
+
+body.high-contrast .completion-btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+  box-shadow: none !important;
 }
 
 body.high-contrast .completion-divider {
