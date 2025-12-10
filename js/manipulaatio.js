@@ -271,14 +271,14 @@
         location.reload();
       });
 
-      // Keyboard navigation for completion screen
+      // Näppäimistön navigointi valmistumissivulla
       function handleCompletionKeys(e) {
-        // R key - restart quiz
+        // R key - uudelleen suorita
         if (e.key === 'r' || e.key === 'R') {
           e.preventDefault();
           location.reload();
         }
-        // Enter or Space - back to index
+        // Enterillä etusivulle
         else if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           window.location.href = 'index.html';
@@ -323,7 +323,7 @@
       scoreEl.textContent = playerScore;
       nextBtn.disabled = false;
       
-      // Change button text if this is the last question
+      // teksti vaihtuu kun on vika kyssäri
       if (currentQuestion === totalQuestions - 1) {
         nextBtn.textContent = 'VALMIS 🎉';
       } else {
@@ -386,7 +386,7 @@
     // Setup
     nextBtn.textContent = ui.nextBtn;
     
-    // Add permanent keyboard hint after info box
+    // vinkki tekstit
     const permanentHint = document.createElement('p');
     permanentHint.className = 'keyboard-hint-permanent';
     permanentHint.style.cssText = 'text-align: center; margin-top: 15px; font-size: 0.9rem; opacity: 0.7;';
