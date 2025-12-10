@@ -36,6 +36,22 @@
   box-sizing: border-box;
 }
 
+<<<<<<< HEAD
+=======
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+>>>>>>> quiz-peli
 body {
   margin: 0;
   min-height: 100vh;
@@ -46,6 +62,45 @@ body {
     linear-gradient(to right, var(--color-muted-transparent) 1px, transparent 1px),
     linear-gradient(to bottom, var(--color-muted-transparent) 1px, transparent 1px);
   background-size: 35px 35px;
+<<<<<<< HEAD
+=======
+  position: relative;
+}
+
+/* Drop line animation */
+body::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-muted),
+    transparent
+  );
+  animation: drop-line 6.0s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes drop-line {
+  0% {
+    top: -5%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+>>>>>>> quiz-peli
 }
 
 
@@ -66,7 +121,17 @@ body {
     width: 200px;  
     height: auto;
     margin-top: 70px; 
+<<<<<<< HEAD
     margin-left: 50px;  
+=======
+    margin-left: 50px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#logokuva:hover {
+    transform: scale(1.05);
+>>>>>>> quiz-peli
 }
 
 /* Mobiili (pienet näytöt) alle 480px */
