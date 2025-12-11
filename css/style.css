@@ -29,6 +29,7 @@
 }
 
 /* perusasetukset */
+
 *,
 *::before,
 *::after {
@@ -214,9 +215,14 @@ body {
   margin-top: 2rem;
 }
 
-/* AGENTTIPANEELI */
+/* statsit */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
 
-.agent-panel {
+.stat-card {
   background: var(--color-card-bg);
   border-radius: var(--radius-lg);
   border: 1px solid rgba(7, 219, 208, 0.6);
@@ -316,50 +322,13 @@ body {
   font-weight: 700;
 }
 
-.agent-panel__next-rank {
-  margin-top: var(--space-md);
-  padding: var(--space-sm);
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(7, 219, 208, 0.35);
-  background: rgba(0, 0, 0, 0.4);
-}
-
-.agent-panel__next-header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: var(--space-md);
-  margin-bottom: var(--space-xs);
-  font-size: var(--font-xs);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-.agent-panel__next-label {
-  color: var(--color-primary);
-}
-
-.agent-progress-bar {
-  position: relative;
-  height: 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(7, 219, 208, 0.4);
-  background: rgba(0, 0, 0, 0.6);
-  overflow: hidden;
-}
-
-.agent-progress-bar__fill {
-  position: absolute;
-  inset: 0;
-  width: 0%; /* alkaa nollasta, päivitetään JS:llä */
-  background: linear-gradient(to right, #00f2ff, #00f382);
-  border-radius: inherit;
-}
-
+/* erotinviiva */
 .divider {
   margin: 1.7rem 0 1.2rem;
   border-bottom: 2px solid rgba(7, 219, 208, 0.35);
 }
+
+/* PELIT */
 
 .game-card.loading-box {
   position: relative;
@@ -509,7 +478,6 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.7);
 }
 
-/* responsiivisuusasetukset */
 
 @media (max-width: 800px) {
   .agent-panel__header {
