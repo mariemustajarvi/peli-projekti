@@ -64,15 +64,15 @@
   // Käynnistetään toinen teksti vasta kun ensimmäinen on valmis
   delayedStart = setTimeout(kirjoita2, teksti1.length * 180 + 500);
 
-  // Skip animation on click
+  // skippaa animaatio kun klikkaa taustaa
   document.body.addEventListener('click', function() {
     if (isTyping) {
-      // Clear all timeouts
+      // tyhjennä ajastimet
       clearTimeout(timeout1);
       clearTimeout(timeout2);
       clearTimeout(delayedStart);
       
-      // Show all text immediately
+      // näytä kaikki tekstit heti
       element1.innerHTML = teksti1;
       element1.style.borderRight = "none";
       element2.innerHTML = teksti2;
@@ -80,7 +80,7 @@
       
       isTyping = false;
       
-      // Show logo immediately
+      // näytä logo heti
       const logo = document.getElementById("logokuva");
       if (logo) {
         clearTimeout(logoTimeout);
@@ -89,7 +89,7 @@
     }
   });
 
-  // ESC key navigation to return to index
+  // ESC pääsee ko
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       window.location.href = 'index.html';
