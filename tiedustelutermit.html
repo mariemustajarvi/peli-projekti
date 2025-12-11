@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Missio — Tiedustelutermit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/accessibility.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/tiedustelutermit.css">
+</head>
+<body class="level-page">
+  <div class="container container-top">
+    <div class="accessibility-controls">
+      <button id="contrastToggle" class="contrast-toggle" aria-label="Vaihda korkean kontrastin tilaan">
+        <span class="toggle-icon">◐</span>
+      </button>
+    </div>
+    <a class="back-btn" href="index.html">← Takaisin missioihin</a>
+  </div>
+
+  <main id="main-content" class="container level-main">
+    <section class="panel">
+      <header class="panel-header">
+        <h1 class="panel-title">🧩 TIEDUSTELUTERMIT</h1>
+        <div class="panel-sub">
+          Yhdistä oikea termi sen määritelmään.
+          <span class="divider-small">|</span>
+          OIKEIN: <span id="score">0</span> / <span id="maxScore">5</span>
+        </div>
+      </header>
+
+      <div class="panel-body" id="gameArea">
+        <p class="instruction-text">
+          Raahaa termi (vasemmalta) oikean selityksen päälle (oikealle).
+        </p>
+
+        <div class="matching-game">
+          <div class="terms-column" id="termsList"></div>
+          <div class="definitions-column" id="definitionsList"></div>
+        </div>
+
+        <div id="feedback" class="feedback-box hidden"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./js/accessibility.js"></script>
+  <script src="./js/tiedustelutermit.js"></script>
+</body>
+</html>
