@@ -98,8 +98,8 @@ body {
 }
 
 .body-text {
-    font-size: var(--font-md);
-    color: white;
+    font-size: var(--font-sm);
+    color:  var(--color-primary);
 }
 
 .answers {
@@ -134,7 +134,6 @@ button {
     color: white;
 }
 
-/* Näppäinohjevihje */
 .controls-hint {
   margin-top: 0.9rem;
   font-size: var(--font-xs);

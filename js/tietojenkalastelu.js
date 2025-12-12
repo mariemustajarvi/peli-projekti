@@ -8,6 +8,7 @@ const messages = [
       "Tämä viesti on tietojenkalasteluyritys!\n" +
       "\n" +
       "🚩 Varoitusmerkit\n" +
+        "\n" +
       "• Väärin kirjoitettu verkkotunnus (amaz0n amazon-sijaan)\n" +
       "• Luo kiireellisyyttä ja pelkoa\n" +
       "• Pyytää klikkaamaan linkkiä\n" +
@@ -16,6 +17,7 @@ const messages = [
       "Tämä viesti on tietojenkalasteluyritys!\n" +
       "\n" +
       "🚩 Varoitusmerkit:\n" +
+            "\n" +
       "• Väärin kirjoitettu verkkotunnus (amaz0n amazon-sijaan)\n" +
       "• Luo kiireellisyyttä ja pelkoa\n" +
       "• Pyytää klikkaamaan linkkiä\n" +
@@ -31,14 +33,16 @@ const messages = [
       "Tämä viesti on tietojenkalasteluyritys!\n" +
       "\n" +
       "🚩 Varoitusmerkit\n" +
+            "\n" +
       "• Käyttää numeroa '1' kirjaimen 'l' sijasta paypal-sanassa\n" +
       "• Pyytää salasanaa ja turvallisuuskysymyksiä\n" +
       "• Mainitsee pelottavan sijainnin luodakseen pelkoa\n" +
       "• Oikeat yritykset eivät koskaan kysy salasanoja sähköpostitse",
     wrongExplanation:
-      "Tämä viesti on tietojenkalasteluyritys!n" +
+      "Tämä viesti on tietojenkalasteluyritys!" +
       "\n" +
       "🚩 Varoitusmerkit\n" +
+            "\n" +
       "• Käyttää numeroa '1' kirjaimen 'l' sijasta paypal-sanassa\n" +
       "• Pyytää salasanaa ja turvallisuuskysymyksiä\n" +
       "• Mainitsee pelottavan sijainnin luodakseen pelkoa\n" +
@@ -54,6 +58,7 @@ const messages = [
       "Tämä viesti on tietojenkalasteluyritys!\n" +
       "\n" +
       "🚩 Varoitusmerkit\n" +
+            "\n" +
       "• Luo väärää kiireellisyyttä (1 tunti)\n" +
       "• Epäilyttävä linkin verkkotunnus (.ru)\n" +
       "• Liian hyvää ollakseen totta (ilmainen premium)\n" +
@@ -62,6 +67,7 @@ const messages = [
       "Tämä viesti on tietojenkalasteluyritys!\n" +
       "\n" +
       "🚩 Varoitusmerkit\n" +
+            "\n" +
       "• Luo väärää kiireellisyyttä (1 tunti)\n" +
       "• Epäilyttävä linkin verkkotunnus (.ru)\n" +
       "• Liian hyvää ollakseen totta (ilmainen premium)\n" +
@@ -77,6 +83,7 @@ const messages = [
       "Tämä viesti on turvallinen!\n" +
       "\n" +
       "✅ Turvallisuusindikaattorit:\n" +
+            "\n" +
       "• Aito verkkotunnus (github.com)\n" +
       "• Normaali ilmoitus ilman kiireellistä toimintaa\n" +
       "• Ei pyyntöjä henkilökohtaisista tiedoista\n" +
@@ -85,6 +92,7 @@ const messages = [
       "Tämä viesti on oikeasti turvallinen!\n" +
       "\n" +
       "✅ Turvallisuusindikaattorit:\n" +
+            "\n" +
       "• Aito verkkotunnus (github.com)\n" +
       "• Normaali ilmoitus ilman kiireellistä toimintaa\n" +
       "• Ei pyyntöjä henkilökohtaisista tiedoista\n" +
@@ -100,6 +108,7 @@ const messages = [
       "Tämä viesti on turvallinen!\n" +
       "\n" +
       "✅ Turvallisuusindikaattorit:\n" +
+            "\n" +
       "• Koulun verkkotunnus (.fi)\n" +
       "• Personoitu nimellä\n" +
       "• Normaali kouluviestintä\n" +
@@ -108,6 +117,7 @@ const messages = [
       "Tämä viesti on oikeasti turvallinen!\n" +
       "\n" +
       "✅ Turvallisuusindikaattorit:\n" +
+            "\n" +
       "• Koulun verkkotunnus (.fi)\n" +
       "• Personoitu nimellä\n" +
       "• Normaali kouluviestintä\n" +
@@ -123,6 +133,7 @@ const messages = [
       "Tämä viesti on tietojenkalasteluyritys!\n" +
       "\n" +
       "🚩 Varoitusmerkit\n" +
+            "\n" +
       "• Epäilyttävä verkkotunnus (ei virallinen yritys)\n" +
       "• Pyytää henkilötunnusta ja pankkitietoja\n" +
       "• Luo pelkoa sakkoista\n" +
@@ -132,6 +143,7 @@ const messages = [
       "Tämä viesti on tietojenkalasteluyritys!\n" +
       "\n" +
       "🚩 Varoitusmerkit\n" +
+            "\n" +
       "• Epäilyttävä verkkotunnus (ei virallinen yritys)\n" +
       "• Pyytää henkilötunnusta ja pankkitietoja\n" +
       "• Luo pelkoa sakkoista\n" +
