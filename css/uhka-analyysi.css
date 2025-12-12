@@ -104,7 +104,7 @@ body {
 
 .scenario-text {
   margin: 0;
-  font-size: var(--font-lg);
+  font-size: var(--font-md);
   color: white;
 }
 
