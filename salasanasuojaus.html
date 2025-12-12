@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Missio — Salasanan vahvuus</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/salasanasuojaus.css">
+</head>
+<body class="level-page">
+  <div class="container-backbtn">
+    <a class="back-btn" href="index.html">← Takaisin missioihin</a>
+    <button
+      id="contrastToggle"
+      class="contrast-btn"
+      aria-label="Vaihda korkean kontrastin tilaan"
+      title="Vaihda korkean kontrastin tilaan">
+      ♿ Kontrasti
+    </button>
+  </div>
+  <main class="container level-main loading-box">
+    <section class="panel" id="pwPanel">
+      <header class="panel-header">
+        <div class="panel-title">🔐 SALASANAN VAHVUUDEN TARKISTAJA</div>
+        <div class="panel-sub">
+          HAASTE <span id="challengeIndex">1</span> / <span id="challengeTotal">3</span>
+        </div>
+      </header>
+      <section class="pw-task">
+        <div class="pw-task-box">
+          <div class="pw-task-title-row">
+            <span class="pw-task-icon" id="taskIcon">🧪</span>
+            <h2 class="pw-task-title" id="taskTitle">
+              Tehtävä 1: Tunnista heikko salasana
+            </h2>
+          </div>
+          <p class="pw-task-text" id="taskText">
+            Luo salasana joka murttuu helposti. Testaa järjestelmän haavoittuvuutta.
+          </p>
+        </div>
+      </section>
+      <section class="pw-input-section">
+        <label class="pw-label" for="passwordInput">Kirjoita salasanasi:</label>
+        <div class="pw-input-row">
+          <input
+            id="passwordInput"
+            type="password"
+            class="pw-input"
+            placeholder="Syötä salasana..."
+            autocomplete="off"
+          />
+          <button
+            type="button"
+            class="pw-eye-btn"
+            id="toggleVisibilityBtn"
+            aria-label="Näytä tai piilota salasana">
+            👁
+          </button>
+        </div>
+      </section>
+      <section class="pw-strength-section hidden" id="strengthSection">
+        <div class="pw-strength-header">
+          <span>Vahvuus:</span>
+          <span class="pw-strength-label pw-strength-label--weak" id="strengthLabel">
+            Heikko
+          </span>
+        </div>
+        <div class="pw-strength-bar">
+          <div class="pw-strength-bar-fill" id="strengthFill"></div>
+        </div>
+        <div class="pw-strength-meta">
+          <span id="crackTimeText">Murtamisaika: –</span>
+        </div>
+        <div class="pw-strength-columns">
+          <div>
+            <h3 class="pw-strength-col-title pw-strength-col-title--good">
+              ✓ Vahvuudet:
+            </h3>
+            <ul class="pw-strength-list" id="strengthListGood"></ul>
+          </div>
+          <div>
+            <h3 class="pw-strength-col-title pw-strength-col-title--bad">
+              ✕ Ongelmat:
+            </h3>
+            <ul class="pw-strength-list" id="strengthListBad"></ul>
+          </div>
+        </div>
+      </section>
+      <button
+        id="nextChallengeBtn"
+        class="pw-primary-btn"
+        type="button"
+      >
+        Seuraava haaste →
+      </button>
+      <p class="controls-hint">
+        Näppäimet: Enter = Seuraava haaste, Esc / B = Takaisin missiolistaan.
+      </p>
+    </section>
+    <section id="resultScreen" class="result-screen hidden">
+      <div class="result-trophy">🏆</div>
+      <h1 class="result-title">MISSIO SUORITETTU!</h1>
+      <div class="result-card">
+        <div class="result-emoji" id="resultEmoji">👏</div>
+        <p class="result-score" id="resultScoreText">0 / 3 oikein</p>
+        <p class="result-comment" id="resultComment">Hyvää työtä, agentti!</p>
+        <hr class="result-divider">
+        <button class="result-points-btn">
+          ✧ <span id="resultPointsText">+0 pistettä</span>
+        </button>
+      </div>
+      <div class="pw-result-list">
+        <article class="pw-result-card">
+          <h2 class="pw-result-card-title">Tehtävä 1: Heikko salasana</h2>
+          <p class="pw-result-card-pw">
+            Salasana: <span id="resultPw1">–</span>
+          </p>
+          <p class="pw-result-card-summary" id="resultSummary1"></p>
+        </article>
+        <article class="pw-result-card">
+          <h2 class="pw-result-card-title">Tehtävä 2: Keskitason salasana</h2>
+          <p class="pw-result-card-pw">
+            Salasana: <span id="resultPw2">–</span>
+          </p>
+          <p class="pw-result-card-summary" id="resultSummary2"></p>
+        </article>
+        <article class="pw-result-card">
+          <h2 class="pw-result-card-title">Tehtävä 3: Agenttitason salasana</h2>
+          <p class="pw-result-card-pw">
+            Salasana: <span id="resultPw3">–</span>
+          </p>
+          <p class="pw-result-card-summary" id="resultSummary3"></p>
+        </article>
+      </div>
+      <div class="result-actions">
+        <a href="index.html" class="result-btn result-btn-primary">
+          TAKAISIN MISSIOLISTAAN
+        </a>
+        <button id="retryBtn" class="result-btn result-btn-ghost">
+          UUDELLEENSUORITA MISSIO
+        </button>
+      </div>
+    </section>
+  </main>
+  <script src="./js/salasanasuojaus.js"></script>
+</body>
+</html>
