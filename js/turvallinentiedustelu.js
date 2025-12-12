@@ -21,10 +21,8 @@ const sites = [
   {
     url: "http://amaz0n-deals.biz/login",
     isSafe: false,
-    rightExplanation:
-      "Tämä verkkosivusto on epäturvallinen!",
-    wrongExplanation:
-      "Tämä sivu on itse asiassa vaarallinen huijaussivu.",
+    rightExplanation: "Tämä verkkosivusto on epäturvallinen!",
+    wrongExplanation: "Tämä sivu on itse asiassa vaarallinen huijaussivu.",
     indicators: [
       "⚠️ HTTP (ei turvallinen)",
       "❌ Väärin kirjoitettu verkkotunnus (amaz0n)",
@@ -41,10 +39,8 @@ const sites = [
   {
     url: "https://www.wikipedia.org",
     isSafe: true,
-    rightExplanation:
-      "Tämä verkkosivusto on turvallinen!",
-    wrongExplanation:
-      "Tämä sivu on turvallinen.",
+    rightExplanation: "Tämä verkkosivusto on turvallinen!",
+    wrongExplanation: "Tämä sivu on turvallinen.",
     indicators: [
       "🔒 HTTPS-yhteys",
       "✅ Tunnettu verkkotunnus",
@@ -59,10 +55,8 @@ const sites = [
   {
     url: "http://free-iphones-now.ru/claim",
     isSafe: false,
-    rightExplanation:
-      "Tämä verkkosivusto on epäturvallinen!",
-    wrongExplanation:
-      "Tämä verkkosivusto on epäturvallinen!",
+    rightExplanation: "Tämä verkkosivusto on epäturvallinen!",
+    wrongExplanation: "Tämä verkkosivusto on epäturvallinen!",
     indicators: [
       "⚠️ HTTP (ei turvallinen)",
       "❌ Liian hyvältä kuulostaakseen totta -tarjous",
@@ -79,10 +73,8 @@ const sites = [
   {
     url: "https://bank0famerica.com/login",
     isSafe: false,
-    rightExplanation:
-      "Tämä verkkosivusto on epäturvallinen!",
-    wrongExplanation:
-      "Tämä verkkosivusto on epäturvallinen!",
+    rightExplanation: "Tämä verkkosivusto on epäturvallinen!",
+    wrongExplanation: "Tämä verkkosivusto on epäturvallinen!",
     indicators: [
       "🔒 On HTTPS mutta...",
       "❌ Käyttää nollaa 'o':n sijaan",
@@ -99,10 +91,8 @@ const sites = [
   {
     url: "https://www.youtube.com",
     isSafe: true,
-    rightExplanation:
-      "Tämä verkkosivusto on turvallinen!",
-    wrongExplanation:
-      "Tämä sivu on turvallinen.",
+    rightExplanation: "Tämä verkkosivusto on turvallinen!",
+    wrongExplanation: "Tämä sivu on turvallinen.",
     indicators: [
       "🔒 HTTPS-yhteys",
       "✅ Aito Google-palvelu",
@@ -117,11 +107,12 @@ const sites = [
 ];
 
 
+const MAX_POINTS = 200;
+const pointsPerCorrect = Math.floor(MAX_POINTS / sites.length); 
+const computedMax = sites.length * pointsPerCorrect;           
 let currentIndex = 0;
 let correctCount = 0;
 let points = 0;
-const pointsPerCorrect = 25;
-const maxPoints = sites.length * pointsPerCorrect;
 
 
 const qIndexEl = document.getElementById("qIndex");
@@ -150,16 +141,15 @@ const resultPointsText = document.getElementById("resultPointsText");
 const resultEmoji = document.getElementById("resultEmoji");
 const retryBtn = document.getElementById("retryBtn");
 
-
-qTotalEl.textContent = sites.length;
-maxPointsEl.textContent = maxPoints.toString();
-pointsEl.textContent = points.toString();
+qTotalEl.textContent = sites.length.toString();
+maxPointsEl.textContent = MAX_POINTS.toString();
+pointsEl.textContent = "0";
 
 
 function showSite(index) {
   const site = sites[index];
   siteUrlEl.textContent = site.url;
-  qIndexEl.textContent = index + 1;
+  qIndexEl.textContent = (index + 1).toString();
 
   btnSafe.disabled = false;
   btnUnsafe.disabled = false;
@@ -175,7 +165,6 @@ function showSite(index) {
   btnSafe.focus();
 }
 
-
 function handleAnswer(isSafeAnswer) {
   if (btnSafe.disabled && btnUnsafe.disabled) return;
 
@@ -189,7 +178,14 @@ function handleAnswer(isSafeAnswer) {
 
   if (correct) {
     correctCount++;
+
+
     points += pointsPerCorrect;
+
+    if (currentIndex === sites.length - 1 && correctCount === sites.length) {
+      points = MAX_POINTS;
+    }
+
     pointsEl.textContent = points.toString();
 
     feedbackBox.classList.add("correct");
@@ -224,12 +220,21 @@ function handleAnswer(isSafeAnswer) {
   nextBtn.focus();
 }
 
+function nextSite() {
+  if (currentIndex >= sites.length - 1) {
+    finishGame();
+    return;
+  }
+  currentIndex++;
+  showSite(currentIndex);
+}
 
 function finishGame() {
   quizPanel.classList.add("hidden");
   resultScreen.classList.remove("hidden");
 
   resultScoreText.textContent = `${correctCount} / ${sites.length} oikein`;
+
   const ratio = correctCount / sites.length;
   let comment;
   let emoji = "👏";
@@ -242,8 +247,9 @@ function finishGame() {
     emoji = "👍";
   } else {
     comment = "Jatka harjoittelua, agentti!";
-    emoji = "👍";
+    emoji = "🧠";
   }
+
   resultComment.textContent = comment;
   resultEmoji.textContent = emoji;
   resultPointsText.textContent = `+${points} pistettä`;
@@ -264,42 +270,15 @@ function restartGame() {
   showSite(currentIndex);
 }
 
-function nextSite() {
-  if (currentIndex >= sites.length - 1) {
-    finishGame();
-    return;
-  }
-  currentIndex++;
-  showSite(currentIndex);
-}
-
 
 btnSafe.addEventListener("click", () => handleAnswer(true));
 btnUnsafe.addEventListener("click", () => handleAnswer(false));
 nextBtn.addEventListener("click", nextSite);
 retryBtn.addEventListener("click", restartGame);
 
-// -------------------------
-// NÄPPÄIMISTÖOHJAUS
-// -------------------------
-//
-// Kysymysvaihe (ei palautetta):
-//   T tai ← = TURVALLINEN
-//   E tai → = EPÄTURVALLINEN
-//
-// Palautteen aikana:
-//   Enter, Space tai N = seuraava sivusto / tulos
-//
-// Aina:
-//   Esc tai B = takaisin missiolistaan
-//
-// Tulosnäyttö:
-//   R tai Enter = uudelleensuorita missio
-//   Esc tai B   = takaisin missiolistaan
-//
 
 document.addEventListener("keydown", (event) => {
-  const key = event.key;          // esim. "ArrowLeft", "Escape", "Enter", " "
+  const key = event.key;
   const lower = key.toLowerCase();
 
   const quizVisible = !quizPanel.classList.contains("hidden");
@@ -334,12 +313,10 @@ document.addEventListener("keydown", (event) => {
         handleAnswer(true);
         return;
       }
-
       if (lower === "e" || key === "ArrowRight") {
         handleAnswer(false);
         return;
       }
-
       return;
     }
 
@@ -347,7 +324,6 @@ document.addEventListener("keydown", (event) => {
       nextSite();
       return;
     }
-
     return;
   }
 
