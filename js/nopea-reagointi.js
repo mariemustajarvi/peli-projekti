@@ -1,4 +1,4 @@
-const questions = [
+const allQuestions = [
   {
     text: 'On ok klikata "Hyväksy kaikki evästeet" jokaisella verkkosivustolla',
     isTrue: false,
@@ -91,18 +91,10 @@ const questions = [
   }
 ];
 
+const QUESTION_COUNT = 10;
+const ROUND_TIME = 15; 
 
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-
-shuffle(questions);
-
-
-const ROUND_TIME = 15; // sekuntia / kierros
+let roundQuestions = [];
 
 let currentIndex = 0;
 let correctCount = 0;
@@ -131,6 +123,7 @@ const feedbackText = document.getElementById("feedbackText");
 
 const quizPanel = document.getElementById("quizPanel");
 const resultScreen = document.getElementById("resultScreen");
+
 const resultScoreText = document.getElementById("resultScoreText");
 const resultComment = document.getElementById("resultComment");
 const resultPointsText = document.getElementById("resultPointsText");
@@ -138,8 +131,20 @@ const resultEmoji = document.getElementById("resultEmoji");
 const retryBtn = document.getElementById("retryBtn");
 
 
-qTotalEl.textContent = questions.length.toString();
-correctCountEl.textContent = "0";
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function buildRoundQuestions() {
+  const copy = allQuestions.slice(); 
+  shuffle(copy);
+  roundQuestions = copy.slice(0, QUESTION_COUNT);
+  qTotalEl.textContent = roundQuestions.length.toString(); // 10
+}
 
 
 function updateTimerUI() {
@@ -161,14 +166,12 @@ function startTimer() {
   stopTimer();
 
   timerId = setInterval(() => {
-    timeLeft -= 0.05; // 50 ms välein → ~20 fps
+    timeLeft -= 0.05; // 50ms välein
     if (timeLeft <= 0) {
       timeLeft = 0;
       updateTimerUI();
       stopTimer();
-      if (roundActive) {
-        handleTimeout();
-      }
+      if (roundActive) handleTimeout();
     } else {
       updateTimerUI();
     }
@@ -177,11 +180,10 @@ function startTimer() {
 
 
 function showQuestion(index) {
-  const q = questions[index];
+  const q = roundQuestions[index];
 
   qIndexEl.textContent = (index + 1).toString();
   statementTextEl.textContent = q.text;
-
 
   feedbackBox.classList.add("hidden");
   feedbackBox.classList.remove("correct", "wrong");
@@ -195,7 +197,6 @@ function showQuestion(index) {
   startTimer();
 }
 
-
 function endRound() {
   roundActive = false;
   btnTrue.disabled = true;
@@ -208,7 +209,7 @@ function handleAnswer(userSaysTrue) {
 
   endRound();
 
-  const q = questions[currentIndex];
+  const q = roundQuestions[currentIndex];
   const correct = userSaysTrue === q.isTrue;
 
   feedbackBox.classList.remove("hidden");
@@ -225,7 +226,6 @@ function handleAnswer(userSaysTrue) {
   }
 
   feedbackText.textContent = q.feedback;
-
 
   setTimeout(nextQuestion, 1500);
 }
@@ -244,13 +244,12 @@ function handleTimeout() {
 
 function nextQuestion() {
   currentIndex++;
-  if (currentIndex >= questions.length) {
+  if (currentIndex >= roundQuestions.length) {
     finishGame();
   } else {
     showQuestion(currentIndex);
   }
 }
-
 
 function finishGame() {
   roundActive = false;
@@ -260,9 +259,9 @@ function finishGame() {
   quizPanel.classList.add("hidden");
   resultScreen.classList.remove("hidden");
 
-  resultScoreText.textContent = `${correctCount} / ${questions.length} oikein`;
+  resultScoreText.textContent = `${correctCount} / ${roundQuestions.length} oikein`;
 
-  const ratio = correctCount / questions.length;
+  const ratio = correctCount / roundQuestions.length;
   let comment;
   let emoji = "👏";
 
@@ -274,60 +273,55 @@ function finishGame() {
     emoji = "👍";
   } else {
     comment = "Jatka harjoittelua, agentti!";
-    emoji = "👍";
+    emoji = "🧠";
   }
 
   resultComment.textContent = comment;
   resultEmoji.textContent = emoji;
 
-  const pointsPerCorrect = 15;
-  const points = correctCount * pointsPerCorrect;
-  resultPointsText.textContent = `+${points} pistettä`;
+const maxPoints = 250;
+const pointsPerCorrect = Math.floor(maxPoints / roundQuestions.length); // 25
+let points = correctCount * pointsPerCorrect;
 
+// 250 pistettä
+if (correctCount === roundQuestions.length) points = maxPoints;
 
-  if (retryBtn) {
-    retryBtn.focus();
-  }
+resultPointsText.textContent = `+${points} pistettä`;
+
+  if (retryBtn) retryBtn.focus();
 }
 
-
 function initHighContrastToggle() {
-  const contrastToggle = document.getElementById('contrastToggle');
+  const contrastToggle = document.getElementById("contrastToggle");
   if (!contrastToggle) return;
 
   const body = document.body;
 
-  body.classList.remove('high-contrast');
-  localStorage.removeItem('high_contrast_mode');
+  body.classList.remove("high-contrast");
+  localStorage.removeItem("high_contrast_mode");
 
-  contrastToggle.addEventListener('click', function () {
-    body.classList.toggle('high-contrast');
-    const isHighContrast = body.classList.contains('high-contrast');
+  contrastToggle.addEventListener("click", function () {
+    body.classList.toggle("high-contrast");
+    const isHighContrast = body.classList.contains("high-contrast");
 
     if (isHighContrast) {
-      contrastToggle.setAttribute('aria-label', 'Vaihda takaisin normaaliin tilaan');
-      contrastToggle.setAttribute('title', 'Vaihda takaisin normaaliin tilaan');
+      contrastToggle.setAttribute("aria-label", "Vaihda takaisin normaaliin tilaan");
+      contrastToggle.setAttribute("title", "Vaihda takaisin normaaliin tilaan");
     } else {
-      contrastToggle.setAttribute('aria-label', 'Vaihda korkean kontrastin tilaan');
-      contrastToggle.setAttribute('title', 'Vaihda korkean kontrastin tilaan');
+      contrastToggle.setAttribute("aria-label", "Vaihda korkean kontrastin tilaan");
+      contrastToggle.setAttribute("title", "Vaihda korkean kontrastin tilaan");
     }
   });
 }
 
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initHighContrastToggle);
-} else {
-  initHighContrastToggle();
-}
-
 function restartGame() {
   stopTimer();
+
   currentIndex = 0;
   correctCount = 0;
   correctCountEl.textContent = "0";
 
-  shuffle(questions);
+  buildRoundQuestions();
 
   container.classList.remove("result-active");
   resultScreen.classList.add("hidden");
@@ -336,15 +330,12 @@ function restartGame() {
   showQuestion(currentIndex);
 }
 
-
 btnTrue.addEventListener("click", () => handleAnswer(true));
 btnFalse.addEventListener("click", () => handleAnswer(false));
-retryBtn.addEventListener("click", restartGame);
-
-
+if (retryBtn) retryBtn.addEventListener("click", restartGame);
 
 document.addEventListener("keydown", (event) => {
-  const key = event.key;          // esim. "ArrowLeft", "Escape", "t"
+  const key = event.key;
   const lower = key.toLowerCase();
   const resultVisible = !resultScreen.classList.contains("hidden");
 
@@ -353,6 +344,7 @@ document.addEventListener("keydown", (event) => {
     "ArrowRight",
     "Escape",
     "Enter",
+    " ",
     "t",
     "f",
     "r",
@@ -362,7 +354,6 @@ document.addEventListener("keydown", (event) => {
   if (handledKeys.includes(key) || handledKeys.includes(lower)) {
     event.preventDefault();
   }
-
 
   if (!resultVisible) {
     if (lower === "t" || key === "ArrowLeft") {
@@ -397,4 +388,15 @@ document.addEventListener("keydown", (event) => {
 });
 
 
-showQuestion(currentIndex);
+function init() {
+  initHighContrastToggle();
+  buildRoundQuestions();
+  correctCountEl.textContent = "0";
+  showQuestion(currentIndex);
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}
