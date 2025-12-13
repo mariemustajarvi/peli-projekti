@@ -34,6 +34,14 @@ const score = document.getElementById('agent-points');
 const missions = document.getElementById('agent-missions');
 const progress = document.getElementById('agent-progress');
 
+const agentRank = document.getElementById('agent-rank');
+const agentNextRank = document.getElementById('agent-next-rank');
+const agentRankIcon = document.getElementById('agent-rank-icon');
+const agentPanelHeader = document.querySelector('.agent-panel__header');
+const agentNextRankPanel = document.getElementById('agentNextRankPanel');
+const agentNextRankPoints = document.getElementById('agent-next-points');
+const agentNextRankBar = document.getElementById("agent-next-progress");
+
 let loggedIn = false; // Tätä käytetään vain tarkistamaan tarvitseeko käyttäjää kirjata ulos nappia painettaessa!
 let completed = new Set();
 
@@ -49,7 +57,8 @@ onAuthStateChanged(auth, (user) => {
       if (data) {
         agentCode.innerHTML = data.username;
 
-        score.innerHTML = data.scores.reduce((partialSum, a) => partialSum + a, 0);
+        const currentScore = data.scores.reduce((partialSum, a) => partialSum + a, 0);
+        score.innerHTML = currentScore;
 
         const completedMissions = data.completedMissions;
         let missionCount = 0;
@@ -59,11 +68,63 @@ onAuthStateChanged(auth, (user) => {
             missionCount++;
           }
         });
-        
+
         missions.innerHTML = missionCount + ' / 10';
 
         if (missionCount > 0) {
           progress.innerHTML = (missionCount / 10) * 100 + ' %'
+        }
+
+        const RANKS = [
+          { name: "ALOITTELIJA-AGENTTI", minPoints: 0, icon: "🔰", color: "#6B7280" },
+          { name: "AGENTTI", minPoints: 500, icon: "🔷", color: "#28ADF1" },
+          { name: "KENTTÄAGENTTI", minPoints: 1500, icon: "🎯", color: "#8B5CF6" },
+          { name: "VETERAANI-AGENTTI", minPoints: 2500, icon: "⭐", color: "#10B981" },
+          { name: "ELITE-AGENTTI", minPoints: 3500, icon: "🏆", color: "#F59E0B" }
+        ];
+
+        let currentRank = 0;
+        let nextRank = 0;
+
+        if (currentScore >= 3500) {
+          currentRank = RANKS[4];
+          agentNextRankPanel.style.visibility = "hidden";
+        } else if (currentScore >= 2500) {
+          currentRank = RANKS[3];
+          nextRank = RANKS[4]
+        } else if (currentScore >= 1500) {
+          currentRank = RANKS[2];
+          nextRank = RANKS[3]
+        } else if (currentScore >= 500) {
+          currentRank = RANKS[1];
+          nextRank = RANKS[2]
+        } else {
+          currentRank = RANKS[0];
+          nextRank = RANKS[1]
+        }
+
+        if (agentRank) {
+          agentRank.textContent = currentRank.name;
+        }
+
+        if (agentRankIcon) {
+          agentRankIcon.textContent = currentRank.icon;
+        }
+
+        if (agentPanelHeader && currentRank.color) {
+          agentPanelHeader.style.background = currentRank.color;
+        }
+
+        if (agentNextRank && nextRank != 0) {
+          agentNextRank.innerHTML = nextRank.name;
+        }
+
+        if (agentNextRankPoints) {
+          agentNextRankPoints.innerHTML = nextRank.minPoints - currentScore + ' pistettä puuttuu';
+        }
+
+        if (agentNextRankBar) {
+          agentNextRankBar.style.width = Math.floor((currentScore / nextRank.minPoints) * 100) + '%';
         }
 
         setupIndexPage();
@@ -97,7 +158,7 @@ function setupIndexPage() {
 
     const missionId = card.dataset.missionId || `mission${index}`;
     const prevMissionId =
-      index === 0 ? null : (cards[index-1].dataset.missionId || `mission${index - 1}`);
+      index === 0 ? null : (cards[index - 1].dataset.missionId || `mission${index - 1}`);
 
     const isFirst = index === 0;
     const isUnlocked = isFirst || (prevMissionId && completed.has(prevMissionId));

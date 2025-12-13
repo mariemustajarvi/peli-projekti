@@ -1,3 +1,4 @@
+
 :root {
   --color-bg: #040e1e;
   --color-grid: rgba(0, 255, 255, 0.04);
@@ -234,16 +235,30 @@ body {
   flex-direction: column;
 }
 
+/* agenttiarvot */
+
+.agent-panel {
+  background: var(--color-card-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(7, 219, 208, 0.6);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+  margin-bottom: 2.2rem;
+}
+
 .agent-panel__header {
   margin-top: 0;
   background: #28ADF1;
   color: white;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border-radius: 0;
   padding: var(--space-lg) var(--space-md);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-lg);
+  border: none;
+  border-bottom: 2px solid rgba(7, 219, 208, 0.6);
 }
 
 .agent-panel__content {
@@ -255,6 +270,18 @@ body {
 
 
 .agent-panel__rank {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.agent-panel__rank-icon {
+  font-size: 3rem;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+.agent-panel__rank-info {
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
@@ -268,7 +295,7 @@ body {
 }
 
 .agent-panel__rank-value {
-  font-size: var(--font-xl);
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
@@ -320,6 +347,52 @@ body {
   margin: 0;
   font-size: var(--font-lg);
   font-weight: 700;
+}
+
+/* Seuraava arvo */
+.agent-panel__next-rank {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.agent-panel__next-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.agent-panel__next-label {
+  font-size: var(--font-xs);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  opacity: 0.9;
+}
+
+.agent-panel__next-points {
+  font-size: var(--font-xs);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  opacity: 0.9;
+}
+
+.agent-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 10, 26, 0.85);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(7, 219, 208, 0.3);
+}
+
+.agent-progress-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  width: 0%;
+  transition: width 0.5s ease;
 }
 
 /* erotinviiva */

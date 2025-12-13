@@ -19,7 +19,7 @@
         Agenttien koulutuskäyttöliittymä 🛡️
       </h2>
       <nav class="top-nav">
-        <a href="#" class="nav-btn nav-btn--primary">
+        <a href="saavutukset.html" class="nav-btn nav-btn--primary">
           <span class="nav-btn__icon">🏆</span>
           <span class="nav-btn__text">Saavutukset (0/30)</span>
         </a>
@@ -39,38 +39,45 @@
 <section class="agent-panel" aria-label="Agent overview">
   <header class="agent-panel__header">
     <div class="agent-panel__rank">
-      <span class="agent-panel__rank-label">🎯 Agenttiarvo</span>
-      <span class="agent-panel__rank-value" id="agent-rank">
-        xxxxx-agentti
-      </span>
+      <div class="agent-panel__rank-icon" id="agent-rank-icon">
+        📦
+      </div>
+      <div class="agent-panel__rank-info">
+        <span class="agent-panel__rank-label">AGENTTIARVO</span>
+        <span class="agent-panel__rank-value" id="agent-rank">
+          XXXXXXX
+        </span>
+      </div>
     </div>
     <div class="agent-panel__code">
-      <span class="agent-panel__code-label">Koodi</span>
+      <span class="agent-panel__code-label">KOODI</span>
       <span class="agent-panel__code-value" id="agent-code">
-        xxxxxx
+        XXXXXXX
       </span>
     </div>
   </header>
   <div class="agent-panel__content">
     <div class="agent-panel__stats">
       <article class="agent-stat">
-        <h3 class="agent-stat__label">Pisteet</h3>
+        <h3 class="agent-stat__label">⭐ PISTEET</h3>
         <p class="agent-stat__value" id="agent-points">0</p>
       </article>
       <article class="agent-stat">
-        <h3 class="agent-stat__label">Missiot</h3>
-        <p class="agent-stat__value" id="agent-missions">0 / 10</p>
+        <h3 class="agent-stat__label">🎯 MISSIOT</h3>
+        <p class="agent-stat__value" id="agent-missions">0/10</p>
       </article>
       <article class="agent-stat">
-        <h3 class="agent-stat__label">Valmis</h3>
+        <h3 class="agent-stat__label">⚡ VALMIS</h3>
         <p class="agent-stat__value" id="agent-progress">0%</p>
       </article>
     </div>
-    <div class="agent-panel__next-rank">
+    <div class="agent-panel__next-rank" id="agentNextRankPanel">
       <div class="agent-panel__next-header">
         <span class="agent-panel__next-label">
-          Seuraava arvo:
-          <span id="agent-next-rank">Veteraani-agentti</span>
+          SEURAAVA ARVO: <span id="agent-next-rank">AGENTTI</span>
+        </span>
+        <span class="agent-panel__next-points" id="agent-next-points">
+          500 pistettä puuttuu
         </span>
       </div>
       <div class="agent-progress-bar">
@@ -81,7 +88,7 @@
       </div>
     </div>
   </div>
-</section>
+  </section>
       <div class="divider"></div>
            <!-- pelit -->
       <section class="game-list" aria-label="Available games">
