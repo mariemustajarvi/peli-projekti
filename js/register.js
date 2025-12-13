@@ -25,19 +25,46 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+let registerInProgress = false;
+
 onAuthStateChanged(auth, (user) => {
-  if (user) {
+  if (user && registerInProgress == false) {
     window.location.href = 'index.html';
   }
 });
 
 let writeUserData = (userId, name) => {
   const db = getDatabase();
-  const reference = ref(db, 'users/' + userId)
-
+  const reference = ref(db, 'users/' + userId);
+  
   set(reference, {
-    username: name
+    username: name,
+    scores: {
+      0: 0,
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+      6: 0,
+      7: 0,
+      8: 0,
+      9: 0
+    },
+    completedMissions: {
+      0: false,
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false
+    }
   }).then(() => {
+    registerInProgress = false;
     window.location.href = 'index.html';
   })
 }
@@ -59,11 +86,10 @@ registerButton.addEventListener('click', event => {
   } else if (password != confirmPassword) {
     errorMsg.innerHTML = 'Virhe: Salasanat eivät täsmää';
   } else {
+    registerInProgress = true;
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const userId = userCredential.user.uid;
-        console.log(userId);
-        console.log(username);
         writeUserData(userId, username)
       })
       .catch((error) => {
