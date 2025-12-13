@@ -1,3 +1,8 @@
+// ================================
+// VÄLIAIKAINEN LOKAALI REKISTERÖINTI TESTAUSTA VARTEN
+// KORVAA TÄMÄ FIREBASELLA KUN OLET VALMIS
+// ================================
+
 // korkea kontrasti toggle asetus
 const contrastToggle = document.getElementById('contrastToggle');
 if (contrastToggle) {
@@ -34,27 +39,32 @@ if (registerForm) {
       return;
     }
     
-    // Tyhjennä kaikki vanhat käyttäjätiedot ensin
+    // Tyhjennä kaikki vanhat käyttäjätiedot ensin (väliaikainen)
     localStorage.removeItem('user_points');
     localStorage.removeItem('completedLevels');
     localStorage.removeItem('achievements');
     
-    // Tallenna feikki käyttäjätiedot localStorageen testausta varten 
+    // Tallenna kaikki käyttäjät localStorageen (väliaikainen, korvaa Firebaseen)
+    let users = JSON.parse(localStorage.getItem('users') || '[]');
+    if (users.find(u => u.email === email)) {
+      alert('Sähköposti on jo rekisteröity!');
+      return;
+    }
     const userData = {
       username: username,
       email: email,
-      loggedIn: true,
+      password: password, // HUOM! ÄLÄ KOSKAAN SÄILYTÄ NÄIN OIKEASSA SOVELLUKSESSA
       registeredAt: new Date().toISOString()
     };
-    
+    users.push(userData);
+    localStorage.setItem('users', JSON.stringify(users));
+    // Kirjaa sisään automaattisesti rekisteröinnin jälkeen
     localStorage.setItem('user', JSON.stringify(userData));
     localStorage.setItem('isLoggedIn', 'true');
-    
-    console.log('Registration successful:', { username, email });
-    
-    // Siirry etusivulle
-    alert('Tervetuloa, agentti ' + username + '!');
-    window.location.href = 'index.html';
+    setTimeout(() => {
+      alert('Tervetuloa, agentti ' + username + '!');
+      window.location.replace('index.html');
+    }, 100);
   });
 }
 

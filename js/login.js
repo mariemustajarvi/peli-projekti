@@ -1,3 +1,8 @@
+// ================================
+// VÄLIAIKAINEN LOKAALI KIRJAUTUMINEN TESTAUSTA VARTEN
+// KORVAA TÄMÄ FIREBASELLA KUN OLET VALMIS
+// ================================
+
 // korkean kontrastin asetukset
 const contrastToggle = document.getElementById('contrastToggle');
 if (contrastToggle) {
@@ -20,36 +25,27 @@ if (loginForm) {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     
-    // Luo feikki käyttäjänimi sähköpostista testausta varten
-    const username = email.split('@')[0];
-    
-    // Tarkista onko kyseessä eri käyttäjä
+    // Tarkista käyttäjät localStoragesta (väliaikainen, korvaa Firebaseen)
+    let users = JSON.parse(localStorage.getItem('users') || '[]');
+    const user = users.find(u => u.email === email && u.password === password);
+    if (!user) {
+      alert('Väärä sähköposti tai salasana!');
+      return;
+    }
+    // Tyhjennä edistyminen, jos vaihdetaan käyttäjää (väliaikainen)
     const oldUser = JSON.parse(localStorage.getItem('user') || '{}');
     const isDifferentUser = oldUser.email && oldUser.email !== email;
-    
-    // Tyhjennä edistyminen, jos vaihdetaan käyttäjää
     if (isDifferentUser) {
       localStorage.removeItem('user_points');
       localStorage.removeItem('completedLevels');
       localStorage.removeItem('achievements');
     }
-    
-    // Tallenna feikki käyttäjätiedot localStorageen tastausta varten
-    const userData = {
-      username: username,
-      email: email,
-      loggedIn: true,
-      loginAt: new Date().toISOString()
-    };
-    
-    localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('isLoggedIn', 'true');
-    
-    console.log('Login successful:', { email });
-    
-    // Siirry etusivulle
-    alert('Tervetuloa takaisin, agentti ' + username + '!');
-    window.location.href = 'index.html';
+    setTimeout(() => {
+      alert('Tervetuloa takaisin, agentti ' + user.username + '!');
+      window.location.replace('index.html');
+    }, 100);
   });
 }
 
