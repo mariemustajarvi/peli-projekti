@@ -295,7 +295,7 @@ body {
 }
 
 .agent-panel__rank-value {
-  font-size: var(--font-xl);
+  font-size: 1.5rem;
   font-weight: 700;
 }
 

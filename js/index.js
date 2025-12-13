@@ -1,4 +1,3 @@
-
 // Käyttää localStoragea (myöhemmin voidaan vaihtaa Firebaseen).
 // VÄLIAIKAINEN: Näytä agenttipaneeli vain kirjautuneille (localStorage)
 // Korvaa tämä Firebase-toteutuksella myöhemmin
@@ -53,6 +52,7 @@
   }
 
   function markMissionCompleted(missionId) {
+    // Mark a mission as completed in localStorage only. UI will update on next page load.
     const state = loadState();
     const set = new Set(state.completed);
     set.add(missionId);
@@ -87,6 +87,21 @@
   }
 
   function updateAgentPanel() {
+        // Päivitä tervetuloa-greetaus
+        const greetingEl = document.getElementById("agent-greeting");
+        if (greetingEl) {
+          let user = null;
+          try {
+            user = JSON.parse(localStorage.getItem('user'));
+          } catch (e) {}
+          let name = 'agentti';
+          if (user && user.username) {
+            name = `agentti ${user.username}`;
+          } else if (user && user.email) {
+            name = `agentti ${user.email.split('@')[0]}`;
+          }
+          greetingEl.textContent = `Tervetuloa, ${name}!`;
+        }
     const state = loadState();
     const completed = state.completed || [];
     const points = calculatePoints(completed);
@@ -196,6 +211,7 @@
           e.preventDefault();
           localStorage.removeItem('isLoggedIn');
           localStorage.removeItem('user');
+          localStorage.removeItem('kyberagentti_progress_v1'); // Clear all mission progress and scores
           setTimeout(() => { location.reload(); }, 100);
         };
       } else {
@@ -243,11 +259,32 @@
       const missionId = card.dataset.missionId || `mission${index + 1}`;
       const prevMissionId = index === 0 ? null : (cards[index - 1].dataset.missionId || `mission${index}`);
       const isFirst = index === 0;
+      const isCompleted = completed.has(missionId);
+      // Only unlock if first, or previous is completed
       const isUnlocked = isFirst || (prevMissionId && completed.has(prevMissionId));
       const lockIcon = card.querySelector(".game-card__lock");
+
+      // Completed styling
+      if (isCompleted) {
+        card.classList.add("game-card--completed");
+        card.classList.remove("game-card--active");
+        card.classList.remove("game-card--locked");
+        card.style.opacity = "1";
+        if (lockIcon) lockIcon.style.display = "none";
+        let cta = card.querySelector(".game-card__cta");
+        if (cta) {
+          cta.textContent = "Pelaa uudelleen";
+          cta.href = card.dataset.missionUrl || "#";
+          cta.style.pointerEvents = "auto";
+          cta.style.opacity = "1";
+        }
+        return;
+      }
+
       if (isUnlocked) {
         card.classList.add("game-card--active");
         card.classList.remove("game-card--locked");
+        card.classList.remove("game-card--completed");
         card.style.opacity = "1";
         if (lockIcon) {
           lockIcon.style.display = "none";
@@ -275,6 +312,7 @@
       } else {
         card.classList.add("game-card--locked");
         card.classList.remove("game-card--active");
+        card.classList.remove("game-card--completed");
         card.style.opacity = "0.7";
         const cta = card.querySelector(".game-card__cta");
         if (cta) {
@@ -292,6 +330,7 @@
   // Tätä kutsutaan mission-sivuilta, kun pelaaja on suorittanut mission.
   // Esim: completeMission("mission1");
   function completeMission(missionId, redirectUrl = "index.html") {
+    // Mark as completed and redirect. UI will update on next page load.
     markMissionCompleted(missionId);
     window.location.href = redirectUrl;
   }
