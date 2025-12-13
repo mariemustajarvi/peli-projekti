@@ -37,11 +37,20 @@ onAuthStateChanged(auth, (user) => {
 });
 
 const savePoints = (points) => {
-  if(userRef) {
-    const updates = {};
-    updates['/scores/1/'] = points;
-    updates['completedMissions/1/'] = true;
-    update(userRef, updates)
+  if (userRef) {
+    let oldScore = 0;
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        oldScore = data.scores[1];
+        const updates = {};
+        if (points > oldScore) {
+          updates['/scores/1/'] = points;
+        }
+        updates['completedMissions/1/'] = true;
+        update(userRef, updates)
+      }
+    });
   }
 };
 

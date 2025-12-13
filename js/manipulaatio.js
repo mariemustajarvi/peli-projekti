@@ -37,11 +37,20 @@ onAuthStateChanged(auth, (user) => {
 });
 
 const savePoints = (points) => {
-  if(userRef) {
-    const updates = {};
-    updates['/scores/2/'] = points;
-    updates['completedMissions/2/'] = true;
-    update(userRef, updates)
+  if (userRef) {
+    let oldScore = 0;
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        oldScore = data.scores[2];
+        const updates = {};
+        if (points > oldScore) {
+          updates['/scores/2/'] = points;
+        }
+        updates['completedMissions/2/'] = true;
+        update(userRef, updates)
+      }
+    });
   }
 };
 
@@ -279,7 +288,6 @@ const savePoints = (points) => {
 
       // Tallenna pisteet
       savePoints(earnedPoints);
-      console.log(earnedPoints);
       
       try {
         const currentPoints = Number(localStorage.getItem('user_points') || 0);

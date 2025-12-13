@@ -2,7 +2,7 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebas
 
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
 
-import { getDatabase, ref, update } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
+import { getDatabase, ref, update, onValue } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
 
 const firebaseConfig = {
 
@@ -37,11 +37,20 @@ onAuthStateChanged(auth, (user) => {
 });
 
 const savePoints = (points) => {
-  if(userRef) {
-    const updates = {};
-    updates['/scores/0/'] = points;
-    updates['completedMissions/0/'] = true;
-    update(userRef, updates)
+  if (userRef) {
+    let oldScore = 0;
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        oldScore = data.scores[0];
+        const updates = {};
+        if (points > oldScore) {
+          updates['/scores/0/'] = points;
+        }
+        updates['completedMissions/0/'] = true;
+        update(userRef, updates)
+      }
+    });
   }
 };
 
@@ -339,13 +348,13 @@ function showResults() {
   resultScoreText.textContent = `${correctCount} / ${CHALLENGE_COUNT} oikein`;
   resultComment.textContent = comment;
 
-const maxPoints = 100;
-const pointsPerCorrect = Math.round(maxPoints / CHALLENGE_COUNT); // 3 -> 33
-let points = correctCount * pointsPerCorrect;
-savePoints(points)
-if (correctCount === CHALLENGE_COUNT) points = maxPoints;
+  const maxPoints = 100;
+  const pointsPerCorrect = Math.round(maxPoints / CHALLENGE_COUNT); // 3 -> 33
+  let points = correctCount * pointsPerCorrect;
+  savePoints(points)
+  if (correctCount === CHALLENGE_COUNT) points = maxPoints;
 
-resultPointsText.textContent = `+${points} pistettä`;
+  resultPointsText.textContent = `+${points} pistettä`;
 
 
 
