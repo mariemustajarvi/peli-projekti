@@ -1,3 +1,50 @@
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js';
+
+import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyCUZNqdanUH2Z63t5GWw1JjY-0ffwqCy7I",
+
+    authDomain: "tuotekehitysprojekti-5f330.firebaseapp.com",
+
+    projectId: "tuotekehitysprojekti-5f330",
+
+    storageBucket: "tuotekehitysprojekti-5f330.firebasestorage.app",
+
+    messagingSenderId: "362924183192",
+
+    appId: "1:362924183192:web:337b854b2ecc8b53e48aed"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const loginBtn = document.getElementById('loginBtn');
+
+loginBtn.addEventListener('click', event => {
+    event.preventDefault()
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    const errorMsg = document.getElementById('errorMessage');
+
+    signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+            window.location.href = "index.html";
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            if (errorCode == 'auth/invalid-email') {
+              errorMsg.innerHTML = 'Virheellinen sähköpostiosoite'
+            } else if (errorCode == 'auth/invalid-credential') {
+              errorMsg.innerHTML = 'Sähköposti ja salasana eivät täsmää'
+            }
+        });
+});
+
 // korkean kontrastin asetukset
 const contrastToggle = document.getElementById('contrastToggle');
 if (contrastToggle) {
@@ -10,6 +57,8 @@ if (contrastToggle) {
     );
   });
 }
+
+/*
 
 // Kirjautumislomakkeen lähetys
 const loginForm = document.getElementById('loginForm');
@@ -70,3 +119,4 @@ if (facebookBtn) {
     alert('Facebook-kirjautuminen tulossa pian! (Demo)');
   });
 }
+*/
