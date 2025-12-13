@@ -1,7 +1,6 @@
-// ================================
 // VÄLIAIKAINEN LOKAALI KIRJAUTUMINEN TESTAUSTA VARTEN
-// KORVAA TÄMÄ FIREBASELLA KUN OLET VALMIS
-// ================================
+// KORVATAAN TÄMÄ FIREBASELLA VALMIS
+
 
 // korkean kontrastin asetukset
 const contrastToggle = document.getElementById('contrastToggle');

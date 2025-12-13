@@ -1,7 +1,6 @@
-// ================================
 // VÄLIAIKAINEN LOKAALI REKISTERÖINTI TESTAUSTA VARTEN
-// KORVAA TÄMÄ FIREBASELLA KUN OLET VALMIS
-// ================================
+// KORVATAAN TÄMÄ FIREBASELLA KUN VALMIS
+
 
 // korkea kontrasti toggle asetus
 const contrastToggle = document.getElementById('contrastToggle');
@@ -53,7 +52,7 @@ if (registerForm) {
     const userData = {
       username: username,
       email: email,
-      password: password, // HUOM! ÄLÄ KOSKAAN SÄILYTÄ NÄIN OIKEASSA SOVELLUKSESSA
+      password: password,
       registeredAt: new Date().toISOString()
     };
     users.push(userData);
