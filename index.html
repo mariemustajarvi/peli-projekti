@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css?v=3">
+  <script type="module" src="./js/index.js"></script>
 </head>
 <body>
   <div class="app content-frame">
@@ -27,9 +28,9 @@
             <span class="nav-btn__icon">👤</span>
             <span class="nav-btn__text">Tulostaulukko</span>
           </a>
-          <a href="login.html" class="nav-btn nav-btn--accent">
+          <a id="logInOutBtnLink" href="login.html" class="nav-btn nav-btn--accent">
             <span class="nav-btn__icon">➜</span>
-            <span class="nav-btn__text">Kirjaudu sisään / rekisteröidy</span>
+            <span id="logInOutBtnText" class="nav-btn__text">Kirjaudu sisään / Rekisteröidy</span>
           </a>
         </div>
       </nav>
@@ -351,6 +352,5 @@
       </section>
     </main>
   </div>
-  <script src="./js/index.js"></script>
 </body>
 </html>
