@@ -9,8 +9,12 @@
   <link rel="stylesheet" href="./css/tiedustelutermit.css">
 </head>
 <body class="level-page">
+  
   <div class="container-backbtn">
     <a class="back-btn" href="index.html">← Takaisin missioihin</a>
+    <button id="contrastToggle" class="contrast-btn" aria-label="Vaihda kontrastia">
+      ♿ Kontrasti
+    </button>
   </div>
 
   <main class="container level-main loading-box">
@@ -18,7 +22,7 @@
       <header class="panel-header">
         <div class="panel-title">✨ TURVALLISUUSTERMIEN YHDISTÄMINEN</div>
         <div class="panel-sub">
-          YHDISTÄ JOKAINEN TERMI OIKEAAN MÄÄRITELMÄÄN
+          YHDISTÄ TERMI JA MÄÄRITELMÄ
           <span class="divider-small">|</span>
           YHDISTETTY: <span id="matches">0</span>/8
         </div>
@@ -26,7 +30,7 @@
 
       <div class="panel-body">
         <p class="instruction-text">
-          KLIKKAA TERMIÄ VASEMMALLA, SITTEN KLIKKAA SEN VASTAAVAA MÄÄRITELMÄÄ OIKEALLA! 🎯
+          KLIKKAA TERMIÄ VASEMMALLA JA SEN JÄLKEEN MÄÄRITELMÄÄ OIKEALLA.
         </p>
 
         <div class="game-grid">
@@ -41,7 +45,7 @@
         </div>
 
         <div class="hint-box">
-          💡 Vinkki: Mitä vähemmän yrityksiä tarvitset, sitä parempi pisteesi!
+          💡 Vinkki: Mitä vähemmän yrityksiä, sitä paremmat pisteet!
         </div>
       </div>
     </section>
@@ -62,6 +66,7 @@
     </section>
   </main>
 
+  <script src="./js/accessibility.js"></script>
   <script src="./js/tiedustelutermit.js"></script>
 </body>
 </html>
