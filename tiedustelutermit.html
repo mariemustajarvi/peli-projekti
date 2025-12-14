@@ -5,42 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Missio — Tiedustelutermit</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/accessibility.css">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/tiedustelutermit.css">
 </head>
 <body class="level-page">
-  <div class="container container-top">
-    <div class="accessibility-controls">
-      <button id="contrastToggle" class="contrast-toggle" aria-label="Vaihda korkean kontrastin tilaan">
-        <span class="toggle-icon">◐</span>
-      </button>
-    </div>
+  
+  <div class="container-backbtn">
     <a class="back-btn" href="index.html">← Takaisin missioihin</a>
+    <button id="contrastToggle" class="contrast-btn" aria-label="Vaihda kontrastia">
+      ♿ Kontrasti
+    </button>
   </div>
 
-  <main id="main-content" class="container level-main">
+  <main class="container level-main loading-box">
     <section class="panel">
       <header class="panel-header">
-        <h1 class="panel-title">🧩 TIEDUSTELUTERMIT</h1>
+        <div class="panel-title">✨ TURVALLISUUSTERMIEN YHDISTÄMINEN</div>
         <div class="panel-sub">
-          Yhdistä oikea termi sen määritelmään.
+          YHDISTÄ TERMI JA MÄÄRITELMÄ
           <span class="divider-small">|</span>
-          OIKEIN: <span id="score">0</span> / <span id="maxScore">5</span>
+          YHDISTETTY: <span id="matches">0</span>/8
         </div>
       </header>
 
-      <div class="panel-body" id="gameArea">
+      <div class="panel-body">
         <p class="instruction-text">
-          Raahaa termi (vasemmalta) oikean selityksen päälle (oikealle).
+          KLIKKAA TERMIÄ VASEMMALLA JA SEN JÄLKEEN MÄÄRITELMÄÄ OIKEALLA.
         </p>
 
-        <div class="matching-game">
-          <div class="terms-column" id="termsList"></div>
-          <div class="definitions-column" id="definitionsList"></div>
+        <div class="game-grid">
+          <div class="column">
+            <h3 class="col-title">TERMIT:</h3>
+            <div id="termsList" class="list-group"></div>
+          </div>
+          <div class="column">
+            <h3 class="col-title">MÄÄRITELMÄT:</h3>
+            <div id="defsList" class="list-group"></div>
+          </div>
         </div>
 
-        <div id="feedback" class="feedback-box hidden"></div>
+        <div class="hint-box">
+          💡 Vinkki: Mitä vähemmän yrityksiä, sitä paremmat pisteet!
+        </div>
+      </div>
+    </section>
+
+    <section id="resultScreen" class="result-screen hidden">
+      <div class="result-trophy">🏆</div>
+      <h1 class="result-title">MISSIO SUORITETTU!</h1>
+      <div class="result-card">
+        <div class="result-emoji">🧩</div>
+        <p class="result-score">Kaikki termit yhdistetty</p>
+        <p class="result-comment">SANASTO HALLUSSA, AGENTTI!</p>
+        <hr class="result-divider">
+        <button class="result-points-btn">✧ +200 PISTETTÄ</button>
+      </div>
+      <div class="result-actions">
+        <a href="index.html" class="result-btn result-btn-primary">TAKAISIN MISSIOLISTAAN</a>
       </div>
     </section>
   </main>
