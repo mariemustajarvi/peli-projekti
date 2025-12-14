@@ -2,7 +2,7 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebas
 
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
 
-import { getDatabase, ref, update } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
+import { getDatabase, ref, update, onValue } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
 
 const firebaseConfig = {
 
