@@ -26,8 +26,8 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const auth = getAuth(app);
 
-const loginBtn = document.getElementById('logInOutBtnLink');
-const loginBtnText = document.getElementById('logInOutBtnText');
+const loginBtn = document.getElementById('loginLogoutBtn');
+const loginBtnText = document.getElementById('loginLogoutText');
 
 const agentCode = document.getElementById('agent-code');
 const score = document.getElementById('agent-points');
@@ -141,6 +141,7 @@ loginBtn.addEventListener('click', (event) => {
   if (loggedIn) {
     signOut(auth).then(() => {
       loginBtnText.innerHTML = "Kirjaudu sisään / Rekisteröidy"
+      location.reload();
     })
   } else {
     window.location.href = loginBtn.href;
