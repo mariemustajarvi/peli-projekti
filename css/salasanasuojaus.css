@@ -459,18 +459,145 @@ body.level-page {
   }
 }
 
-body.high-contrast * {
-  background: #000 !important;
-  color: #fff !important;
-  border-color: #fff !important;
+/* Korkean kontrastin tila */
+body.high-contrast {
+  background: #000000 !important;
+  background-image: none !important;
+}
+
+body.high-contrast .container.level-main {
+  background: #000000 !important;
+  border: 3px solid #ffffff !important;
+}
+
+body.high-contrast .panel {
+  background: #000000 !important;
+  border: 3px solid #ffffff !important;
   box-shadow: none !important;
 }
 
-body.high-contrast button,
-body.high-contrast .result-btn,
-body.high-contrast .contrast-btn {
-  background: #fff !important;
-  color: #000 !important;
+body.high-contrast .panel::after {
+  display: none !important;
+}
+
+body.high-contrast .panel-title,
+body.high-contrast .panel-sub,
+body.high-contrast .pw-task-title,
+body.high-contrast .pw-task-text,
+body.high-contrast .pw-label,
+body.high-contrast .strength-text,
+body.high-contrast .pw-task-icon,
+body.high-contrast p,
+body.high-contrast span {
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+body.high-contrast .pw-task-box {
+  background: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .pw-input {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .pw-input::placeholder {
+  color: #999999 !important;
+}
+
+body.high-contrast .pw-toggle-btn,
+body.high-contrast .pw-submit-btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: none !important;
+}
+
+body.high-contrast .pw-primary-btn,
+body.high-contrast .pw-eye-btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: none !important;
+}
+
+body.high-contrast .pw-primary-btn:disabled {
+  background: #333333 !important;
+  color: #666666 !important;
+  border: 2px solid #666666 !important;
+}
+
+body.high-contrast .strength-bar {
+  background: #333333 !important;
+  border: 1px solid #ffffff !important;
+}
+
+body.high-contrast .strength-fill {
+  background: #ffffff !important;
+}
+
+body.high-contrast .strength-good,
+body.high-contrast .strength-check {
+  color: #ffffff !important;
+}
+
+body.high-contrast .strength-bad,
+body.high-contrast .strength-cross {
+  color: #ffffff !important;
+}
+
+body.high-contrast .strength-text {
+  color: #ffffff !important;
+}
+
+body.high-contrast .result-btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: none !important;
+}
+
+body.high-contrast .result-btn-ghost {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast .back-btn {
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  background: #000000 !important;
+}
+
+body.high-contrast .container-backbtn {
+  background: transparent !important;
+}
+
+body.high-contrast ul li {
+  color: #ffffff !important;
+}
+
+body.high-contrast .pw-input-row {
+  border-color: #ffffff !important;
+}
+
+body.high-contrast .pw-strength {
+  border-color: #ffffff !important;
+  background: #000000 !important;
+}
+
+body.high-contrast .controls-hint {
+  color: #ffffff !important;
+}
+
+body.high-contrast .pw-strength-col-title,
+body.high-contrast .pw-strength-header span,
+body.high-contrast .pw-strength-label,
+body.high-contrast .pw-strength-meta span {
+  color: #ffffff !important;
 }
 
 /* Responsiivisuus */

@@ -1,3 +1,59 @@
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js';
+
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
+
+import { getDatabase, ref, update, onValue } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyCUZNqdanUH2Z63t5GWw1JjY-0ffwqCy7I",
+
+  authDomain: "tuotekehitysprojekti-5f330.firebaseapp.com",
+
+  projectId: "tuotekehitysprojekti-5f330",
+
+  storageBucket: "tuotekehitysprojekti-5f330.firebasestorage.app",
+
+  messagingSenderId: "362924183192",
+
+  appId: "1:362924183192:web:337b854b2ecc8b53e48aed",
+
+  databaseURL: "https://tuotekehitysprojekti-5f330-default-rtdb.europe-west1.firebasedatabase.app"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase();
+const auth = getAuth(app);
+let userRef = null;
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const userId = user.uid;
+    userRef = ref(db, 'users/' + userId);
+  } else {
+    window.location.href = "index.html";
+  }
+});
+
+const savePoints = (points) => {
+  if (userRef) {
+    let oldScore = 0;
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        oldScore = data.scores[0];
+        const updates = {};
+        if (points > oldScore) {
+          updates['/scores/0/'] = points;
+        }
+        updates['completedMissions/0/'] = true;
+        update(userRef, updates);
+      }
+    });
+  }
+};
+
 const CHALLENGE_COUNT = 3;
 
 const challengeGoals = {
@@ -63,8 +119,6 @@ const resultPw3 = document.getElementById("resultPw3");
 const resultSummary1 = document.getElementById("resultSummary1");
 const resultSummary2 = document.getElementById("resultSummary2");
 const resultSummary3 = document.getElementById("resultSummary3");
-
-const contrastToggle = document.getElementById("contrastToggle");
 
 if (challengeTotalEl) {
   challengeTotalEl.textContent = CHALLENGE_COUNT.toString();
@@ -292,13 +346,13 @@ function showResults() {
   resultScoreText.textContent = `${correctCount} / ${CHALLENGE_COUNT} oikein`;
   resultComment.textContent = comment;
 
-const maxPoints = 100;
-const pointsPerCorrect = Math.round(maxPoints / CHALLENGE_COUNT); // 3 -> 33
-let points = correctCount * pointsPerCorrect;
+  const maxPoints = 100;
+  const pointsPerCorrect = Math.round(maxPoints / CHALLENGE_COUNT); // 3 -> 33
+  let points = correctCount * pointsPerCorrect;
+  savePoints(points)
+  if (correctCount === CHALLENGE_COUNT) points = maxPoints;
 
-if (correctCount === CHALLENGE_COUNT) points = maxPoints;
-
-resultPointsText.textContent = `+${points} pistettä`;
+  resultPointsText.textContent = `+${points} pistettä`;
 
 
 
@@ -335,33 +389,6 @@ function saveCurrentAndContinue() {
     loadChallenge(currentChallenge + 1);
   }
 }
-
-function initHighContrastToggle() {
-  if (!contrastToggle) return;
-
-  const body = document.body;
-  body.classList.remove("high-contrast");
-
-  contrastToggle.addEventListener("click", () => {
-    body.classList.toggle("high-contrast");
-    const high = body.classList.contains("high-contrast");
-
-    if (high) {
-      contrastToggle.setAttribute(
-        "aria-label",
-        "Vaihda takaisin normaaliin tilaan"
-      );
-      contrastToggle.setAttribute("title", "Vaihda takaisin normaaliin tilaan");
-    } else {
-      contrastToggle.setAttribute(
-        "aria-label",
-        "Vaihda korkean kontrastin tilaan"
-      );
-      contrastToggle.setAttribute("title", "Vaihda korkean kontrastin tilaan");
-    }
-  });
-}
-
 
 passwordInput.addEventListener("input", () => {
   updateStrengthUI(passwordInput.value);
@@ -412,7 +439,6 @@ document.addEventListener("keydown", (event) => {
 });
 
 function init() {
-  initHighContrastToggle();
   loadChallenge(1);
 }
 

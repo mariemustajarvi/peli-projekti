@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tulostaulukko - Kyberagentti</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/tulostaulukko.css">
+  <script type="module" src="./js/saavutukset.js"></script>
+  <script type="module" src="./js/tulostaulukko.js"></script>
+</head>
+<body>
+  <div class="app content-frame">
+    <!-- Header -->
+    <header class="header">
+      <button id="backBtn" class="back-btn">← Takaisin</button>
+      <button id="refreshBtn" class="refresh-btn">
+        <span class="refresh-icon">↻</span>
+        <span class="refresh-text">Päivitä</span>
+      </button>
+    </header>
+
+    <!-- Leaderboard Title Section -->
+    <div class="leaderboard-header">
+      <div class="trophy-icon">🏆</div>
+      <h1 class="leaderboard-title">🏅 AGENTTIEN SIJOITUSTAULUKKO</h1>
+      <div id="userRanking" class="user-ranking">Agenttisijoitus: #--</div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="loading-state">
+      <div class="spinner"></div>
+      <p>Ladataan tulostaulukkoa...</p>
+    </div>
+
+    <!-- Leaderboard Container -->
+    <div id="leaderboardContainer" class="leaderboard-container" style="display: none;">
+      <!-- Leaderboard items will be inserted here -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="empty-state" style="display: none;">
+      <p>Ei pelaajia tulostaulukossa</p>
+    </div>
+  </div>
+</body>
+</html>

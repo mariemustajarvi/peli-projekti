@@ -6,20 +6,21 @@
   <title>Missio — Salasanan vahvuus</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/accessibility.css">
   <link rel="stylesheet" href="./css/salasanasuojaus.css">
+  <script type="module" src="./js/salasanasuojaus.js"></script>
 </head>
 <body class="level-page">
-  <div class="container-backbtn">
-    <a class="back-btn" href="index.html">← Takaisin missioihin</a>
-    <button
-      id="contrastToggle"
-      class="contrast-btn"
-      aria-label="Vaihda korkean kontrastin tilaan"
-      title="Vaihda korkean kontrastin tilaan">
-      ♿ Kontrasti
+  <a href="#main-content" class="skip-link">Siirry pääsisältöön</a>
+  <div class="accessibility-controls">
+    <button id="contrastToggle" class="contrast-toggle" aria-label="Vaihda korkean kontrastin tilaan" title="Vaihda korkean kontrastin tilaan">
+      <span class="toggle-icon">◐</span>
     </button>
   </div>
-  <main class="container level-main loading-box">
+  <div class="container-backbtn">
+    <a class="back-btn" href="index.html">← Takaisin missioihin</a>
+  </div>
+  <main id="main-content" class="container level-main loading-box" role="main">
     <section class="panel" id="pwPanel">
       <header class="panel-header">
         <div class="panel-title">🔐 SALASANAN VAHVUUDEN TARKISTAJA</div>
@@ -143,6 +144,6 @@
       </div>
     </section>
   </main>
-  <script src="./js/salasanasuojaus.js"></script>
+  <script src="./js/accessibility.js"></script>
 </body>
 </html>
