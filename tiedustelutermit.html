@@ -9,45 +9,58 @@
   <link rel="stylesheet" href="./css/tiedustelutermit.css">
 </head>
 <body class="level-page">
-  
-  <div class="top-bar">
-    <a href="index.html" class="back-btn">← Takaisin missioihin</a>
+  <div class="container-backbtn">
+    <a class="back-btn" href="index.html">← Takaisin missioihin</a>
   </div>
 
-  <div class="game-container">
-    <header class="game-header">
-      <h1>✨ TURVALLISUUSTERMIEN YHDISTÄMINEN</h1>
-      <p class="subtitle">YHDISTÄ JOKAINEN TERMI OIKEAAN MÄÄRITELMÄÄN | YRITYKSET: <span id="tries">0</span> | YHDISTETTY: <span id="matches">0</span>/8</p>
-    </header>
+  <main class="container level-main loading-box">
+    <section class="panel">
+      <header class="panel-header">
+        <div class="panel-title">✨ TURVALLISUUSTERMIEN YHDISTÄMINEN</div>
+        <div class="panel-sub">
+          YHDISTÄ JOKAINEN TERMI OIKEAAN MÄÄRITELMÄÄN
+          <span class="divider-small">|</span>
+          YHDISTETTY: <span id="matches">0</span>/8
+        </div>
+      </header>
 
-    <div class="instruction">
-      KLIKKAA TERMIÄ VASEMMALLA, SITTEN KLIKKAA SEN VASTAAVAA MÄÄRITELMÄÄ OIKEALLA! 🎯
-    </div>
+      <div class="panel-body">
+        <p class="instruction-text">
+          KLIKKAA TERMIÄ VASEMMALLA, SITTEN KLIKKAA SEN VASTAAVAA MÄÄRITELMÄÄ OIKEALLA! 🎯
+        </p>
 
-    <div class="game-grid">
-      <div class="column">
-        <h3>TERMIT:</h3>
-        <div id="termsList" class="list-group"></div>
+        <div class="game-grid">
+          <div class="column">
+            <h3 class="col-title">TERMIT:</h3>
+            <div id="termsList" class="list-group"></div>
+          </div>
+          <div class="column">
+            <h3 class="col-title">MÄÄRITELMÄT:</h3>
+            <div id="defsList" class="list-group"></div>
+          </div>
+        </div>
+
+        <div class="hint-box">
+          💡 Vinkki: Mitä vähemmän yrityksiä tarvitset, sitä parempi pisteesi!
+        </div>
       </div>
+    </section>
 
-      <div class="column">
-        <h3>MÄÄRITELMÄT:</h3>
-        <div id="defsList" class="list-group"></div>
+    <section id="resultScreen" class="result-screen hidden">
+      <div class="result-trophy">🏆</div>
+      <h1 class="result-title">MISSIO SUORITETTU!</h1>
+      <div class="result-card">
+        <div class="result-emoji">🧩</div>
+        <p class="result-score">Kaikki termit yhdistetty</p>
+        <p class="result-comment">SANASTO HALLUSSA, AGENTTI!</p>
+        <hr class="result-divider">
+        <button class="result-points-btn">✧ +200 PISTETTÄ</button>
       </div>
-    </div>
-
-    <div class="hint-box">
-      💡 Vinkki: Mitä vähemmän yrityksiä tarvitset, sitä parempi pisteesi!
-    </div>
-  </div>
-
-  <div id="completionOverlay" class="completion-overlay hidden">
-    <div class="completion-box">
-      <h2>TEHTÄVÄ SUORITETTU!</h2>
-      <p>Sait kaikki termit oikein.</p>
-      <a href="index.html" class="next-btn">Palaa päävalikkoon</a>
-    </div>
-  </div>
+      <div class="result-actions">
+        <a href="index.html" class="result-btn result-btn-primary">TAKAISIN MISSIOLISTAAN</a>
+      </div>
+    </section>
+  </main>
 
   <script src="./js/tiedustelutermit.js"></script>
 </body>

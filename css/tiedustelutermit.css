@@ -1,131 +1,130 @@
 :root {
-  --color-neon-cyan: #00f2ff;
-  --bg-dark: #020817;
+  --color-bg: #040e1e;
+  --color-primary: #00f2ff;
+  --color-accent: #00f382;
+  --color-danger: #f30000;
+  --color-muted: #0d4263;
+  --font-main: "Orbitron", system-ui, sans-serif;
 }
 
 body {
-  background-color: var(--bg-dark);
-  font-family: 'Orbitron', sans-serif;
-  color: var(--color-neon-cyan);
+  background-color: var(--color-bg);
+  font-family: var(--font-main);
+  color: var(--color-primary);
   margin: 0;
-  padding: 20px;
-  background-image: linear-gradient(rgba(0, 20, 40, 0.9), rgba(0, 10, 20, 0.95)), url('../pictures/ruudukko.png');
-}
-
-.top-bar { margin-bottom: 20px; }
-.back-btn {
-  border: 1px solid var(--color-neon-cyan);
-  padding: 8px 16px;
-  text-decoration: none;
-  color: var(--color-neon-cyan);
-  font-size: 0.8rem;
-}
-
-.game-container {
-  max-width: 950px;
-  margin: 0 auto;
-  border: 1px solid rgba(0, 242, 255, 0.5);
-  padding: 25px;
-  background: rgba(2, 8, 20, 0.8);
-  border-radius: 8px;
-  box-shadow: 0 0 25px rgba(0, 242, 255, 0.15);
-}
-
-.game-header h1 { font-size: 1.2rem; margin: 0 0 5px 0; }
-.subtitle { font-size: 0.8rem; color: #fff; margin-bottom: 20px; text-transform: uppercase; }
-
-.instruction {
-  margin-bottom: 20px;
-  font-size: 0.9rem;
-  color: #ffcccc;
-}
-
-.game-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 30px;
-}
-
-.column h3 {
-  font-size: 0.8rem;
-  color: #8ab;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-
-.list-group {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background-image: linear-gradient(rgba(4, 14, 30, 0.9), rgba(4, 14, 30, 0.95)), url('../pictures/ruudukko.png');
 }
 
-/* Button tyyli */
+.container {
+  width: 100%;
+  max-width: 950px;
+  padding: 30px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-primary);
+  border-radius: 10px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.container-backbtn { position: absolute; top: 20px; left: 20px; z-index: 10; }
+.back-btn {
+  border: 1px solid var(--color-primary); border-radius: 6px; padding: 0.7rem 1rem;
+  color: var(--color-primary); text-decoration: none; font-size: 0.8rem;
+  background: rgba(0,0,0,0.5); text-transform: uppercase;
+}
+
+.panel-header { margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-muted); padding-bottom: 1rem; }
+.panel-title { font-size: 1.2rem; color: var(--color-primary); margin-bottom: 0.5rem; }
+.panel-sub { font-size: 0.8rem; color: #fff; }
+.divider-small { margin: 0 10px; color: var(--color-muted); }
+
+.instruction-text { color: var(--color-accent); font-size: 0.85rem; margin-bottom: 1.5rem; text-align: left; }
+
+.game-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px; }
+.col-title { font-size: 0.8rem; color: var(--color-muted); margin-bottom: 10px; text-transform: uppercase; }
+.list-group { display: flex; flex-direction: column; gap: 10px; }
+
 .game-btn {
-  background: rgba(0, 20, 30, 0.7);
-  border: 1px solid #368;
+  background: rgba(4, 16, 36, 0.8);
+  border: 1px solid var(--color-muted);
   padding: 12px 15px;
-  color: var(--color-neon-cyan);
+  color: var(--color-primary);
   cursor: pointer;
   text-align: left;
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-main);
   font-size: 0.85rem;
-  transition: all 0.2s;
   border-radius: 4px;
+  transition: all 0.2s;
 }
 
 .game-btn:hover {
-  background: rgba(0, 242, 255, 0.15);
-  border-color: var(--color-neon-cyan);
+  border-color: var(--color-primary);
+  background: rgba(0, 242, 255, 0.1);
 }
 
 .game-btn.selected {
-  background: var(--color-neon-cyan);
+  background: var(--color-primary);
   color: #000;
-  box-shadow: 0 0 15px var(--color-neon-cyan);
+  box-shadow: 0 0 15px var(--color-primary);
 }
 
 .game-btn.correct {
-  border-color: #00ff9b;
-  color: #00ff9b;
-  opacity: 0.5;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: rgba(0, 243, 130, 0.1);
   pointer-events: none;
-  background: rgba(0, 255, 155, 0.1);
+  opacity: 0.6;
 }
 
 .game-btn.wrong {
+  border-color: var(--color-danger);
   animation: shake 0.4s;
-  border-color: #ff4d4d;
 }
 
 @keyframes shake {
-  0% { transform: translateX(0); }
+  0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
+  75% { transform: translateX(5px); }
 }
 
 .hint-box {
   margin-top: 30px;
-  border: 1px solid #368;
   padding: 15px;
   font-size: 0.85rem;
-  color: #8ab;
+  color: var(--color-primary);
+  border: 1px solid var(--color-muted);
   border-radius: 4px;
+  background: rgba(0,0,0,0.2);
 }
 
-/* Loppuruutu */
-.completion-overlay {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.9);
-  display: flex; justify-content: center; align-items: center;
-  z-index: 100;
+.hidden { display: none !important; }
+.result-screen { text-align: center; padding: 2rem 0; }
+.result-trophy { font-size: 3rem; margin-bottom: 0.5rem; }
+.result-title { font-size: 1.5rem; color: var(--color-primary); margin-bottom: 2rem; letter-spacing: 0.2em; }
+.result-card {
+  max-width: 500px; margin: 0 auto 2rem; padding: 2rem;
+  border: 1px solid var(--color-primary);
+  border-radius: 10px;
+  background: radial-gradient(circle at top, rgba(0, 242, 255, 0.1), transparent);
 }
-.completion-box {
-  background: #020817; border: 2px solid var(--color-neon-cyan);
-  padding: 40px; text-align: center;
+.result-emoji { font-size: 2.5rem; margin-bottom: 1rem; }
+.result-score { font-size: 1.2rem; color: var(--color-primary); margin: 0; }
+.result-comment { font-size: 0.9rem; letter-spacing: 0.1em; opacity: 0.9; color: #fff; margin-top: 5px; }
+.result-divider { border: 0; border-top: 1px solid rgba(0,242,255,0.3); margin: 1.5rem 0; }
+.result-points-btn {
+  padding: 0.8rem 1.8rem; border: 1px solid var(--color-primary);
+  background: rgba(0,242,255,0.1); color: var(--color-primary);
+  border-radius: 6px; font-family: var(--font-main);
 }
-.hidden { display: none; }
+.result-btn {
+  display: block; width: 100%; padding: 1rem; text-align: center;
+  background: var(--color-primary); color: #000; text-decoration: none;
+  border-radius: 6px; font-weight: bold; letter-spacing: 0.1em;
+}
 
 @media (max-width: 700px) {
   .game-grid { grid-template-columns: 1fr; }
