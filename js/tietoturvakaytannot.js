@@ -121,6 +121,7 @@ const savePoints = (points) => {
   }
 
   function showCompletion() {
+    savePoints(150);
     panel.classList.add('hidden');
     resultScreen.classList.remove('hidden');
     
