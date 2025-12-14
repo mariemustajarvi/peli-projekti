@@ -1,135 +1,103 @@
 (function() {
-    const data = [
-      { id: 'firewall', term: "Palomuuri", def: "Valvoo ja rajoittaa verkkoliikennettä sääntöjen perusteella." },
-      { id: 'vpn', term: "VPN", def: "Luo salatun 'tunnelin' internetiin ja piilottaa sijaintisi." },
-      { id: 'encryption', term: "Salaus", def: "Muuttaa tiedon lukukelvottomaksi ilman oikeaa avainta." },
-      { id: 'malware', term: "Haittaohjelma", def: "Ohjelmisto, joka on suunniteltu vahingoittamaan laitetta." },
-      { id: 'phishing', term: "Tietojenkalastelu", def: "Huijausviesti, joka yrittää varastaa tunnuksesi tai tietosi." }
-    ];
-  
-    let matches = 0;
-    const maxMatches = data.length;
-    let selectedTerm = null;
-  
-    const termsList = document.getElementById('termsList');
-    const definitionsList = document.getElementById('definitionsList');
-    const scoreEl = document.getElementById('score');
-    const feedbackEl = document.getElementById('feedback');
-    const panelBody = document.querySelector('.panel-body');
-  
-    function initGame() {
-      const shuffledTerms = [...data].sort(() => Math.random() - 0.5);
-      const shuffledDefs = [...data].sort(() => Math.random() - 0.5);
-  
-      shuffledTerms.forEach(item => {
-        const el = document.createElement('div');
-        el.classList.add('draggable-term');
-        el.draggable = true;
-        el.textContent = item.term;
-        el.dataset.id = item.id;
-        
-        el.addEventListener('dragstart', handleDragStart);
-        el.addEventListener('click', handleTermClick);
-        
-        termsList.appendChild(el);
-      });
-  
-      shuffledDefs.forEach(item => {
-        const el = document.createElement('div');
-        el.classList.add('drop-zone');
-        el.dataset.matchId = item.id;
-        
-        const p = document.createElement('p');
-        p.textContent = item.def;
-        el.appendChild(p);
-  
-        el.addEventListener('dragover', e => { e.preventDefault(); el.classList.add('drag-over'); });
-        el.addEventListener('dragleave', () => el.classList.remove('drag-over'));
-        el.addEventListener('drop', handleDrop);
-        el.addEventListener('click', () => handleDefClick(el));
-  
-        definitionsList.appendChild(el);
-      });
-    }
-  
-    function handleDragStart(e) {
-      e.dataTransfer.setData('text/plain', e.target.dataset.id);
-      e.target.classList.add('dragging');
-    }
-  
-    function handleDrop(e) {
-      e.preventDefault();
-      const zone = e.currentTarget;
-      zone.classList.remove('drag-over');
-      if (zone.classList.contains('correct')) return;
-      const termId = e.dataTransfer.getData('text/plain');
-      checkMatch(termId, zone);
-    }
-  
-    function handleTermClick(e) {
+  // Kuvan mukaiset 8 paria
+  const data = [
+    { id: 'malware', term: "Haittaohjelma", def: "Haitallinen ohjelmisto joka on suunniteltu vahingoittamaan laitetta" },
+    { id: 'firewall', term: "Palomuuri", def: "Turvajärjestelmä joka valvoo verkkoliikennettä" },
+    { id: 'encryption', term: "Salaus", def: "Tietojen muuttaminen salaiseksi koodiksi" },
+    { id: 'phishing', term: "Tietojenkalastelu", def: "Väärennettyjä viestejä jotka yrittävät varastaa tietoja" },
+    { id: '2fa', term: "2FA", def: "Ylimääräinen turvatoimenpide käyttäen kahta vahvistusta" },
+    { id: 'vpn', term: "VPN", def: "Piilottaa IP-osoitteesi ja salaa yhteyden" },
+    { id: 'antivirus', term: "Virustorjunta", def: "Ohjelmisto joka tunnistaa ja poistaa haitalliset ohjelmat" },
+    { id: 'cookie', term: "Eväste", def: "Pieni tiedosto joka seuraa selausaktiviteettiasi" }
+  ];
+
+  let selectedTerm = null;
+  let matches = 0;
+  let tries = 0;
+
+  const termsList = document.getElementById('termsList');
+  const defsList = document.getElementById('defsList');
+  const triesEl = document.getElementById('tries');
+  const matchesEl = document.getElementById('matches');
+  const completionOverlay = document.getElementById('completionOverlay');
+
+  function init() {
+    // Luodaan termit (vasen)
+    data.forEach(item => {
+      const btn = document.createElement('div');
+      btn.className = 'game-btn';
+      btn.textContent = item.term;
+      btn.dataset.id = item.id;
+      btn.dataset.type = 'term';
+      btn.addEventListener('click', handleClick);
+      termsList.appendChild(btn);
+    });
+
+    // Luodaan määritelmät (oikea) - sekoitettuna
+    const shuffledData = [...data].sort(() => Math.random() - 0.5);
+    shuffledData.forEach(item => {
+      const btn = document.createElement('div');
+      btn.className = 'game-btn';
+      btn.textContent = item.def;
+      btn.dataset.id = item.id;
+      btn.dataset.type = 'def';
+      btn.addEventListener('click', handleClick);
+      defsList.appendChild(btn);
+    });
+  }
+
+  function handleClick(e) {
+    const clickedBtn = e.target;
+
+    // Jos klikataan jo ratkaistua
+    if (clickedBtn.classList.contains('correct')) return;
+
+    // Jos on määritelmä mutta ei valittua termiä -> ei tehdä mitään (tai ilmoitetaan)
+    if (clickedBtn.dataset.type === 'def' && !selectedTerm) return;
+
+    // 1. Valitaan termi
+    if (clickedBtn.dataset.type === 'term') {
+      // Poista vanha valinta
       if (selectedTerm) selectedTerm.classList.remove('selected');
-      selectedTerm = e.target;
+      
+      selectedTerm = clickedBtn;
       selectedTerm.classList.add('selected');
-      showFeedback("Valitse nyt vastaava määritelmä.", "neutral");
     }
-  
-    function handleDefClick(zone) {
-      if (!selectedTerm || zone.classList.contains('correct')) return;
-      checkMatch(selectedTerm.dataset.id, zone);
-      selectedTerm.classList.remove('selected');
-      selectedTerm = null;
-    }
-  
-    function checkMatch(termId, zone) {
-      const targetId = zone.dataset.matchId;
-      const termEl = document.querySelector(`.draggable-term[data-id="${termId}"]`);
-  
-      if (termId === targetId) {
-        matches++;
-        scoreEl.textContent = matches;
-        zone.classList.add('correct');
-        termEl.classList.add('matched');
-        showFeedback("Oikein yhdistetty!", "success");
-        if (matches === maxMatches) setTimeout(finishGame, 800);
+    
+    // 2. Valitaan määritelmä (kun termi on valittu)
+    else if (clickedBtn.dataset.type === 'def' && selectedTerm) {
+      tries++;
+      triesEl.textContent = tries;
+
+      if (clickedBtn.dataset.id === selectedTerm.dataset.id) {
+        // OIKEIN
+        handleMatch(selectedTerm, clickedBtn);
       } else {
-        showFeedback("Väärin! Termi ja määritelmä eivät täsmää.", "error");
-        zone.classList.add('shake');
-        setTimeout(() => zone.classList.remove('shake'), 500);
+        // VÄÄRIN
+        handleMismatch(clickedBtn);
       }
     }
-  
-    function showFeedback(text, type) {
-      feedbackEl.textContent = text;
-      feedbackEl.className = 'feedback-box show ' + (type === 'neutral' ? '' : type);
-      if (type !== 'neutral') setTimeout(() => feedbackEl.classList.remove('show'), 2000);
+  }
+
+  function handleMatch(termBtn, defBtn) {
+    termBtn.classList.remove('selected');
+    termBtn.classList.add('correct');
+    defBtn.classList.add('correct');
+    
+    matches++;
+    matchesEl.textContent = `${matches}/8`;
+    selectedTerm = null;
+
+    if (matches === 8) {
+      setTimeout(() => completionOverlay.classList.remove('hidden'), 500);
     }
-  
-    function finishGame() {
-      const earnedPoints = 200;
-      try {
-        const currentPoints = Number(localStorage.getItem('user_points') || 0);
-        localStorage.setItem('user_points', currentPoints + earnedPoints);
-      } catch(e) {}
-  
-      panelBody.innerHTML = `
-        <div class="completion-screen">
-          <div class="completion-trophy">🧩</div>
-          <h2 class="completion-title">TERMIT HALLUSSA!</h2>
-          <div class="completion-card">
-            <div class="completion-emoji">🤓</div>
-            <p class="completion-score">${matches} / ${maxMatches} Oikein</p>
-            <p class="completion-message">Agentti, tunnet sanaston täydellisesti.</p>
-            <hr class="divider">
-            <div class="completion-points-wrapper">
-               <span class="completion-points">+${earnedPoints} pistettä</span>
-            </div>
-          </div>
-          <div class="completion-buttons">
-            <a href="index.html" class="next-btn">Takaisin listaan</a>
-          </div>
-        </div>
-      `;
-    }
-  
-    initGame();
-  })();
+  }
+
+  function handleMismatch(defBtn) {
+    defBtn.classList.add('wrong');
+    setTimeout(() => defBtn.classList.remove('wrong'), 400);
+    // Pidetään termi valittuna, jotta voi yrittää toista
+  }
+
+  init();
+})();
