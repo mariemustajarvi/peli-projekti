@@ -1,3 +1,16 @@
+/* Welcome message styling */
+.welcome-message {
+  text-align: center;
+  margin-top: 1.2rem;
+  margin-bottom: 2.2rem;
+}
+.welcome-green {
+  color: #00ff99;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  font-family: 'Orbitron', 'Arial', sans-serif;
+}
 
 :root {
   --color-bg: #040e1e;
