@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css?v=3">
+  <script type="module" src="./js/index.js"></script>
 </head>
 <body>
   <div class="app content-frame">
@@ -19,7 +20,7 @@
       </h2>
       <div id="agent-greeting" class="site-header__greeting" style="margin-top: 0.7rem; font-size: 1.1rem; color: #00f382; font-weight: 500;"></div>
       <nav class="top-nav">
-        <a href="#" class="nav-btn nav-btn--primary">
+        <a href="saavutukset.html" class="nav-btn nav-btn--primary">
           <span class="nav-btn__icon">🏆</span>
           <span class="nav-btn__text">Saavutukset (0/30)</span>
         </a>
@@ -71,7 +72,7 @@
         <p class="agent-stat__value" id="agent-progress">0%</p>
       </article>
     </div>
-    <div class="agent-panel__next-rank">
+    <div class="agent-panel__next-rank" id="agentNextRankPanel">
       <div class="agent-panel__next-header">
         <span class="agent-panel__next-label">
           SEURAAVA ARVO: <span id="agent-next-rank">AGENTTI</span>
@@ -94,7 +95,7 @@
         <!-- 1: eka peli – heti auki -->
         <article
           class="game-card game-card--active loading-box"
-          data-mission-id="mission1"
+          data-mission-id="mission0"
           data-mission-url="./salasanasuojaus.html">
           <div class="loading-box__content">
             <div class="game-card__header">
@@ -124,7 +125,7 @@
         <!-- 2: Tietojenkalastelu -->
         <article
           class="game-card game-card--locked loading-box"
-          data-mission-id="mission2"
+          data-mission-id="mission1"
           data-mission-url="./tietojenkalastelu.html">
           <div class="game-card__header">
             <div class="game-card__icon">🎣</div>
@@ -150,7 +151,7 @@
         <!-- Manipulaatio -->
         <article
           class="game-card game-card--locked loading-box"
-          data-mission-id="mission3"
+          data-mission-id="mission2"
           data-mission-url="./manipulaatio.html">
           <div class="game-card__header">
             <div class="game-card__icon">🎭</div>
@@ -176,8 +177,8 @@
         <!-- Turvallinen tiedustelu -->
         <article
           class="game-card game-card--locked loading-box"
-          data-mission-id="mission4"
-          data-mission-url="./turvallinen-tiedustelu.html">
+          data-mission-id="mission3"
+          data-mission-url="./turvallinentiedustelu.html">
           <div class="game-card__header">
             <div class="game-card__icon">🌐</div>
             <div class="game-card__titles">
@@ -202,7 +203,7 @@
         <!-- Tietosuojaoperaatio -->
         <article
           class="game-card game-card--locked loading-box"
-          data-mission-id="mission5"
+          data-mission-id="mission4"
           data-mission-url="./tietosuoja.html">
           <div class="game-card__header">
             <div class="game-card__icon">🔒</div>
@@ -228,7 +229,7 @@
         <!-- Tietoturvakäytännöt -->
         <article
           class="game-card game-card--locked loading-box"
-          data-mission-id="mission6"
+          data-mission-id="mission5"
           data-mission-url="./tietoturvakaytannot.html">
           <div class="game-card__header">
             <div class="game-card__icon">🎯</div>
@@ -254,7 +255,7 @@
         <!-- Tiedustelutermit -->
         <article
           class="game-card game-card--locked loading-box"
-          data-mission-id="mission7"
+          data-mission-id="mission6"
           data-mission-url="./tiedustelutermit.html">
           <div class="game-card__header">
             <div class="game-card__icon">🧩</div>
@@ -280,7 +281,7 @@
         <!-- Uhka-analyysi -->
         <article
           class="game-card game-card--locked loading-box"
-          data-mission-id="mission8"
+          data-mission-id="mission7"
           data-mission-url="./uhka-analyysi.html">
           <div class="game-card__header">
             <div class="game-card__icon">⚡</div>
@@ -306,7 +307,7 @@
         <!-- Nopea reagointi -->
         <article
           class="game-card game-card--locked loading-box"
-          data-mission-id="mission9"
+          data-mission-id="mission8"
           data-mission-url="./nopea-reagointi.html">
           <div class="game-card__header">
             <div class="game-card__icon">⏱️</div>
@@ -332,7 +333,7 @@
         <!-- Lopullinen arviointi -->
         <article
           class="game-card game-card--locked loading-box"
-          data-mission-id="mission10"
+          data-mission-id="mission9"
           data-mission-url="./quiz.html">
           <div class="game-card__header">
             <div class="game-card__icon">🏆</div>
@@ -358,6 +359,5 @@
       </section>
     </main>
   </div>
-  <script src="./js/index.js"></script>
 </body>
 </html>

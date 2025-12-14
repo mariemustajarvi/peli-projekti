@@ -1,86 +1,125 @@
-// VÄLIAIKAINEN LOKAALI REKISTERÖINTI TESTAUSTA VARTEN
-// KORVATAAN TÄMÄ FIREBASELLA KUN VALMIS
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js';
 
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
 
-// korkea kontrasti toggle asetus
-const contrastToggle = document.getElementById('contrastToggle');
-if (contrastToggle) {
-  contrastToggle.addEventListener('click', () => {
-    document.body.classList.toggle('high-contrast');
-    const isHighContrast = document.body.classList.contains('high-contrast');
-    contrastToggle.setAttribute(
-      'aria-label',
-      isHighContrast ? 'Vaihda normaaliin tilaan' : 'Vaihda korkean kontrastin tilaan'
-    );
-  });
+import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyCUZNqdanUH2Z63t5GWw1JjY-0ffwqCy7I",
+
+  authDomain: "tuotekehitysprojekti-5f330.firebaseapp.com",
+
+  projectId: "tuotekehitysprojekti-5f330",
+
+  storageBucket: "tuotekehitysprojekti-5f330.firebasestorage.app",
+
+  messagingSenderId: "362924183192",
+
+  appId: "1:362924183192:web:337b854b2ecc8b53e48aed",
+
+  databaseURL: "https://tuotekehitysprojekti-5f330-default-rtdb.europe-west1.firebasedatabase.app"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+let registerInProgress = false;
+
+onAuthStateChanged(auth, (user) => {
+  if (user && registerInProgress == false) {
+    window.location.href = 'index.html';
+  }
+});
+
+let writeUserData = (userId, name) => {
+  const db = getDatabase();
+  const reference = ref(db, 'users/' + userId);
+
+  set(reference, {
+    username: name,
+    scores: {
+      0: 0,
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+      6: 0,
+      7: 0,
+      8: 0,
+      9: 0
+    },
+    completedMissions: {
+      0: false,
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false
+    }
+  }).then(() => {
+    registerInProgress = false;
+    window.location.href = 'index.html';
+  })
 }
 
-// Rekisteröintilomakkeen lähetys
-const registerForm = document.getElementById('registerForm');
-if (registerForm) {
-  registerForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    
-    // Tarkista että salasanat täsmäävät
-    if (password !== confirmPassword) {
-      alert('Salasanat eivät täsmää!');
-      return;
-    }
-    
-    // Tarkista salasanan vahvuus 
-    if (password.length < 8) {
-      alert('Salasanan tulee olla vähintään 8 merkkiä pitkä!');
-      return;
-    }
-    
-    // Tyhjennä kaikki vanhat käyttäjätiedot ensin (väliaikainen)
-    localStorage.removeItem('user_points');
-    localStorage.removeItem('completedLevels');
-    localStorage.removeItem('achievements');
-    
-    // Tallenna kaikki käyttäjät localStorageen (väliaikainen, korvaa Firebaseen)
-    let users = JSON.parse(localStorage.getItem('users') || '[]');
-    if (users.find(u => u.email === email)) {
-      alert('Sähköposti on jo rekisteröity!');
-      return;
-    }
-    const userData = {
-      username: username,
-      email: email,
-      password: password,
-      registeredAt: new Date().toISOString()
-    };
-    users.push(userData);
-    localStorage.setItem('users', JSON.stringify(users));
-    // Kirjaa sisään automaattisesti rekisteröinnin jälkeen
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('isLoggedIn', 'true');
-    setTimeout(() => {
-      alert('Tervetuloa, agentti ' + username + '!');
-      window.location.replace('index.html');
-    }, 100);
-  });
-}
+const registerButton = document.getElementById('registerButton');
 
-// Google rekisteröitymisnappi
+registerButton.addEventListener('click', event => {
+  event.preventDefault()
+  const username = document.getElementById('username').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+  const errorMsg = document.getElementById('errorMessage');
+
+  if (password.length < 6) {
+    errorMsg.innerHTML = 'Virhe: Salasanan on oltava vähintään 6 merkkiä pitkä';
+  } else if (username.length > 20) {
+    errorMsg.innerHTML = 'Virhe: Agenttinimi voi olla enintään 20 merkkiä pitkä';
+  } else if (password != confirmPassword) {
+    errorMsg.innerHTML = 'Virhe: Salasanat eivät täsmää';
+  } else {
+    registerInProgress = true;
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const userId = userCredential.user.uid;
+        writeUserData(userId, username)
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        if (errorCode == 'auth/email-already-in-use') {
+          errorMsg.innerHTML = 'Virhe: Sähköpostiosoite on jo käytössä';
+        }
+      });
+  }
+});
+
 const googleBtn = document.getElementById('googleBtn');
-if (googleBtn) {
-  googleBtn.addEventListener('click', () => {
-    console.log('Google registration clicked');
-    alert('Google-kirjautuminen tulossa pian! (Demo)');
-  });
-}
 
-// Facebook rekisteröitymisnappi
-const facebookBtn = document.getElementById('facebookBtn');
-if (facebookBtn) {
-  facebookBtn.addEventListener('click', () => {
-    console.log('Facebook registration clicked');
-    alert('Facebook-kirjautuminen tulossa pian! (Demo)');
-  });
-}
+googleBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  const username = document.getElementById('username').value;
+  if (username.length >= 1 && username.length <= 20) {
+    registerInProgress = true;
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider).then((result) => {
+      const userId = result.user.uid;
+      writeUserData(userId, username)
+    }).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+  } else {
+    const errorMsg = document.getElementById('errorMessage');
+    errorMsg.innerHTML = 'Virhe: Käyttäjänimen on oltava 1-20 merkkiä!';
+  }
+});

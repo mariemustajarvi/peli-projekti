@@ -1,342 +1,217 @@
-// Käyttää localStoragea (myöhemmin voidaan vaihtaa Firebaseen).
-// VÄLIAIKAINEN: Näytä agenttipaneeli vain kirjautuneille (localStorage)
-// Korvaa tämä Firebase-toteutuksella myöhemmin
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js';
 
-(function () {
-  const STORAGE_KEY = "kyberagentti_progress_v1";
+import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
 
-  // Agenttien arvot pisteiden mukaan
-  const RANKS = [
-    { name: "ALOITTELIJA-AGENTTI", minPoints: 0, icon: "🔰", color: "#6B7280" },
-    { name: "AGENTTI", minPoints: 500, icon: "🔷", color: "#28ADF1" },
-    { name: "KENTTÄAGENTTI", minPoints: 1500, icon: "🎯", color: "#8B5CF6" },
-    { name: "VETERAANI-AGENTTI", minPoints: 2500, icon: "⭐", color: "#10B981" },
-    { name: "ELITE-AGENTTI", minPoints: 3500, icon: "🏆", color: "#F59E0B" }
-  ];
+import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
 
-  // Pisteet per missio
-  const MISSION_POINTS = {
-    mission1: 100,
-    mission2: 150,
-    mission3: 150,
-    mission4: 200,
-    mission5: 200,
-    mission6: 150,
-    mission7: 200,
-    mission8: 250,
-    mission9: 250,
-    mission10: 300
-  };
+const firebaseConfig = {
 
-  function loadState() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return { completed: [] };
-      const parsed = JSON.parse(raw);
-      if (!Array.isArray(parsed.completed)) {
-        parsed.completed = [];
-      }
-      return parsed;
-    } catch (e) {
-      console.warn("Virhe luettaessa tilaa, käytetään oletusta:", e);
-      return { completed: [] };
-    }
-  }
+  apiKey: "AIzaSyCUZNqdanUH2Z63t5GWw1JjY-0ffwqCy7I",
 
-  function saveState(state) {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    } catch (e) {
-      console.error("Virhe tallennettaessa tilaa:", e);
-    }
-  }
+  authDomain: "tuotekehitysprojekti-5f330.firebaseapp.com",
 
-  function markMissionCompleted(missionId) {
-    // Mark a mission as completed in localStorage only. UI will update on next page load.
-    const state = loadState();
-    const set = new Set(state.completed);
-    set.add(missionId);
-    state.completed = Array.from(set);
-    saveState(state);
-    return state;
-  }
+  projectId: "tuotekehitysprojekti-5f330",
 
-  function calculatePoints(completedMissions) {
-    let totalPoints = 0;
-    completedMissions.forEach(missionId => {
-      totalPoints += MISSION_POINTS[missionId] || 0;
-    });
-    return totalPoints;
-  }
+  storageBucket: "tuotekehitysprojekti-5f330.firebasestorage.app",
 
-  function getRank(points) {
-    for (let i = RANKS.length - 1; i >= 0; i--) {
-      if (points >= RANKS[i].minPoints) {
-        return RANKS[i];
-      }
-    }
-    return RANKS[0];
-  }
+  messagingSenderId: "362924183192",
 
-  function getNextRank(currentRank) {
-    const currentIndex = RANKS.findIndex(r => r.name === currentRank.name);
-    if (currentIndex < RANKS.length - 1) {
-      return RANKS[currentIndex + 1];
-    }
-    return null; // Maksimiarvo saavutettu
-  }
+  appId: "1:362924183192:web:337b854b2ecc8b53e48aed",
 
-  function updateAgentPanel() {
-        // Päivitä tervetuloa-greetaus
-        const greetingEl = document.getElementById("agent-greeting");
-        if (greetingEl) {
-          let user = null;
-          try {
-            user = JSON.parse(localStorage.getItem('user'));
-          } catch (e) {}
-          let name = 'agentti';
-          if (user && user.username) {
-            name = `agentti ${user.username}`;
-          } else if (user && user.email) {
-            name = `agentti ${user.email.split('@')[0]}`;
+  databaseURL: "https://tuotekehitysprojekti-5f330-default-rtdb.europe-west1.firebasedatabase.app"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase();
+const auth = getAuth(app);
+
+const loginBtn = document.getElementById('logInOutBtnLink');
+const loginBtnText = document.getElementById('logInOutBtnText');
+
+const agentCode = document.getElementById('agent-code');
+const score = document.getElementById('agent-points');
+const missions = document.getElementById('agent-missions');
+const progress = document.getElementById('agent-progress');
+
+const agentRank = document.getElementById('agent-rank');
+const agentNextRank = document.getElementById('agent-next-rank');
+const agentRankIcon = document.getElementById('agent-rank-icon');
+const agentPanelHeader = document.querySelector('.agent-panel__header');
+const agentNextRankPanel = document.getElementById('agentNextRankPanel');
+const agentNextRankPoints = document.getElementById('agent-next-points');
+const agentNextRankBar = document.getElementById("agent-next-progress");
+
+let loggedIn = false; // Tätä käytetään vain tarkistamaan tarvitseeko käyttäjää kirjata ulos nappia painettaessa!
+let completed = new Set();
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    loggedIn = true;
+    loginBtnText.innerHTML = 'Kirjaudu ulos';
+
+    const userId = user.uid;
+    const userRef = ref(db, 'users/' + userId);
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        agentCode.innerHTML = data.username;
+
+        const currentScore = data.scores.reduce((partialSum, a) => partialSum + a, 0);
+        score.innerHTML = currentScore;
+
+        const completedMissions = data.completedMissions;
+        let missionCount = 0;
+        completedMissions.forEach(element => {
+          if (element == true) {
+            completed.add('mission' + missionCount);
+            missionCount++;
           }
-          greetingEl.textContent = `Tervetuloa, ${name}!`;
+        });
+
+        missions.innerHTML = missionCount + ' / 10';
+
+        if (missionCount > 0) {
+          progress.innerHTML = (missionCount / 10) * 100 + ' %'
         }
-    const state = loadState();
-    const completed = state.completed || [];
-    const points = calculatePoints(completed);
-    const currentRank = getRank(points);
-    const nextRank = getNextRank(currentRank);
 
-    // Päivitä pisteet
-    const pointsEl = document.getElementById("agent-points");
-    if (pointsEl) {
-      pointsEl.textContent = points;
-    }
+        const RANKS = [
+          { name: "ALOITTELIJA-AGENTTI", minPoints: 0, icon: "🔰", color: "#6B7280" },
+          { name: "AGENTTI", minPoints: 500, icon: "🔷", color: "#28ADF1" },
+          { name: "KENTTÄAGENTTI", minPoints: 1500, icon: "🎯", color: "#8B5CF6" },
+          { name: "VETERAANI-AGENTTI", minPoints: 2500, icon: "⭐", color: "#10B981" },
+          { name: "ELITE-AGENTTI", minPoints: 3500, icon: "🏆", color: "#F59E0B" }
+        ];
 
-    // Päivitä missiot
-    const missionsEl = document.getElementById("agent-missions");
-    if (missionsEl) {
-      missionsEl.textContent = `${completed.length}/10`;
-    }
+        let currentRank = 0;
+        let nextRank = 0;
 
-    // Päivitä valmistumisprosentti
-    const progressEl = document.getElementById("agent-progress");
-    if (progressEl) {
-      const percentage = Math.round((completed.length / 10) * 100);
-      progressEl.textContent = `${percentage}%`;
-    }
+        if (currentScore >= 3500) {
+          currentRank = RANKS[4];
+          agentNextRankPanel.style.visibility = "hidden";
+        } else if (currentScore >= 2500) {
+          currentRank = RANKS[3];
+          nextRank = RANKS[4]
+        } else if (currentScore >= 1500) {
+          currentRank = RANKS[2];
+          nextRank = RANKS[3]
+        } else if (currentScore >= 500) {
+          currentRank = RANKS[1];
+          nextRank = RANKS[2]
+        } else {
+          currentRank = RANKS[0];
+          nextRank = RANKS[1]
+        }
 
-    // Päivitä agenttiarvo
-    const rankEl = document.getElementById("agent-rank");
-    if (rankEl) {
-      rankEl.textContent = currentRank.name;
-    }
+        if (agentRank) {
+          agentRank.textContent = currentRank.name;
+        }
 
+        if (agentRankIcon) {
+          agentRankIcon.textContent = currentRank.icon;
+        }
 
-    // Päivitä agenttiarvo ikoni
-    const rankIconEl = document.getElementById("agent-rank-icon");
-    if (rankIconEl) {
-      rankIconEl.textContent = currentRank.icon;
-    }
+        if (agentPanelHeader && currentRank.color) {
+          agentPanelHeader.style.background = currentRank.color;
+        }
 
-    // Päivitä agenttikoodi (näytä käyttäjänimi)
-    const codeEl = document.getElementById("agent-code");
-    if (codeEl) {
-      let user = null;
-      try {
-        user = JSON.parse(localStorage.getItem('user'));
-      } catch (e) {}
-      if (user && user.username) {
-        codeEl.textContent = user.username;
-      } else if (user && user.email) {
-        codeEl.textContent = user.email.split('@')[0];
-      } else {
-        codeEl.textContent = 'XXXXXXX';
+        if (agentNextRank && nextRank != 0) {
+          agentNextRank.innerHTML = nextRank.name;
+        }
+
+        if (agentNextRankPoints) {
+          agentNextRankPoints.innerHTML = nextRank.minPoints - currentScore + ' pistettä puuttuu';
+        }
+
+        if (agentNextRankBar) {
+          agentNextRankBar.style.width = Math.floor((currentScore / nextRank.minPoints) * 100) + '%';
+        }
+
+        setupIndexPage();
       }
-    }
+    })
+  } else {
+    loggedIn = false;
+    loginBtnText.innerHTML = "Kirjaudu sisään / Rekisteröidy"
+  }
+});
 
-    // Päivitä header väri
-    const headerEl = document.querySelector(".agent-panel__header");
-    if (headerEl && currentRank.color) {
-      headerEl.style.background = currentRank.color;
-    }
+loginBtn.addEventListener('click', (event) => {
+  event.preventDefault()
+  if (loggedIn) {
+    signOut(auth).then(() => {
+      loginBtnText.innerHTML = "Kirjaudu sisään / Rekisteröidy"
+    })
+  } else {
+    window.location.href = loginBtn.href;
+  }
+});
 
-    // Päivitä seuraava arvo ja progress bar
-    const nextRankEl = document.getElementById("agent-next-rank");
-    const nextProgressEl = document.getElementById("agent-next-progress");
-    const nextRankSection = document.querySelector(".agent-panel__next-rank");
-    const nextPointsEl = document.getElementById("agent-next-points");
+function setupIndexPage() {
+  const gameList = document.querySelector(".game-list");
+  if (!gameList) return; // ei olla index-sivulla
 
-    if (nextRank) {
-      if (nextRankEl) {
-        nextRankEl.textContent = nextRank.name;
+  const cards = Array.from(gameList.querySelectorAll(".game-card"));
+
+  // Käydään kortit läpi järjestyksessä: 1. kortti = mission1, 2. = mission2...
+  cards.forEach((card, index) => {
+
+    const missionId = card.dataset.missionId || `mission${index}`;
+    const prevMissionId =
+      index === 0 ? null : (cards[index - 1].dataset.missionId || `mission${index - 1}`);
+
+    const isFirst = index === 0;
+    const isUnlocked = isFirst || (prevMissionId && completed.has(prevMissionId));
+
+    const lockIcon = card.querySelector(".game-card__lock");
+
+    if (isUnlocked) {
+      // Tee kortista "aktiivinen" (samannäköinen kun eka)
+      card.classList.add("game-card--active");
+      card.classList.remove("game-card--locked");
+      card.style.opacity = "1";
+
+      if (lockIcon) {
+        lockIcon.style.display = "none";
       }
-      if (nextProgressEl) {
-        const pointsNeeded = nextRank.minPoints - currentRank.minPoints;
-        const pointsEarned = points - currentRank.minPoints;
-        const progressPercent = Math.min(100, (pointsEarned / pointsNeeded) * 100);
-        nextProgressEl.style.width = `${progressPercent}%`;
-      }
-      if (nextRankSection) {
-        nextRankSection.style.display = "";
+
+      // Luo CTA-nappi, jos sitä ei vielä ole
+      let cta = card.querySelector(".game-card__cta");
+      if (!cta) {
+        const footer = card.querySelector(".game-card__footer");
+        if (footer) {
+          cta = document.createElement("a");
+          cta.className = "game-card__cta";
+          cta.textContent = "Aloita missio";
+          footer.appendChild(cta);
+        }
       }
 
-      // Päivitä "pistettä puuttuu" teksti
-      if (nextPointsEl) {
-        const pointsNeeded = nextRank.minPoints - points;
-        nextPointsEl.textContent = `${pointsNeeded} pistettä puuttuu`;
+      if (cta) {
+        const url = card.dataset.missionUrl;
+        if (url) {
+          cta.href = url;
+        } else {
+          cta.href = "#";
+        }
+        cta.style.pointerEvents = "auto";
+        cta.style.opacity = "1";
       }
     } else {
-      // Maksimiarvo saavutettu
-      if (nextRankSection) {
-        nextRankSection.style.display = "none";
+      // Pidä kortti lukittuna
+      card.classList.add("game-card--locked");
+      card.classList.remove("game-card--active");
+      card.style.opacity = "0.7";
+
+      const cta = card.querySelector(".game-card__cta");
+      if (cta) {
+        cta.style.pointerEvents = "none";
+        cta.style.opacity = "0.4";
+        cta.addEventListener("click", (ev) => ev.preventDefault());
+      }
+      if (lockIcon) {
+        lockIcon.style.display = "";
       }
     }
-  }
-
-  // Save the original agent panel HTML for restoration
-  let originalAgentPanelHTML = null;
-  function setupIndexPage() {
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    const loginLogoutBtn = document.getElementById('loginLogoutBtn');
-    const loginLogoutText = document.getElementById('loginLogoutText');
-    const loginLogoutIcon = document.getElementById('loginLogoutIcon');
-    if (loginLogoutBtn && loginLogoutText && loginLogoutIcon) {
-      if (isLoggedIn) {
-        loginLogoutText.textContent = 'Kirjaudu ulos';
-        loginLogoutIcon.textContent = '➜';
-        loginLogoutBtn.href = '#';
-        loginLogoutBtn.onclick = function(e) {
-          e.preventDefault();
-          localStorage.removeItem('isLoggedIn');
-          localStorage.removeItem('user');
-          localStorage.removeItem('kyberagentti_progress_v1'); // Clear all mission progress and scores
-          setTimeout(() => { location.reload(); }, 100);
-        };
-      } else {
-        loginLogoutText.textContent = 'Kirjaudu sisään / rekisteröidy';
-        loginLogoutIcon.textContent = '➜';
-        loginLogoutBtn.href = 'login.html';
-        loginLogoutBtn.onclick = null;
-      }
-    }
-    const agentPanel = document.querySelector('.agent-panel');
-    if (agentPanel && originalAgentPanelHTML === null) {
-      originalAgentPanelHTML = agentPanel.innerHTML;
-    }
-    console.log('[DEBUG] isLoggedIn:', isLoggedIn, '| user:', localStorage.getItem('user'));
-   
-    if (agentPanel) {
-      if (isLoggedIn) {
-        
-        if (originalAgentPanelHTML && agentPanel.innerHTML !== originalAgentPanelHTML) {
-          agentPanel.innerHTML = originalAgentPanelHTML;
-        }
-        agentPanel.style.display = '';
-        updateAgentPanel();
-      } else {
-        // piilota agenttipaneeli jos ei ole kirjautunut
-        agentPanel.style.display = 'none';
-      }
-    }
-    if (isLoggedIn && agentPanel && agentPanel.style.display === 'none') {
-      if (originalAgentPanelHTML && agentPanel.innerHTML !== originalAgentPanelHTML) {
-        agentPanel.innerHTML = originalAgentPanelHTML;
-      }
-      agentPanel.style.display = '';
-      updateAgentPanel();
-    }
-    const gameList = document.querySelector(".game-list");
-    if (!gameList) return;
-    if (isLoggedIn) {
-      updateAgentPanel();
-    }
-    const state = loadState();
-    const completed = new Set(state.completed);
-    const cards = Array.from(gameList.querySelectorAll(".game-card"));
-    cards.forEach((card, index) => {
-      const missionId = card.dataset.missionId || `mission${index + 1}`;
-      const prevMissionId = index === 0 ? null : (cards[index - 1].dataset.missionId || `mission${index}`);
-      const isFirst = index === 0;
-      const isCompleted = completed.has(missionId);
-      // Only unlock if first, or previous is completed
-      const isUnlocked = isFirst || (prevMissionId && completed.has(prevMissionId));
-      const lockIcon = card.querySelector(".game-card__lock");
-
-      // Completed styling
-      if (isCompleted) {
-        card.classList.add("game-card--completed");
-        card.classList.remove("game-card--active");
-        card.classList.remove("game-card--locked");
-        card.style.opacity = "1";
-        if (lockIcon) lockIcon.style.display = "none";
-        let cta = card.querySelector(".game-card__cta");
-        if (cta) {
-          cta.textContent = "Pelaa uudelleen";
-          cta.href = card.dataset.missionUrl || "#";
-          cta.style.pointerEvents = "auto";
-          cta.style.opacity = "1";
-        }
-        return;
-      }
-
-      if (isUnlocked) {
-        card.classList.add("game-card--active");
-        card.classList.remove("game-card--locked");
-        card.classList.remove("game-card--completed");
-        card.style.opacity = "1";
-        if (lockIcon) {
-          lockIcon.style.display = "none";
-        }
-        let cta = card.querySelector(".game-card__cta");
-        if (!cta) {
-          const footer = card.querySelector(".game-card__footer");
-          if (footer) {
-            cta = document.createElement("a");
-            cta.className = "game-card__cta";
-            cta.textContent = "Aloita missio";
-            footer.appendChild(cta);
-          }
-        }
-        if (cta) {
-          const url = card.dataset.missionUrl;
-          if (url) {
-            cta.href = url;
-          } else {
-            cta.href = "#";
-          }
-          cta.style.pointerEvents = "auto";
-          cta.style.opacity = "1";
-        }
-      } else {
-        card.classList.add("game-card--locked");
-        card.classList.remove("game-card--active");
-        card.classList.remove("game-card--completed");
-        card.style.opacity = "0.7";
-        const cta = card.querySelector(".game-card__cta");
-        if (cta) {
-          cta.style.pointerEvents = "none";
-          cta.style.opacity = "0.4";
-          cta.addEventListener("click", (ev) => ev.preventDefault());
-        }
-        if (lockIcon) {
-          lockIcon.style.display = "";
-        }
-      }
-    });
-  }
-
-  // Tätä kutsutaan mission-sivuilta, kun pelaaja on suorittanut mission.
-  // Esim: completeMission("mission1");
-  function completeMission(missionId, redirectUrl = "index.html") {
-    // Mark as completed and redirect. UI will update on next page load.
-    markMissionCompleted(missionId);
-    window.location.href = redirectUrl;
-  }
-
-  // Viedään globaaliksi, jotta mission-sivut voivat käyttää
-  window.completeMission = completeMission;
-
-  document.addEventListener("DOMContentLoaded", setupIndexPage);
-})();
+  });
+};
