@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kyberagentti</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css?v=3">
+  <script type="module" src="./js/saavutukset.js"></script>
+  <script type="module" src="./js/index.js"></script>
+</head>
+<body>
+  <div class="app content-frame">
+    <header class="site-header">
+      <div class="brand">
+        <img src="./pictures/logo.png" alt="Logo" class="brand__logo">
+        <div class="brand__text">Kyberturvallisuusakatemia</div>
+      </div>
+      <h2 class="site-header__title">
+        Agenttien koulutuskäyttöliittymä 🛡️
+      </h2>
+      <div id="welcomeText" class="welcome-message" style="display:none;">
+        <span class="welcome-green">Tervetuloa, agentti <span id="welcomeUsername"></span>!</span>
+      </div>
+      <nav class="top-nav">
+        <a href="saavutukset.html" class="nav-btn nav-btn--primary">
+          <span class="nav-btn__icon">🏆</span>
+          <span class="nav-btn__text" id="achievementsText">Saavutukset (0/25)</span>
+        </a>
+        <div class="top-nav__row">
+          <a href="tulostaulukko.html" class="nav-btn nav-btn--secondary">
+            <span class="nav-btn__icon">👤</span>
+            <span class="nav-btn__text">Tulostaulukko</span>
+          </a>
+          <a id="logInOutBtnLink" href="login.html" class="nav-btn nav-btn--accent">
+            <span class="nav-btn__icon">➜</span>
+            <span id="logInOutBtnText" class="nav-btn__text">Kirjaudu sisään / Rekisteröidy</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+    <main class="dashboard">
+<section class="agent-panel" aria-label="Agent overview">
+  <header class="agent-panel__header">
+    <div class="agent-panel__rank">
+      <div class="agent-panel__rank-icon" id="agent-rank-icon">
+        📦
+      </div>
+      <div class="agent-panel__rank-info">
+        <span class="agent-panel__rank-label">AGENTTIARVO</span>
+        <span class="agent-panel__rank-value" id="agent-rank">
+          XXXXXXX
+        </span>
+      </div>
+    </div>
+    <div class="agent-panel__code">
+      <span class="agent-panel__code-label">KOODI</span>
+      <span class="agent-panel__code-value" id="agent-code">
+        XXXXXXX
+      </span>
+    </div>
+  </header>
+  <div class="agent-panel__content">
+    <div class="agent-panel__stats">
+      <article class="agent-stat">
+        <h3 class="agent-stat__label">⭐ PISTEET</h3>
+        <p class="agent-stat__value" id="agent-points">0</p>
+      </article>
+      <article class="agent-stat">
+        <h3 class="agent-stat__label">🎯 MISSIOT</h3>
+        <p class="agent-stat__value" id="agent-missions">0/10</p>
+      </article>
+      <article class="agent-stat">
+        <h3 class="agent-stat__label">⚡ VALMIS</h3>
+        <p class="agent-stat__value" id="agent-progress">0%</p>
+      </article>
+    </div>
+    <div class="agent-panel__next-rank" id="agentNextRankPanel">
+      <div class="agent-panel__next-header">
+        <span class="agent-panel__next-label">
+          SEURAAVA ARVO: <span id="agent-next-rank">AGENTTI</span>
+        </span>
+        <span class="agent-panel__next-points" id="agent-next-points">
+          500 pistettä puuttuu
+        </span>
+      </div>
+      <div class="agent-progress-bar">
+        <div
+          class="agent-progress-bar__fill"
+          id="agent-next-progress"
+        ></div>
+      </div>
+    </div>
+  </div>
+  </section>
+           <!-- pelit -->
+      <section class="game-list" aria-label="Available games">
+        <!-- 1: eka peli – heti auki -->
+        <article
+          class="game-card game-card--active loading-box"
+          data-mission-id="mission0"
+          data-mission-url="./salasanasuojaus.html">
+          <div class="loading-box__content">
+            <div class="game-card__header">
+              <div class="game-card__icon">🔐</div>
+              <div class="game-card__titles">
+                <h2 class="game-card__title">Missio: Salasanasuojaus</h2>
+                <p class="game-card__subtitle">
+                  Analysoi salasanojen vahvuus ja murtoaika. Agenttitason suojaus edellytetään.
+                </p>
+              </div>
+            </div>
+            <div class="game-card__footer">
+              <div class="game-card__rewards">
+                <div class="reward-box reward-box--star">
+                  ⭐
+                </div>
+                <div class="reward-box reward-box--points">
+                  100 pistettä
+                </div>
+              </div>
+              <a href="./salasanasuojaus.html" class="game-card__cta">
+                Aloita missio
+              </a>
+            </div>
+          </div>
+        </article>
+        <!-- 2: Tietojenkalastelu -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission1"
+          data-mission-url="./tietojenkalastelu.html">
+          <div class="game-card__header">
+            <div class="game-card__icon">🎣</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Missio: Tietojenkalastelun tunnistus</h2>
+              <p class="game-card__subtitle">
+                Paljasta väärennetyt viestit. Viholliset yrittävät soluttautua järjestelmiimme.
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__rewards">
+              <div class="reward-box reward-box--star">
+                ⭐
+              </div>
+              <div class="reward-box reward-box--points">
+                150 pistettä
+              </div>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+        <!-- Manipulaatio -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission2"
+          data-mission-url="./manipulaatio.html">
+          <div class="game-card__header">
+            <div class="game-card__icon">🎭</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Missio: Manipulaation torjunta</h2>
+              <p class="game-card__subtitle">
+                Opi vastustamaan sosiaalisen manipuloinnin taktiikoita. Agentti ei lankea huijauksiin.
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__rewards">
+              <div class="reward-box reward-box--star">
+                ⭐⭐
+              </div>
+              <div class="reward-box reward-box--points">
+                150 pistettä
+              </div>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+        <!-- Turvallinen tiedustelu -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission3"
+          data-mission-url="./turvallinentiedustelu.html">
+          <div class="game-card__header">
+            <div class="game-card__icon">🌐</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Missio: Turvallinen tiedustelu</h2>
+              <p class="game-card__subtitle">
+                Erottele turvalliset kohteet vihollisverkkoista. Väärä siirto voi olla kohtalokas.
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__rewards">
+              <div class="reward-box reward-box--star">
+                ⭐⭐
+              </div>
+              <div class="reward-box reward-box--points">
+                200 pistettä
+              </div>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+        <!-- Tietosuojaoperaatio -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission4"
+          data-mission-url="./tietosuoja.html">
+          <div class="game-card__header">
+            <div class="game-card__icon">🔒</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Missio: Tietosuojaoperaatio</h2>
+              <p class="game-card__subtitle">
+                Suojaa arkaluontoiset tiedot. Agenttien henkilöllisyys on luokiteltu.
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__rewards">
+              <div class="reward-box reward-box--star">
+                ⭐⭐
+              </div>
+              <div class="reward-box reward-box--points">
+                200 pistettä
+              </div>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+        <!-- Tietoturvakäytännöt -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission5"
+          data-mission-url="./tietoturvakaytannot.html">
+          <div class="game-card__header">
+            <div class="game-card__icon">🎯</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Missio: Tietoturvakäytäntöjen luokittelu</h2>
+              <p class="game-card__subtitle">
+                Lajittele turvalliset ja vaaralliset operaatiot. Kenttäagentin on tunnettava ero.
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__rewards">
+              <div class="reward-box reward-box--star">
+                ⭐⭐
+              </div>
+              <div class="reward-box reward-box--points">
+                150 pistettä
+              </div>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+        <!-- Tiedustelutermit -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission6"
+          data-mission-url="./tiedustelutermit.html">
+          <div class="game-card__header">
+            <div class="game-card__icon">🧩</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Missio: Tiedustelutermit</h2>
+              <p class="game-card__subtitle">
+                Yhdistä kyberturva-analyysit määritelmiin. Agentin kieli on oltava hallussa.
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__rewards">
+              <div class="reward-box reward-box--star">
+                ⭐⭐
+              </div>
+              <div class="reward-box reward-box--points">
+                200 pistettä
+              </div>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+        <!-- Uhka-analyysi -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission7"
+          data-mission-url="./uhka-analyysi.html">
+          <div class="game-card__header">
+            <div class="game-card__icon">⚡</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Missio: Uhka-analyysi</h2>
+              <p class="game-card__subtitle">
+                Kriittinen tehtävä! Tunnista uhat ennen kuin ne tunkeutuvat järjestelmään.
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__rewards">
+              <div class="reward-box reward-box--star">
+                ⭐⭐⭐
+              </div>
+              <div class="reward-box reward-box--points">
+                250 pistettä
+              </div>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+        <!-- Nopea reagointi -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission8"
+          data-mission-url="./nopea-reagointi.html">
+          <div class="game-card__header">
+            <div class="game-card__icon">⏱️</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Missio: Nopea reagointi</h2>
+              <p class="game-card__subtitle">
+                Kenttätilanteessa päätökset on tehtävä sekunneissa. 15 sekuntia per analyysi!
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__rewards">
+              <div class="reward-box reward-box--star">
+                ⭐⭐⭐
+              </div>
+              <div class="reward-box reward-box--points">
+                250 pistettä
+              </div>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+        <!-- Lopullinen arviointi -->
+        <article
+          class="game-card game-card--locked loading-box"
+          data-mission-id="mission9"
+          data-mission-url="./quiz.html">
+          <div class="game-card__header">
+            <div class="game-card__icon">🏆</div>
+            <div class="game-card__titles">
+              <h2 class="game-card__title">Missio: Lopullinen arviointi</h2>
+              <p class="game-card__subtitle">
+                Todista kykysi. Vain parhaat agentit läpäisevät tämän testin!
+              </p>
+            </div>
+          </div>
+          <div class="game-card__footer">
+            <div class="game-card__rewards">
+              <div class="reward-box reward-box--star">
+                ⭐⭐⭐
+              </div>
+              <div class="reward-box reward-box--points">
+                300 pistettä
+              </div>
+            </div>
+            <div class="game-card__lock">🔒</div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
