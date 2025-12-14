@@ -1,18 +1,14 @@
 :root {
   --color-bg: #040e1e;
-  --color-grid: rgba(0, 255, 255, 0.04);
   --color-primary: #00f2ff;
-  --color-primary-soft: rgba(7, 219, 208, 0.2);
   --color-accent: #00f382;
-  --color-text: #00f2ff;
-  --color-muted: #0d4263;
   --color-danger: #f30000;
-  
+  --color-muted: #0d4263;
+  --font-main: "Orbitron", system-ui, sans-serif;
   --font-xs: 0.7rem;
   --font-sm: 0.8rem;
   --font-md: 1.0rem;
   --font-lg: 1.3rem;
-  --font-xl: 2.2rem;
 }
 
 body {
@@ -21,42 +17,33 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Orbitron", system-ui, sans-serif;
+  font-family: var(--font-main);
   background-color: var(--color-bg);
-  background-image: url('../pictures/ruudukko.png'); /* Varmista että polku on oikein */
+  background-image: url('../pictures/ruudukko.png');
   padding: 2rem 1rem;
-  color: var(--color-text);
+  color: var(--color-primary);
 }
 
-/* Yläkulman napit */
 .container-backbtn {
   position: absolute;
   top: 20px; left: 20px; z-index: 10;
-  display: flex; align-items: center; gap: 0.6rem;
+  display: flex; gap: 0.6rem;
 }
 
-.back-btn {
+.back-btn, .contrast-btn {
   border: 1px solid var(--color-primary); border-radius: 6px;
-  padding: 0.7rem 1rem; color: var(--color-primary); text-decoration: none;
-  font-size: var(--font-xs); background: rgba(0,0,0,0.6);
+  padding: 0.6rem 0.9rem; color: var(--color-primary); text-decoration: none;
+  font-size: var(--font-xs); background: rgba(0,0,0,0.6); cursor: pointer;
 }
 
-.contrast-btn {
-  padding: 0.55rem 0.85rem; font-size: var(--font-xs);
-  border-radius: 6px; border: 1px solid var(--color-primary);
-  color: var(--color-primary); background-color: rgba(0,0,0,0.6); cursor: pointer;
-}
-
-/* Pääkontti */
 .container {
-  width: 100%; max-width: 900px; padding: 30px;
+  width: 100%; max-width: 800px; padding: 30px;
   background-color: var(--color-bg);
   border: 1px solid var(--color-primary);
   border-radius: 10px; box-sizing: border-box;
+  position: relative;
 }
 
-/* LASER EFEKTI (Kopioitu tietojenkalastelu.css) */
-.loading-box { position: relative; }
 .loading-box::before {
   content: ""; position: absolute; left: 0; right: 0; height: 2px;
   background: linear-gradient(to right, transparent, var(--color-muted), transparent);
@@ -71,89 +58,66 @@ body {
   100% { top: 100%; opacity: 0; }
 }
 
-/* Otsikot */
-.panel-title { font-size: var(--font-lg); margin-bottom: 0.5rem; }
-.panel-sub { margin-top: 0.5rem; font-size: var(--font-sm); color: white; }
+.panel-title { font-size: var(--font-lg); margin-bottom: 0.5rem; color: #fff; }
+.panel-sub { font-size: var(--font-sm); color: var(--color-primary); margin-top: 0.5rem; }
 .divider-small { margin: 0 1rem; color: var(--color-muted); }
 
-/* Pelialue */
-.section-label {
-  font-size: var(--font-sm); color: var(--color-muted); margin-bottom: 10px; text-transform: uppercase;
-}
+.section-label { font-size: var(--font-sm); color: var(--color-muted); margin-bottom: 10px; }
 
-.draggable-list {
-  display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px;
-}
+.draggable-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px; }
 
 .draggable-item {
-  background: rgba(4, 16, 36, 0.8);
-  border: 1px solid var(--color-primary);
-  padding: 15px; border-radius: 6px; cursor: grab;
-  color: white; font-size: var(--font-sm);
+  background: rgba(4, 16, 36, 0.8); border: 1px solid var(--color-primary);
+  padding: 12px; border-radius: 6px; cursor: grab; color: #fff; font-size: var(--font-sm);
   display: flex; align-items: center; transition: all 0.2s;
 }
+.draggable-item:hover { background: rgba(7, 219, 208, 0.15); transform: translateX(3px); }
+.draggable-item::before { content: ':::'; margin-right: 12px; color: var(--color-primary); font-weight: bold; }
 
-.draggable-item:hover {
-  background: rgba(7, 219, 208, 0.1);
-  transform: translateX(5px);
-}
-
-.draggable-item::before {
-  content: ':::'; margin-right: 15px; color: var(--color-primary); font-weight: bold;
-}
-
-.drop-zones {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-}
+.drop-zones { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 
 .zone {
-  border: 1px dashed var(--color-primary);
-  background: rgba(0,0,0,0.3); border-radius: 6px;
-  padding: 20px; min-height: 150px;
-  display: flex; flex-direction: column; text-align: center;
-  transition: all 0.3s;
+  border: 1px dashed var(--color-primary); background: rgba(0,0,0,0.3);
+  border-radius: 6px; padding: 15px; min-height: 120px;
+  display: flex; flex-direction: column; text-align: center; transition: all 0.3s;
 }
 
-.zone-header {
-  font-size: var(--font-md); font-weight: bold; margin-bottom: 10px;
-}
-.zone-content { font-size: var(--font-xs); opacity: 0.7; margin-top: auto; margin-bottom: auto; }
+.zone-header { font-size: var(--font-md); font-weight: bold; margin-bottom: 8px; }
+.zone-content { font-size: var(--font-xs); opacity: 0.6; margin: auto; }
 
-/* Värit alueille */
 .safe-zone { border-color: var(--color-accent); }
 .safe-zone .zone-header { color: var(--color-accent); }
-.safe-zone.drag-over { background: rgba(0, 243, 130, 0.1); box-shadow: 0 0 15px rgba(0, 243, 130, 0.2); }
+.safe-zone.drag-over { background: rgba(0, 243, 130, 0.15); box-shadow: 0 0 15px rgba(0, 243, 130, 0.2); }
 
 .risk-zone { border-color: var(--color-danger); }
 .risk-zone .zone-header { color: var(--color-danger); }
-.risk-zone.drag-over { background: rgba(243, 0, 0, 0.1); box-shadow: 0 0 15px rgba(243, 0, 0, 0.2); }
+.risk-zone.drag-over { background: rgba(243, 0, 0, 0.15); box-shadow: 0 0 15px rgba(243, 0, 0, 0.2); }
 
-/* Loppuruutu (Kopioitu suoraan esimerkistä) */
 .hidden { display: none !important; }
-.result-screen { text-align: center; margin-top: 1.5rem; }
+.result-screen { text-align: center; margin-top: 2rem; }
 .result-card {
-  margin: 0 auto 2rem; max-width: 500px; padding: 2rem;
-  border: 1px solid rgba(0, 242, 255, 0.4); border-radius: 10px;
-  background: radial-gradient(circle at top, rgba(0, 242, 255, 0.12), transparent), #020813;
+  margin: 0 auto 2rem; max-width: 450px; padding: 2rem;
+  border: 1px solid var(--color-primary); border-radius: 10px;
+  background: radial-gradient(circle at top, rgba(0, 242, 255, 0.12), #020813);
 }
-.result-trophy { font-size: 3rem; margin-bottom: 0.5rem; }
-.result-title { font-size: var(--font-lg); color: var(--color-primary); margin-bottom: 2rem; }
-.result-score { font-size: 1.6rem; color: var(--color-primary); margin: 0; }
-.result-comment { font-size: var(--font-sm); color: white; opacity: 0.9; margin-top: 10px; }
-.result-divider { border: 0; border-top: 1px solid rgba(0,242,255,0.2); margin: 1.5rem 0; }
+.result-trophy { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.result-title { font-size: 1.4rem; color: var(--color-primary); margin-bottom: 1.5rem; }
+.result-score { font-size: 1.2rem; color: var(--color-primary); margin: 0; }
+.result-comment { font-size: var(--font-sm); color: #fff; opacity: 0.9; margin-top: 8px; }
+.result-divider { border: 0; border-top: 1px solid rgba(0,242,255,0.3); margin: 1.5rem 0; }
 .result-points-btn {
-  padding: 0.8rem 1.8rem; border: 1px solid var(--color-primary); background: rgba(0,242,255,0.08);
-  color: var(--color-primary); font-size: var(--font-sm); border-radius: 6px;
+  padding: 0.7rem 1.5rem; border: 1px solid var(--color-primary);
+  background: rgba(0,242,255,0.1); color: var(--color-primary);
+  border-radius: 6px; font-size: var(--font-sm);
 }
 .result-btn {
-  display: block; width: 100%; padding: 1.1rem; text-align: center;
+  display: block; width: 100%; padding: 1rem; text-align: center;
   background: var(--color-primary); color: var(--color-bg);
   border-radius: 6px; font-weight: bold; text-decoration: none;
 }
 
-/* Mobiili */
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .drop-zones { grid-template-columns: 1fr; }
   .container { padding: 15px; }
-  .container-backbtn { position: relative; top: 0; left: 0; margin-bottom: 20px; }
+  .container-backbtn { position: relative; top: 0; left: 0; margin-bottom: 15px; }
 }
