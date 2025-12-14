@@ -1,5 +1,4 @@
 (function() {
-  // Tismalleen kuvan tekstit
   const items = [
     { id: 1, text: "Jaa henkilökohtaisia tietoja sosiaalisessa mediassa", type: "risk" },
     { id: 2, text: "Käytä samaa salasanaa kaikilla tileillä", type: "risk" },
@@ -17,10 +16,10 @@
   const sourceContainer = document.getElementById('sourceContainer');
   const zones = document.querySelectorAll('.zone');
   const statusText = document.getElementById('statusText');
-  const completionOverlay = document.getElementById('completionOverlay');
+  const panel = document.querySelector('.panel');
+  const resultScreen = document.getElementById('resultScreen');
 
   function init() {
-    // Sekoita
     const shuffled = [...items].sort(() => Math.random() - 0.5);
     
     shuffled.forEach(item => {
@@ -30,30 +29,19 @@
       el.draggable = true;
       el.dataset.type = item.type;
       
-      // Drag events
       el.addEventListener('dragstart', (e) => {
         e.dataTransfer.setData('type', item.type);
         el.classList.add('dragging');
       });
-      
-      el.addEventListener('dragend', () => {
-        el.classList.remove('dragging');
-      });
-
+      el.addEventListener('dragend', () => el.classList.remove('dragging'));
       sourceContainer.appendChild(el);
     });
-    
     updateStatus();
   }
 
   zones.forEach(zone => {
-    zone.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      zone.classList.add('drag-over');
-    });
-
+    zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('drag-over'); });
     zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
-
     zone.addEventListener('drop', (e) => {
       e.preventDefault();
       zone.classList.remove('drag-over');
@@ -62,20 +50,11 @@
       const draggingItem = document.querySelector('.dragging');
       
       if (draggingItem && zone.dataset.type === type) {
-        // Oikein meni
         draggingItem.remove();
         itemsLeft--;
         updateStatus();
-        
-        // Pieni efekti
-        zone.style.backgroundColor = zone.dataset.type === 'safe' ? 'rgba(0,255,155,0.2)' : 'rgba(255,77,77,0.2)';
-        setTimeout(() => zone.style.backgroundColor = '', 300);
-
-        if (itemsLeft === 0) {
-          setTimeout(() => completionOverlay.classList.remove('hidden'), 500);
-        }
+        if (itemsLeft === 0) showCompletion();
       } else {
-        // Väärin meni
         alert("Väärä kategoria! Yritä uudelleen.");
       }
     });
@@ -83,6 +62,16 @@
 
   function updateStatus() {
     statusText.textContent = `ASETA VIELÄ ${itemsLeft} KOHDETTA`;
+  }
+
+  function showCompletion() {
+    panel.classList.add('hidden');
+    resultScreen.classList.remove('hidden');
+    
+    try {
+      let pts = Number(localStorage.getItem('user_points') || 0);
+      localStorage.setItem('user_points', pts + 150);
+    } catch(e) {}
   }
 
   init();

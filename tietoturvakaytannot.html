@@ -3,61 +3,70 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Missio — Turvallisuuskäytännöt</title>
+  <title>Missio — Tietoturvakäytännöt</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/tietoturvakaytannot.css">
 </head>
 <body class="level-page">
-  
-  <div class="top-bar">
-    <a href="index.html" class="back-btn">← Takaisin missioihin</a>
+  <div class="container-backbtn">
+    <a class="back-btn" href="index.html">← Takaisin missioihin</a>
   </div>
 
-  <div class="game-container">
-    <header class="game-header">
-      <h1><span class="icon">🛡</span> LAJITTELE TURVALLISUUSKÄYTÄNNÖT</h1>
-      <p class="subtitle">VEDÄ JOKAINEN KÄYTÄNTÖ OIKEAAN KATEGORIAAN: TURVALLINEN TAI EPÄTURVALLINEN</p>
-    </header>
+  <main class="container level-main loading-box">
+    <section class="panel">
+      <header class="panel-header">
+        <div class="panel-title">🛡 LAJITTELE TURVALLISUUSKÄYTÄNNÖT</div>
+        <div class="panel-sub">
+          VEDÄ JOKAINEN KÄYTÄNTÖ OIKEAAN KATEGORIAAN
+          <span class="divider-small">|</span>
+          <span id="statusText">ASETA VIELÄ 10 KOHDETTA</span>
+        </div>
+      </header>
 
-    <div class="content-area">
-      <p class="section-label">VEDÄ NÄMÄ KOHTEET:</p>
-      
-      <div id="sourceContainer" class="source-list"></div>
-
-      <div class="drop-zones-wrapper">
-        <div class="zone safe-zone" data-type="safe">
-          <div class="zone-header">
-            <span class="check-icon">✅</span> TURVALLISET KÄYTÄNNÖT
-          </div>
-          <div class="zone-content">
-            Pudota turvalliset käytännöt tähän
-          </div>
+      <div class="panel-body game-grid">
+        <div class="source-area">
+          <p class="section-label">VEDÄ NÄMÄ KOHTEET:</p>
+          <div id="sourceContainer" class="draggable-list"></div>
         </div>
 
-        <div class="zone risk-zone" data-type="risk">
-          <div class="zone-header">
-            <span class="warn-icon">⚠️</span> EPÄTURVALLISET KÄYTÄNNÖT
+        <div class="drop-zones">
+          <div class="zone safe-zone" data-type="safe">
+            <div class="zone-header">
+              <span class="icon">✅</span> TURVALLISET KÄYTÄNNÖT
+            </div>
+            <div class="zone-content">
+              Pudota turvalliset tähän
+            </div>
           </div>
-          <div class="zone-content">
-            Pudota epäturvalliset käytännöt tähän
+
+          <div class="zone risk-zone" data-type="risk">
+            <div class="zone-header">
+              <span class="icon">⚠️</span> EPÄTURVALLISET KÄYTÄNNÖT
+            </div>
+            <div class="zone-content">
+              Pudota epäturvalliset tähän
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="bottom-status-bar">
-      <span id="statusText">ASETA VIELÄ 10 KOHDETTA</span>
-    </div>
-  </div>
-
-  <div id="completionOverlay" class="completion-overlay hidden">
-    <div class="completion-box">
-      <h2>MISSIO SUORITETTU!</h2>
-      <p>Olet tunnistanut kaikki riskit onnistuneesti.</p>
-      <a href="index.html" class="next-btn">Palaa päävalikkoon</a>
-    </div>
-  </div>
+    <section id="resultScreen" class="result-screen hidden">
+      <div class="result-trophy">🏆</div>
+      <h1 class="result-title">MISSIO SUORITETTU!</h1>
+      <div class="result-card">
+        <div class="result-emoji">🛡</div>
+        <p class="result-score">Kaikki luokiteltu oikein</p>
+        <p class="result-comment">ERINOMAISTA TYÖTÄ, AGENTTI!</p>
+        <hr class="result-divider">
+        <button class="result-points-btn">✧ +150 PISTETTÄ</button>
+      </div>
+      <div class="result-actions">
+        <a href="index.html" class="result-btn result-btn-primary">TAKAISIN MISSIOLISTAAN</a>
+      </div>
+    </section>
+  </main>
 
   <script src="./js/tietoturvakaytannot.js"></script>
 </body>
