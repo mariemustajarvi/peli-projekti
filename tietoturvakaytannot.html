@@ -9,8 +9,12 @@
   <link rel="stylesheet" href="./css/tietoturvakaytannot.css">
 </head>
 <body class="level-page">
+  
   <div class="container-backbtn">
     <a class="back-btn" href="index.html">← Takaisin missioihin</a>
+    <button id="contrastToggle" class="contrast-btn" aria-label="Vaihda kontrastia">
+      ♿ Kontrasti
+    </button>
   </div>
 
   <main class="container level-main loading-box">
@@ -24,28 +28,22 @@
         </div>
       </header>
 
-      <div class="panel-body game-grid">
-        <div class="source-area">
-          <p class="section-label">VEDÄ NÄMÄ KOHTEET:</p>
-          <div id="sourceContainer" class="draggable-list"></div>
-        </div>
-
-        <div class="drop-zones">
-          <div class="zone safe-zone" data-type="safe">
-            <div class="zone-header">
-              <span class="icon">✅</span> TURVALLISET KÄYTÄNNÖT
-            </div>
-            <div class="zone-content">
-              Pudota turvalliset tähän
-            </div>
+      <div class="panel-body">
+        <div class="game-layout">
+          <div class="source-area">
+            <p class="section-label">VEDÄ NÄMÄ KOHTEET:</p>
+            <div id="sourceContainer" class="draggable-list"></div>
           </div>
 
-          <div class="zone risk-zone" data-type="risk">
-            <div class="zone-header">
-              <span class="icon">⚠️</span> EPÄTURVALLISET KÄYTÄNNÖT
+          <div class="drop-zones">
+            <div class="zone safe-zone" data-type="safe">
+              <div class="zone-header">✅ TURVALLISET</div>
+              <div class="zone-content">Pudota tänne</div>
             </div>
-            <div class="zone-content">
-              Pudota epäturvalliset tähän
+
+            <div class="zone risk-zone" data-type="risk">
+              <div class="zone-header">⚠️ EPÄTURVALLISET</div>
+              <div class="zone-content">Pudota tänne</div>
             </div>
           </div>
         </div>
@@ -68,6 +66,7 @@
     </section>
   </main>
 
+  <script src="./js/accessibility.js"></script>
   <script src="./js/tietoturvakaytannot.js"></script>
 </body>
 </html>
