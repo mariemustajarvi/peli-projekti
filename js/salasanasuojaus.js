@@ -48,7 +48,7 @@ const savePoints = (points) => {
           updates['/scores/0/'] = points;
         }
         updates['completedMissions/0/'] = true;
-        update(userRef, updates);
+        update(userRef, updates)
       }
     });
   }

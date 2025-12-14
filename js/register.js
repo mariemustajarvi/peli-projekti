@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js';
 
-import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
 
 import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
 
@@ -36,7 +36,7 @@ onAuthStateChanged(auth, (user) => {
 let writeUserData = (userId, name) => {
   const db = getDatabase();
   const reference = ref(db, 'users/' + userId);
-  
+
   set(reference, {
     username: name,
     scores: {
@@ -100,5 +100,26 @@ registerButton.addEventListener('click', event => {
           errorMsg.innerHTML = 'Virhe: Sähköpostiosoite on jo käytössä';
         }
       });
+  }
+});
+
+const googleBtn = document.getElementById('googleBtn');
+
+googleBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  const username = document.getElementById('username').value;
+  if (username.length >= 1 && username.length <= 20) {
+    registerInProgress = true;
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider).then((result) => {
+      const userId = result.user.uid;
+      writeUserData(userId, username)
+    }).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+  } else {
+    const errorMsg = document.getElementById('errorMessage');
+    errorMsg.innerHTML = 'Virhe: Käyttäjänimen on oltava 1-20 merkkiä!';
   }
 });
