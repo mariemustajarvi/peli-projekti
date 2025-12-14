@@ -120,8 +120,6 @@ const resultSummary1 = document.getElementById("resultSummary1");
 const resultSummary2 = document.getElementById("resultSummary2");
 const resultSummary3 = document.getElementById("resultSummary3");
 
-const contrastToggle = document.getElementById("contrastToggle");
-
 if (challengeTotalEl) {
   challengeTotalEl.textContent = CHALLENGE_COUNT.toString();
 }
@@ -392,33 +390,6 @@ function saveCurrentAndContinue() {
   }
 }
 
-function initHighContrastToggle() {
-  if (!contrastToggle) return;
-
-  const body = document.body;
-  body.classList.remove("high-contrast");
-
-  contrastToggle.addEventListener("click", () => {
-    body.classList.toggle("high-contrast");
-    const high = body.classList.contains("high-contrast");
-
-    if (high) {
-      contrastToggle.setAttribute(
-        "aria-label",
-        "Vaihda takaisin normaaliin tilaan"
-      );
-      contrastToggle.setAttribute("title", "Vaihda takaisin normaaliin tilaan");
-    } else {
-      contrastToggle.setAttribute(
-        "aria-label",
-        "Vaihda korkean kontrastin tilaan"
-      );
-      contrastToggle.setAttribute("title", "Vaihda korkean kontrastin tilaan");
-    }
-  });
-}
-
-
 passwordInput.addEventListener("input", () => {
   updateStrengthUI(passwordInput.value);
 });
@@ -468,7 +439,6 @@ document.addEventListener("keydown", (event) => {
 });
 
 function init() {
-  initHighContrastToggle();
   loadChallenge(1);
 }
 

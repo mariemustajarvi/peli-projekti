@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css?v=3">
+  <script type="module" src="./js/saavutukset.js"></script>
   <script type="module" src="./js/index.js"></script>
 </head>
 <body>
@@ -18,20 +19,22 @@
       <h2 class="site-header__title">
         Agenttien koulutuskäyttöliittymä 🛡️
       </h2>
-      <div id="agent-greeting" class="site-header__greeting" style="margin-top: 0.7rem; font-size: 1.1rem; color: #00f382; font-weight: 500;"></div>
+      <div id="welcomeText" class="welcome-message" style="display:none;">
+        <span class="welcome-green">Tervetuloa, agentti <span id="welcomeUsername"></span>!</span>
+      </div>
       <nav class="top-nav">
         <a href="saavutukset.html" class="nav-btn nav-btn--primary">
           <span class="nav-btn__icon">🏆</span>
-          <span class="nav-btn__text">Saavutukset (0/30)</span>
+          <span class="nav-btn__text" id="achievementsText">Saavutukset (0/25)</span>
         </a>
         <div class="top-nav__row">
-          <a href="#" class="nav-btn nav-btn--secondary">
+          <a href="tulostaulukko.html" class="nav-btn nav-btn--secondary">
             <span class="nav-btn__icon">👤</span>
             <span class="nav-btn__text">Tulostaulukko</span>
           </a>
-          <a href="login.html" class="nav-btn nav-btn--accent" id="loginLogoutBtn">
-            <span class="nav-btn__icon" id="loginLogoutIcon">➜</span>
-            <span class="nav-btn__text" id="loginLogoutText">Kirjaudu sisään / rekisteröidy</span>
+          <a id="logInOutBtnLink" href="login.html" class="nav-btn nav-btn--accent">
+            <span class="nav-btn__icon">➜</span>
+            <span id="logInOutBtnText" class="nav-btn__text">Kirjaudu sisään / Rekisteröidy</span>
           </a>
         </div>
       </nav>
@@ -90,7 +93,7 @@
     </div>
   </div>
   </section>
-  <!-- pelit -->
+           <!-- pelit -->
       <section class="game-list" aria-label="Available games">
         <!-- 1: eka peli – heti auki -->
         <article

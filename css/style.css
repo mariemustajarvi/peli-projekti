@@ -1,3 +1,16 @@
+/* Welcome message styling */
+.welcome-message {
+  text-align: center;
+  margin-top: 1.2rem;
+  margin-bottom: 2.2rem;
+}
+.welcome-green {
+  color: #00ff99;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  font-family: 'Orbitron', 'Arial', sans-serif;
+}
 
 :root {
   --color-bg: #040e1e;
@@ -116,6 +129,20 @@ body {
   letter-spacing: 0.36em;
   color: var(--color-primary);
   text-transform: uppercase;
+}
+
+.welcome-text {
+  margin: 0.8rem 0 0 0;
+  font-size: var(--font-md);
+  font-weight: 400;
+  color: var(--color-accent);
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.welcome-text #welcomeUsername {
+  font-weight: 600;
+  text-transform: lowercase;
 }
 
 .site-header__title-icon {
@@ -476,9 +503,9 @@ body {
 }
 
 .game-card--completed {
-  border-color: rgba(0, 255, 122, 0.8);
-  box-shadow: 0 0 20px rgba(0, 255, 122, 0.4);
-  background: rgba(0, 10, 5, 0.8);
+  border: 2.5px solid #00ff7a !important;
+  box-shadow: 0 0 16px 2px #00ff7a55;
+  background: rgba(15, 35, 50, 0.9);
   position: relative;
 }
 
@@ -487,17 +514,17 @@ body {
   position: absolute;
   top: 15px;
   right: 15px;
-  width: 40px;
-  height: 40px;
-  background: rgba(0, 255, 122, 0.9);
+  width: 32px;
+  height: 32px;
+  background: #00ff7a;
   color: #001217;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
-  box-shadow: 0 0 15px rgba(0, 255, 122, 0.6);
+  box-shadow: 0 0 15px #00ff7a99;
 }
 
 .game-card--completed:hover {
@@ -506,7 +533,7 @@ body {
     0 0 60px rgba(0, 255, 122, 1), 
     0 0 40px rgba(0, 255, 122, 0.9), 
     0 0 20px rgba(0, 255, 122, 0.8);
-  background: rgba(0, 15, 10, 0.95);
+  background: rgba(20, 40, 55, 0.95);
 }
 
 .game-card--completed .game-card__title {
@@ -594,6 +621,20 @@ body {
   background: rgba(10, 220, 235, 1);
   box-shadow: 0 0 20px rgba(10, 220, 235, 0.7);
   transform: translateY(-1px);
+}
+
+.game-card--completed .game-card__cta {
+  background: rgba(0, 0, 0, 0.6);
+  color: #00f2ff;
+  border: 2px solid #00f2ff;
+  box-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+}
+
+.game-card--completed .game-card__cta:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: #00f2ff;
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+  color: #00f2ff;
 }
 
 .game-card--locked {
