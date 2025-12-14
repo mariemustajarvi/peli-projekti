@@ -3,61 +3,62 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Missio — Tietoturvakäytännöt</title>
+  <title>Missio — Turvallisuuskäytännöt</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/accessibility.css">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/tietoturvakaytannot.css">
 </head>
 <body class="level-page">
-  <div class="container container-top">
-    <div class="accessibility-controls">
-      <button id="contrastToggle" class="contrast-toggle" aria-label="Vaihda korkean kontrastin tilaan">
-        <span class="toggle-icon">◐</span>
-      </button>
-    </div>
-    <a class="back-btn" href="index.html">← Takaisin missioihin</a>
+  
+  <div class="top-bar">
+    <a href="index.html" class="back-btn">← Takaisin missioihin</a>
   </div>
 
-  <main id="main-content" class="container level-main">
-    <section class="panel">
-      <header class="panel-header">
-        <h1 class="panel-title">🎯 TIETOTURVAKÄYTÄNTÖJEN LUOKITTELU</h1>
-        <div class="panel-sub">
-          Lajittele kortit oikeisiin laatikoihin.
-          <span class="divider-small">|</span>
-          PISTEET: <span id="score">0</span> / <span id="maxScore">6</span>
-        </div>
-      </header>
+  <div class="game-container">
+    <header class="game-header">
+      <h1><span class="icon">🛡</span> LAJITTELE TURVALLISUUSKÄYTÄNNÖT</h1>
+      <p class="subtitle">VEDÄ JOKAINEN KÄYTÄNTÖ OIKEAAN KATEGORIAAN: TURVALLINEN TAI EPÄTURVALLINEN</p>
+    </header>
 
-      <div class="panel-body" id="gameArea">
-        <p class="instruction-text">
-          Raahaa kortti tai klikkaa sitä ja valitse kohde.
-        </p>
+    <div class="content-area">
+      <p class="section-label">VEDÄ NÄMÄ KOHTEET:</p>
+      
+      <div id="sourceContainer" class="source-list"></div>
 
-        <div class="drop-zones">
-          <div class="zone safe-zone" data-type="safe">
-            <div class="zone-icon">🛡</div>
-            <h3>TURVALLINEN</h3>
-            <p>Salli tämä toiminta</p>
+      <div class="drop-zones-wrapper">
+        <div class="zone safe-zone" data-type="safe">
+          <div class="zone-header">
+            <span class="check-icon">✅</span> TURVALLISET KÄYTÄNNÖT
           </div>
-
-          <div class="zone risk-zone" data-type="risk">
-            <div class="zone-icon">⚠️</div>
-            <h3>RISKI</h3>
-            <p>Estä tämä toiminta</p>
+          <div class="zone-content">
+            Pudota turvalliset käytännöt tähän
           </div>
         </div>
 
-        <div class="card-container" id="cardContainer">
+        <div class="zone risk-zone" data-type="risk">
+          <div class="zone-header">
+            <span class="warn-icon">⚠️</span> EPÄTURVALLISET KÄYTÄNNÖT
           </div>
-
-        <div id="feedback" class="feedback-box hidden"></div>
+          <div class="zone-content">
+            Pudota epäturvalliset käytännöt tähän
+          </div>
+        </div>
       </div>
-    </section>
-  </main>
+    </div>
 
-  <script src="./js/accessibility.js"></script>
+    <div class="bottom-status-bar">
+      <span id="statusText">ASETA VIELÄ 10 KOHDETTA</span>
+    </div>
+  </div>
+
+  <div id="completionOverlay" class="completion-overlay hidden">
+    <div class="completion-box">
+      <h2>MISSIO SUORITETTU!</h2>
+      <p>Olet tunnistanut kaikki riskit onnistuneesti.</p>
+      <a href="index.html" class="next-btn">Palaa päävalikkoon</a>
+    </div>
+  </div>
+
   <script src="./js/tietoturvakaytannot.js"></script>
 </body>
 </html>
